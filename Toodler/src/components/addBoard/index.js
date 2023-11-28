@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
-const AddBoard = ({ stateChanger, boardsLength }) => {
+const AddBoard = ({ stateChanger, newId }) => {
     const [boardName, onChangeText] = useState('New board name...');
+
     const retVal = (
         <>
             <TextInput
@@ -14,7 +15,7 @@ const AddBoard = ({ stateChanger, boardsLength }) => {
             />
             <TouchableOpacity style={styles.button}
                 onPress={() => stateChanger({
-                    id: boardsLength + 1,
+                    id: newId + 1,
                     name: boardName,
                     thumbnailPhoto:
                         'https://previews.123rf.com/images/mathier/mathier1905/mathier190500002/134557216-no-thumbnail-image-placeholder-for-forums-blogs-and-websites.jpg'
@@ -28,7 +29,7 @@ const AddBoard = ({ stateChanger, boardsLength }) => {
 
 AddBoard.propTypes = {
     stateChanger: PropTypes.func.isRequired,
-    boardsLength: PropTypes.number.isRequired
+    newId: PropTypes.number.isRequired
 };
 
 const styles = StyleSheet.create({
