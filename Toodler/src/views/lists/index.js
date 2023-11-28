@@ -4,7 +4,6 @@ import { Button, StatusBar, Text } from 'react-native';
 
 const Lists = ({ route, navigation: { navigate } }) => {
     const { boardId, lists } = route.params;
-    console.log(lists);
     return (
         <>
             <Text>Welcome to the list screen for board with id {boardId} </Text>

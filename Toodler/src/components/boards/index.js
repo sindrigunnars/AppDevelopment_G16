@@ -12,9 +12,17 @@ const ItemView = (item, key, list, navigation, lists) => {
         <View key={key} style={styles.boardContainer}>
             <Image source={{ uri: item.thumbnailPhoto }} style={styles.image}/>
             <Text style={styles.headline}>{item.name}</Text>
-            <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
-                <Text>See lists</Text>
-            </TouchableOpacity>
+            <View style={styles.buttons}>
+                <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
+                    <Text>See lists</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
+                    <Text>Edit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
+                    <Text>Delete</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -61,8 +69,14 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     button: {
+        width: '33%',
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
         padding: 10
+    },
+    buttons: {
+        flex: 1,
+        justifyContent: 'space-between',
+        flexDirection: 'row'
     }
 });
