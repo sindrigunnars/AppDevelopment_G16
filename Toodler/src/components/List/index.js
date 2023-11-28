@@ -14,15 +14,15 @@ const List = ({ name, color, tasks }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={styles.listList}>
             <TouchableOpacity style={styles.header} onPress={toggleExpand}>
                 <Text style={styles.header}>{name}</Text>
             </TouchableOpacity>
-            <View style={{ ...styles.testing, backgroundColor: color }} >
+            <View style={{ ...styles.taskList, backgroundColor: color }} >
                 {expanded
                     ? tasks.map((task, index) => {
                         return (
-                            <TouchableOpacity key={index} onPress={() => toggleDoubleExpand(index)}>
+                            <TouchableOpacity style={styles.individualTask} key={index} onPress={() => toggleDoubleExpand(index)}>
                                 <Text>{task.name}</Text>
                                 {doubleExpanded === index && <Text>{task.description}</Text>}
                             </TouchableOpacity>
@@ -49,14 +49,10 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 15
     },
-    container: {
-        flex: 1,
-        rowGap: 5,
-        justifyContent: 'space-between'
+    listList: {
     },
-    testing: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-around'
+    taskList: {
+    },
+    individualTask: {
     }
 });
