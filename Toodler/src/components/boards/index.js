@@ -41,11 +41,19 @@ const Boards = () => {
     const boardDivs = data.boards;
     const navigation = useNavigation();
     navigation.removeListener();
-    return (
-        <View style={styles.container}>
-            { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation, data.lists, deleteBoard)) }
-        </View>
-    );
+    if (boardDivs.length > 0) {
+        return (
+            <View style={styles.container}>
+                { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation, data.lists, deleteBoard)) }
+            </View>
+        );
+    } else {
+        return (
+            <View style={styles.container}>
+                <Text>There are no boards</Text>
+            </View>
+        );
+    }
 };
 
 export default Boards;

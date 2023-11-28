@@ -14,7 +14,7 @@ const Main = () => {
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
                 <DataContext.Provider value={{ data, setData }}>
                     <Boards />
-                    <AddBoard newId={data.boards[data.boards.length - 1].id}/>
+                    <AddBoard newId={data.boards.length <= 0 ? 0 : data.boards[data.boards.length - 1].id}/>
                 </DataContext.Provider>
             </ScrollView>
         </SafeAreaView>
