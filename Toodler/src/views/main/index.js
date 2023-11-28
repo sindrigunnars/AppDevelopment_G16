@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Boards from '../../components/boards';
 import AddBoard from '../../components/addBoard';
-import jsonData from '../../resources/data.json';
 import { DataContext } from '../../components/data';
 import { ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 const Main = () => {
-    const [data, setData] = useState(jsonData);
+    const { data } = useContext(DataContext);
 
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
-                <DataContext.Provider value={{ data, setData }}>
-                    <Boards />
-                    <AddBoard newId={data.boards.length <= 0 ? 0 : data.boards[data.boards.length - 1].id}/>
-                </DataContext.Provider>
+                <Boards />
+                <AddBoard newId={data.boards.length <= 0 ? 0 : data.boards[data.boards.length - 1].id}/>
             </ScrollView>
         </SafeAreaView>
     );
