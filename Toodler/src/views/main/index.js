@@ -7,18 +7,28 @@ import { ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 const Main = () => {
     const [data, setData] = useState(jsonData);
-    const updateBoards = useCallback((board) => {
+
+    const addBoard = useCallback((board) => {
         setData({
             ...data,
+            lists: data.lists,
             boards: [...data.boards, board]
+        });
+    }, [data, setData]);
+
+    const deleteBoard = useCallback((boardId) => {
+        setData({
+            boards: [...data.boards.filter((board) => board.id !== boardId)],
+            lists: [...data.lists.filter((list) => list.boardId !== boardId)],
+            tasks: [...data.tasks.filter((task) => (task.listId in data.lists.map((list) => list.id)))]
         });
     }, [data, setData]);
 
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
-                <Boards boards={data.boards} lists={data.lists}/>
-                <AddBoard stateChanger={updateBoards} boardsLength={data.boards.length}/>
+                <Boards boards={data.boards} lists={data.lists} stateChanger={deleteBoard}/>
+                <AddBoard stateChanger={addBoard} newId={data.boards[data.boards.length - 1].id}/>
             </ScrollView>
         </SafeAreaView>
     );

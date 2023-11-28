@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const ItemView = (item, key, list, navigation, lists) => {
+const ItemView = (item, key, list, navigation, lists, stateChanger) => {
     const onPress = (list, navigation) => {
         navigation.navigate('Lists', { boardId: list, lists });
     };
-
     return (
         <View key={key} style={styles.boardContainer}>
             <Image source={{ uri: item.thumbnailPhoto }} style={styles.image}/>
@@ -19,7 +18,7 @@ const ItemView = (item, key, list, navigation, lists) => {
                 <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
                     <Text>Edit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
+                <TouchableOpacity style={styles.button} onPress={() => stateChanger(item.id)}>
                     <Text>Delete</Text>
                 </TouchableOpacity>
             </View>
@@ -27,20 +26,21 @@ const ItemView = (item, key, list, navigation, lists) => {
     );
 };
 
-const Boards = ({ boards, lists }) => {
+const Boards = ({ boards, lists, stateChanger }) => {
     const boardDivs = boards;
     const navigation = useNavigation();
     navigation.removeListener();
     return (
         <View style={styles.container}>
-            { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation, lists)) }
+            { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation, lists, stateChanger)) }
         </View>
     );
 };
 
 Boards.propTypes = {
     boards: PropTypes.array.isRequired,
-    lists: PropTypes.array.isRequired
+    lists: PropTypes.array.isRequired,
+    stateChanger: PropTypes.func.isRequired
 };
 
 export default Boards;
