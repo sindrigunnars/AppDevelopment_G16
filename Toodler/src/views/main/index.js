@@ -16,13 +16,6 @@ const Main = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar
-                animated={true}
-                backgroundColor="#61dafb"
-                barStyle={'dark-content'}
-                showHideTransition={'fade'}
-                hidden={false}
-            />
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
                 <Boards boards={data.boards} lists={data.lists}/>
                 <AddBoard stateChanger={updateBoards} boardsLength={data.boards.length}/>
@@ -40,9 +33,9 @@ Main.propTypes = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column',
-        marginTop: 20,
-        backgroundColor: '#fff',
+        flexDirection: 'row',
+        gap: 10,
+        marginHorizontal: 20,
         alignItems: 'center',
         justifyContent: 'center'
     },

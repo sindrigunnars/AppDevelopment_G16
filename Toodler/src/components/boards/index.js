@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const ItemView = (item, key, list) => {
-    const onPress = (list) => {
-        const navigation = useNavigation();
+const ItemView = (item, key, list, navigation) => {
+    const onPress = (list, navigation) => {
         navigation.navigate('Lists', { boardId: list });
     };
+
     return (
         <View key={key} style={styles.boardContainer}>
             <Image source={{ uri: item.thumbnailPhoto }} style={styles.image}/>
             <Text style={styles.headline}>{item.name}</Text>
-            <TouchableOpacity style={styles.button} onPress={() => onPress(list)}>
+            <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
                 <Text>See lists</Text>
             </TouchableOpacity>
         </View>
@@ -21,9 +21,11 @@ const ItemView = (item, key, list) => {
 
 const Boards = ({ boards, lists }) => {
     const boardDivs = boards;
+    const navigation = useNavigation();
+    navigation.removeListener();
     return (
         <View style={styles.container}>
-            { boardDivs.map((item, key) => ItemView(item, key, item.id)) }
+            { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation)) }
         </View>
     );
 };
@@ -36,9 +38,12 @@ Boards.propTypes = {
 export default Boards;
 
 const styles = StyleSheet.create({
+    container: {
+        rowGap: 5
+    },
     boardContainer: {
         flex: 1,
-        rowGap: 2,
+        rowGap: 5,
         justifyContent: 'center',
         textAlign: 'center',
         backgroundColor: 'grey',
