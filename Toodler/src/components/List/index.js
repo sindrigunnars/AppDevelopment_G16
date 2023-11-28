@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
-const List = ({ name, color, tasks }) => {
+const List = ({ list }) => {
+    const { name, color, tasks } = list;
     const [expanded, setExpanded] = useState(false);
     const [doubleExpanded, setDoubleExpanded] = useState(null); // State to hold the index of the expanded task
 
@@ -15,10 +16,10 @@ const List = ({ name, color, tasks }) => {
 
     return (
         <View style={styles.listList}>
-            <TouchableOpacity style={styles.header} onPress={toggleExpand}>
+            <TouchableOpacity style={{ ...styles.list, backgroundColor: color }} onPress={toggleExpand}>
                 <Text style={styles.header}>{name}</Text>
             </TouchableOpacity>
-            <View style={{ ...styles.taskList, backgroundColor: color }} >
+            <View style={styles.taskList} >
                 {expanded
                     ? tasks.map((task, index) => {
                         return (
@@ -35,14 +36,16 @@ const List = ({ name, color, tasks }) => {
 };
 
 List.propTypes = {
-    name: PropTypes.string,
-    color: PropTypes.string,
-    tasks: PropTypes.array
+    list: PropTypes.object.isRequired
 };
 
 export default List;
 
 const styles = StyleSheet.create({
+    list: {
+        borderBottomWidth: 2,
+        borderTopWidth: 2
+    },
     header: {
         fontSize: 30
     },
@@ -50,6 +53,9 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     listList: {
+        flex: 1,
+        flexDirection: 'column',
+        paddingVertical: 10
     },
     taskList: {
     },
