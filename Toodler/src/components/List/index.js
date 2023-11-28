@@ -7,7 +7,6 @@ const List = ({ name, color, tasks }) => {
 
     const toggleExpand = () => {
         setExpanded(!expanded);
-        console.log('Expanded');
     };
 
     return (
