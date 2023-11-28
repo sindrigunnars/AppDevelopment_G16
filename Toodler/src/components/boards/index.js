@@ -29,12 +29,13 @@ const ItemView = (item, key, list, navigation, lists, stateChanger) => {
 
 const Boards = () => {
     const { data, setData } = useContext(DataContext);
-
+    console.log(data.tasks.map((task) => task.listId));
     const deleteBoard = useCallback((boardId) => {
+        const newLists = data.lists.filter((list) => list.boardId !== boardId);
         setData({
             boards: [...data.boards.filter((board) => board.id !== boardId)],
-            lists: [...data.lists.filter((list) => list.boardId !== boardId)],
-            tasks: [...data.tasks.filter((task) => (task.listId in data.lists.map((list) => list.id)))]
+            lists: [...newLists],
+            tasks: [...data.tasks.filter((task) => newLists.map((list) => list.id).includes(task.listId))]
         });
     }, [data, setData]);
 
