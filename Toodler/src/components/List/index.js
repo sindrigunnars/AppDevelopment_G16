@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 
 const List = ({ name, color, tasks }) => {
     const [expanded, setExpanded] = useState(false);
+    const [doubleExpanded, setDoubleExpanded] = useState(null); // State to hold the index of the expanded task
 
     const toggleExpand = () => {
         setExpanded(!expanded);
+    };
+    const toggleDoubleExpand = (index) => {
+        setDoubleExpanded(doubleExpanded === index ? null : index); // Toggle description visibility for the selected task
     };
 
     return (
@@ -14,10 +18,15 @@ const List = ({ name, color, tasks }) => {
             <TouchableOpacity style={styles.header} onPress={toggleExpand}>
                 <Text style={styles.header}>{name}</Text>
             </TouchableOpacity>
-            <View style={{ ...styles.testing, backgroundColor: color }}>
+            <View style={{ ...styles.testing, backgroundColor: color }} >
                 {expanded
-                    ? tasks.map((task, indx) => {
-                        return <Text key={indx}> {task.name} </Text>;
+                    ? tasks.map((task, index) => {
+                        return (
+                            <TouchableOpacity key={index} onPress={() => toggleDoubleExpand(index)}>
+                                <Text>{task.name}</Text>
+                                {doubleExpanded === index && <Text>{task.description}</Text>}
+                            </TouchableOpacity>
+                        );
                     })
                     : null}
             </View>
