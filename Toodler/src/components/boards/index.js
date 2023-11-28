@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useCallback } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { DataContext } from '../data';
 
 const ItemView = (item, key, list, navigation, lists, stateChanger) => {
     const onPress = (list, navigation) => {
         navigation.navigate('Lists', { boardId: list, lists });
     };
+
     return (
         <View key={key} style={styles.boardContainer}>
             <Image source={{ uri: item.thumbnailPhoto }} style={styles.image}/>
@@ -26,21 +27,25 @@ const ItemView = (item, key, list, navigation, lists, stateChanger) => {
     );
 };
 
-const Boards = ({ boards, lists, stateChanger }) => {
-    const boardDivs = boards;
+const Boards = () => {
+    const { data, setData } = useContext(DataContext);
+
+    const deleteBoard = useCallback((boardId) => {
+        setData({
+            boards: [...data.boards.filter((board) => board.id !== boardId)],
+            lists: [...data.lists.filter((list) => list.boardId !== boardId)],
+            tasks: [...data.tasks.filter((task) => (task.listId in data.lists.map((list) => list.id)))]
+        });
+    }, [data, setData]);
+
+    const boardDivs = data.boards;
     const navigation = useNavigation();
     navigation.removeListener();
     return (
         <View style={styles.container}>
-            { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation, lists, stateChanger)) }
+            { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation, data.lists, deleteBoard)) }
         </View>
     );
-};
-
-Boards.propTypes = {
-    boards: PropTypes.array.isRequired,
-    lists: PropTypes.array.isRequired,
-    stateChanger: PropTypes.func.isRequired
 };
 
 export default Boards;

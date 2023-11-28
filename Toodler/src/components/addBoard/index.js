@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { DataContext } from '../data';
 
-const AddBoard = ({ stateChanger, newId }) => {
+const AddBoard = ({ newId }) => {
     const [boardName, onChangeText] = useState('New board name...');
+    const { data, setData } = useContext(DataContext);
+
+    const addBoard = (board) => {
+        setData({
+            ...data,
+            lists: data.lists,
+            boards: [...data.boards, board]
+        });
+    };
 
     const retVal = (
         <>
@@ -14,7 +24,7 @@ const AddBoard = ({ stateChanger, newId }) => {
                 value={boardName}
             />
             <TouchableOpacity style={styles.button}
-                onPress={() => stateChanger({
+                onPress={() => addBoard({
                     id: newId + 1,
                     name: boardName,
                     thumbnailPhoto:
@@ -28,7 +38,6 @@ const AddBoard = ({ stateChanger, newId }) => {
 };
 
 AddBoard.propTypes = {
-    stateChanger: PropTypes.func.isRequired,
     newId: PropTypes.number.isRequired
 };
 
