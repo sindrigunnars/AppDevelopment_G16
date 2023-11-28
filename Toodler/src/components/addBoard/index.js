@@ -17,7 +17,7 @@ const AddBoard = ({ stateChanger, boardsLength }) => {
                     id: boardsLength + 1,
                     name: boardName,
                     thumbnailPhoto:
-                        'https://images-na.ssl-images-amazon.com/images/I/61fq9A8jEGL._SL1500_.jpg'
+                        'https://previews.123rf.com/images/mathier/mathier1905/mathier190500002/134557216-no-thumbnail-image-placeholder-for-forums-blogs-and-websites.jpg'
                 })}>
                 <Text>Add Board</Text>
             </TouchableOpacity>

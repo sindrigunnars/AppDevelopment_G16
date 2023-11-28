@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const ItemView = (item, key, list, navigation) => {
+const ItemView = (item, key, list, navigation, lists) => {
     const onPress = (list, navigation) => {
-        navigation.navigate('Lists', { boardId: list });
+        navigation.navigate('Lists', { boardId: list, lists });
     };
 
     return (
@@ -25,7 +25,7 @@ const Boards = ({ boards, lists }) => {
     navigation.removeListener();
     return (
         <View style={styles.container}>
-            { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation)) }
+            { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation, lists)) }
         </View>
     );
 };

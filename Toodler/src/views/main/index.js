@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Boards from '../../components/boards';
 import AddBoard from '../../components/addBoard';
 import jsonData from '../../resources/data.json';
-import { ScrollView, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet } from 'react-native';
 
 const Main = () => {
     const [data, setData] = useState(jsonData);
