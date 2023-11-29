@@ -5,7 +5,7 @@ import { DataContext } from '../data';
 
 const List = ({ list }) => {
     const { name, color, tasks } = list;
-    const { data, setData } = useContext(DataContext); // line taken from boards
+    const { data, setData } = useContext(DataContext);
     const [expanded, setExpanded] = useState(false);
     const [doubleExpanded, setDoubleExpanded] = useState(null);
 
