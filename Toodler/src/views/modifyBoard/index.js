@@ -17,7 +17,7 @@ const ModifyBoard = ({ route, navigation }) => {
 
     const press = () => {
         const newBoard = {
-            id: modify ? board.id : data.boards[data.boards.length - 1].id + 1,
+            id: modify ? board.id : (data.boards.length <= 0) ? 1 : data.boards[data.boards.length - 1].id + 1,
             name: boardName,
             thumbnailPhoto: imgUrl
         };
