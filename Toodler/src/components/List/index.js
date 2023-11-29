@@ -51,7 +51,7 @@ const List = ({ list }) => {
     const { data, setData } = useContext(DataContext);
     const [expanded, setExpanded] = useState(false);
     const [doubleExpanded, setDoubleExpanded] = useState(null);
-
+    const navigation = useNavigation();
     const tasks = data.tasks.filter((task) => task.listId === list.id);
 
     const toggleDoubleExpand = useCallback((index) => {
@@ -89,8 +89,8 @@ const List = ({ list }) => {
             <View style={styles.taskList}>
                 {expanded && tasks.map((task, index) => (
                     <IndividualTask
-                        key={index}
                         task={task}
+                        key={index}
                         listId={id}
                         toggleTaskFinished={toggleTaskFinished}
                         toggleDoubleExpand={toggleDoubleExpand}
@@ -98,6 +98,14 @@ const List = ({ list }) => {
                         deleteTask={deleteTask}
                     />
                 ))}
+                {expanded && (
+                    <TouchableOpacity
+                        style={styles.button} // button for ADDING A TASK
+                        onPress={() => navigation.navigate('Edit Task', { modify: false, task: null, listId: id })}
+                    >
+                        <Text>Add Task</Text>
+                    </TouchableOpacity>
+                )}
             </View>
         </View>
     );
