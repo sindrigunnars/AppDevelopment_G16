@@ -5,6 +5,7 @@ import Boards from '../views/main';
 import Lists from '../views/lists';
 import Tasks from '../views/tasks';
 import ModifyBoard from '../views/modifyBoard';
+import ModifyTask from '../views/modifyTask';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const Routes = () => (
             <Stack.Screen name="Edit Board" component={ModifyBoard} />
             <Stack.Screen name="Lists" component={Lists} />
             <Stack.Screen name="Tasks" component={Tasks} />
+            <Stack.Screen name="Edit Task" component={ModifyTask} />
         </Stack.Navigator>
     </NavigationContainer>
 );
