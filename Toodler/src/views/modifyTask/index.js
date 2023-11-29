@@ -63,7 +63,7 @@ const ModifyTask = ({ route, navigation }) => {
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
                         press();
-                        navigation.navigate('Boards');
+                        navigation.navigate('Lists', { boardId: data.lists.find((list) => list.id === listId).boardId });
                     }}>
                     <Text>{modify ? 'Edit Task' : 'Add Task'}</Text>
                 </TouchableOpacity>
