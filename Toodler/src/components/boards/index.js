@@ -10,13 +10,15 @@ const ItemView = (item, key, list, navigation, lists, stateChanger) => {
 
     return (
         <View key={key} style={styles.boardContainer}>
-            <Image source={{ uri: item.thumbnailPhoto }} style={styles.image}/>
+            <Image
+                source={{ uri: item.thumbnailPhoto }}
+                style={styles.image}/>
             <Text style={styles.headline}>{item.name}</Text>
             <View style={styles.buttons}>
                 <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
                     <Text>See lists</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Board', { modify: true, board: item })}>
                     <Text>Edit</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button} onPress={() => stateChanger(item.id)}>
