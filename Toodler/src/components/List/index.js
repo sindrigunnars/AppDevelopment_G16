@@ -5,9 +5,9 @@ import { DataContext } from '../data';
 
 const List = ({ list }) => {
     const { name, color, tasks } = list;
-    const { data, setData } = useContext(DataContext);
     const [expanded, setExpanded] = useState(false);
     const [doubleExpanded, setDoubleExpanded] = useState(null);
+    const { data, setData } = useContext(DataContext);
 
     const toggleExpand = () => {
         setExpanded(!expanded);
@@ -39,7 +39,7 @@ const List = ({ list }) => {
                 <Text style={styles.header}>{name}</Text>
             </TouchableOpacity>
             <View style={styles.taskList} >
-                {expanded // ------------------------------------------ EXPANDING LIST TO SHOW TASKS
+                {expanded
                     ? tasks.map((task, index) => {
                         return (
                             <TouchableOpacity style={styles.individualTask} key={index} onPress={() => toggleDoubleExpand(index)}>
