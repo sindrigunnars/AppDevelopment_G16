@@ -1,53 +1,17 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { DataContext } from '../data';
-
-const ItemView = (item, key, list, navigation, lists, stateChanger) => {
-    const onPress = (list, navigation) => {
-        navigation.navigate('Lists', { boardId: list, lists });
-    };
-
-    return (
-        <View key={key} style={styles.boardContainer}>
-            <Image
-                source={{ uri: item.thumbnailPhoto }}
-                style={styles.image}/>
-            <Text style={styles.headline}>{item.name}</Text>
-            <View style={styles.buttons}>
-                <TouchableOpacity style={styles.button} onPress={() => onPress(list, navigation)}>
-                    <Text>See lists</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Board', { modify: true, board: item })}>
-                    <Text>Edit</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => stateChanger(item.id)}>
-                    <Text>Delete</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
-};
+import ItemView from '../boardItem';
 
 const Boards = () => {
-    const { data, setData } = useContext(DataContext);
-
-    const deleteBoard = useCallback((boardId) => {
-        const newLists = data.lists.filter((list) => list.boardId !== boardId);
-        setData({
-            boards: [...data.boards.filter((board) => board.id !== boardId)],
-            lists: [...newLists],
-            tasks: [...data.tasks.filter((task) => newLists.map((list) => list.id).includes(task.listId))]
-        });
-    }, [data, setData]);
-
-    const boardDivs = data.boards;
+    const { data } = useContext(DataContext);
     const navigation = useNavigation();
     navigation.removeListener();
-    if (boardDivs.length > 0) {
+    if (data.boards.length > 0) {
         return (
             <View style={styles.container}>
-                { boardDivs.map((item, key) => ItemView(item, key, item.id, navigation, data.lists, deleteBoard)) }
+                { data.boards.map((item, key) => <ItemView key={key} item={item} navigation={navigation} lists={data.lists} />)}
             </View>
         );
     } else {
@@ -64,35 +28,5 @@ export default Boards;
 const styles = StyleSheet.create({
     container: {
         rowGap: 5
-    },
-    boardContainer: {
-        flex: 1,
-        rowGap: 5,
-        justifyContent: 'center',
-        textAlign: 'center',
-        backgroundColor: 'grey',
-        borderRadius: 10,
-        borderColor: 'black',
-        borderWidth: 1,
-        overflow: 'hidden'
-    },
-    image: {
-        height: 150,
-        resizeMode: 'center'
-    },
-    headline: {
-        textAlign: 'center',
-        fontSize: 20
-    },
-    button: {
-        width: '33%',
-        alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 10
-    },
-    buttons: {
-        flex: 1,
-        justifyContent: 'space-between',
-        flexDirection: 'row'
     }
 });
