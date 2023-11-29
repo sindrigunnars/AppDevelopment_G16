@@ -2,13 +2,15 @@ import React, { useState, useContext } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { DataContext } from '../data';
+import { useNavigation } from '@react-navigation/native';
 
 const List = ({ list }) => {
-    const { name, color } = list;
+    const { id, name, color } = list;
     const { data, setData } = useContext(DataContext);
     const tasks = data.tasks.filter((task) => task.listId === list.id);
     const [expanded, setExpanded] = useState(false);
     const [doubleExpanded, setDoubleExpanded] = useState(null);
+    const navigation = useNavigation();
 
     const toggleExpand = () => {
         setExpanded(!expanded);
@@ -69,7 +71,7 @@ const List = ({ list }) => {
                                                         <Text>Mark Undone</Text>
                                                     </TouchableOpacity>
                                                 )}
-                                            <TouchableOpacity>
+                                            <TouchableOpacity onPress={() => navigation.navigate('Edit Task', { modify: true, task: task, listId: id })}>
                                                 <Text>Edit</Text>
                                             </TouchableOpacity>
                                             <TouchableOpacity onPress={() => deleteTask(task.id)}>
