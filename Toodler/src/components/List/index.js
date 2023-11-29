@@ -49,9 +49,10 @@ IndividualTask.propTypes = {
 const List = ({ list }) => {
     const { id, name, color } = list;
     const { data, setData } = useContext(DataContext);
-    const tasks = data.tasks.filter((task) => task.listId === list.id);
     const [expanded, setExpanded] = useState(false);
     const [doubleExpanded, setDoubleExpanded] = useState(null);
+
+    const tasks = data.tasks.filter((task) => task.listId === list.id);
 
     const toggleDoubleExpand = useCallback((index) => {
         setDoubleExpanded(doubleExpanded === index ? null : index);
@@ -62,19 +63,12 @@ const List = ({ list }) => {
     };
 
     const toggleTaskFinished = (taskId) => {
-        /* Toggling a chosen task's 'isFinished' attribute. */
-
-        const newTasks = data.tasks;
-        newTasks.forEach(task => {
-            if (task.id === taskId) {
-                task.isFinished = !task.isFinished;
-            } // (this seems like maybe not the smartest way to do this, so if anyone has any other ideas do tell)
-        });
-
         setData({
             boards: [...data.boards],
             lists: [...data.lists],
-            tasks: [...newTasks]
+            tasks: [...data.tasks.map((task) =>
+                task.id === taskId ? { ...task, isFinished: !task.isFinished } : task
+            )]
         });
     };
 
