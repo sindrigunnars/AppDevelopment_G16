@@ -1,11 +1,12 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { DataContext } from '../data';
 
 const List = ({ list }) => {
-    const { name, color, tasks } = list;
-    const { data, setData } = useContext(DataContext); // line taken from boards
+    const { name, color } = list;
+    const { data, setData } = useContext(DataContext);
+    const tasks = data.tasks.filter((task) => task.listId === list.id);
     const [expanded, setExpanded] = useState(false);
     const [doubleExpanded, setDoubleExpanded] = useState(null);
 
@@ -16,7 +17,7 @@ const List = ({ list }) => {
         setDoubleExpanded(doubleExpanded === index ? null : index);
     };
 
-    const toggleTaskFinished = useCallback((taskId) => {
+    const toggleTaskFinished = (taskId) => {
         /* Toggling a chosen task's 'isFinished' attribute. */
 
         const newTasks = data.tasks;
@@ -31,7 +32,16 @@ const List = ({ list }) => {
             lists: [...data.lists],
             tasks: [...newTasks]
         });
-    }, [data, setData]);
+    };
+
+    const deleteTask = (taskId) => {
+        const newTasks = data.tasks.filter((task) => task.id !== taskId); // filter out this ONE task
+        setData({
+            boards: [...data.boards],
+            lists: [...data.lists],
+            tasks: [...newTasks]
+        });
+    };
 
     return (
         <View style={styles.listList}>
@@ -62,7 +72,7 @@ const List = ({ list }) => {
                                             <TouchableOpacity>
                                                 <Text>Edit</Text>
                                             </TouchableOpacity>
-                                            <TouchableOpacity>
+                                            <TouchableOpacity onPress={() => deleteTask(task.id)}>
                                                 <Text>Delete</Text>
                                             </TouchableOpacity>
                                         </View>
