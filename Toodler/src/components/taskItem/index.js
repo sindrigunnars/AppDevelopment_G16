@@ -56,10 +56,6 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 15
     },
-    listList: {
-    },
-    taskList: {
-    },
     individualTask: {
     },
     taskButtons: {
