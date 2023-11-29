@@ -6,7 +6,7 @@ import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text } from 're
 const Main = ({ navigation: { navigate } }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
+            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.container}>
                 <Boards />
                 <TouchableOpacity style={styles.button}
                     onPress={() => navigate('Edit Board', { modify: false })}>
@@ -25,17 +25,21 @@ Main.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'row',
-        gap: 10,
-        marginHorizontal: 20,
+        flexGrow: 1,
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center'
+        rowGap: 10,
+        paddingVertical: 20
     },
     button: {
+        flexShrink: 1,
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
-        padding: 10
+        padding: 10,
+        width: '94%',
+        borderRadius: 10,
+        borderColor: 'black',
+        borderWidth: 1
     }
 });
 
