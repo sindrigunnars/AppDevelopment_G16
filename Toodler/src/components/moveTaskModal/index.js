@@ -106,14 +106,15 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 10
+        backgroundColor: '#f23006',
+        padding: 10,
+        marginBottom: 10
     },
     centeredView: {
         flexShrink: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 100,
+        marginTop: 50,
         height: '50%'
     },
     modalView: {
@@ -129,13 +130,16 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
+        width: '80%',
+        gap: 10
     },
     buttonOpen: {
-        backgroundColor: '#F194FF'
+        backgroundColor: '#f23006'
     },
     buttonClose: {
-        backgroundColor: '#2196F3'
+        backgroundColor: '#f23006',
+        width: '90%'
     },
     textStyle: {
         color: 'white',
@@ -145,5 +149,19 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: 'center'
+    },
+    item: {
+        flex: 1,
+        flexDirection: 'column',
+        minWidth: '90%',
+        alignItems: 'center'
+    },
+    title: {
+        fontSize: 20,
+        padding: 5
+    },
+    flatlist: {
+        flexGrow: 1,
+        flexDirection: 'column'
     }
 });
