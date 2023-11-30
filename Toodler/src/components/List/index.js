@@ -40,6 +40,15 @@ const List = ({ list }) => {
         });
     };
 
+    const deleteList = (listId) => {
+        const newTasks = data.tasks.filter((task) => task.listId !== id);
+        setData({
+            boards: [...data.boards],
+            lists: [...data.lists.filter((list) => list.id !== id)],
+            tasks: [...newTasks]
+        });
+    };
+
     return (
         <View style={styles.listList}>
             <TouchableOpacity style={{ ...styles.list, backgroundColor: color }} onPress={toggleExpand}>
@@ -67,6 +76,9 @@ const List = ({ list }) => {
                 )}
             <TouchableOpacity onPress={()=> navigation.navigate('Edit List', {modify: true, list})}>
                 <Text>Edit List</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={()=> deleteList(id)}>
+                <Text>Delete List</Text>
             </TouchableOpacity>
             </View>
         </View>
