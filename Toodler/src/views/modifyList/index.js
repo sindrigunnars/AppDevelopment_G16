@@ -46,7 +46,7 @@ const ModifyList = ({ route, navigation }) => {
 
     const isValidColor = (color) => {
         const hexColorValidFormat = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/; // so both 6-letter long and 3-letter long hexes will work
-        return hexColorValidFormat.test(color);
+        return color === '#' ? true : hexColorValidFormat.test(color);
     };
 
     return (
