@@ -8,7 +8,7 @@ const Boards = () => {
     const { data } = useContext(DataContext);
     const navigation = useNavigation();
     navigation.removeListener();
-    
+
     if (data.boards.length > 0) {
         return (
             <View style={styles.container}>

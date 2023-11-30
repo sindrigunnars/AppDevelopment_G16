@@ -29,7 +29,7 @@ const Lists = ({ route, navigation: { navigate } }) => {
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.scrollContainer}>
                 {lists.map((list) => <List key={list.id} style={styles.item} list={list} />)}
                 <TouchableOpacity style={styles.button}
-                    onPress={() => navigate('Edit List', {modify: false, list: null, boardId})}>
+                    onPress={() => navigate('Edit List', { modify: false, list: null, boardId })}>
                     <Text style={styles.textStyle}>Add List</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         marginHorizontal: 20,
-        marginTop: 10
+        marginTop: 10,
+        gap: 10
     },
     button: {
         flexShrink: 1,
