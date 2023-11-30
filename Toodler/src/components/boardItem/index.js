@@ -22,7 +22,7 @@ const ItemView = ({ item, navigation, lists }) => {
     };
 
     return (
-        <View key={item.id} style={styles.boardContainer}>
+        <TouchableOpacity key={item.id} style={styles.boardContainer} onPress={() => navigation.navigate('Lists', { boardId: item.id, lists })}>
             <ImageBackground
                 source={imageSource}
                 onError={handleImageError}
@@ -30,18 +30,16 @@ const ItemView = ({ item, navigation, lists }) => {
             >
                 <Text style={styles.headline}>{item.name}</Text>
                 <View style={styles.buttons}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Lists', { boardId: item.id, lists })}>
-                        <Text style={styles.buttonText} >See lists</Text>
-                    </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Board', { modify: true, board: item })}>
                         <Text style={styles.buttonText} >Edit</Text>
                     </TouchableOpacity>
+                    <Text style={styles.line}></Text>
                     <TouchableOpacity style={styles.button} onPress={() => deleteBoard(item.id)}>
                         <Text style={styles.buttonText} >Delete</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
-        </View>
+        </TouchableOpacity>
     );
 };
 
@@ -59,7 +57,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'flex-end',
         backgroundColor: 'grey',
-        borderRadius: 10,
         borderColor: 'black',
         borderWidth: 1,
         overflow: 'hidden',
@@ -80,7 +77,7 @@ const styles = StyleSheet.create({
         textShadowColor: 'white'
     },
     button: {
-        width: '33%',
+        width: '50%',
         flexShrink: 1,
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
@@ -89,10 +86,16 @@ const styles = StyleSheet.create({
     buttons: {
         flexShrink: 1,
         justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderTopWidth: 1,
+        borderColor: 'black'
     },
     buttonText: {
         fontSize: 20
+    },
+    line: {
+        width: 1,
+        backgroundColor: 'black'
     }
 });
 
