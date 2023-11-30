@@ -10,7 +10,7 @@ const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDo
     return (
         <View style={styles.task}>
             <View style={styles.checkBox}>
-                <BouncyCheckbox
+                <BouncyCheckbox // gorgeous checkbox for checking off tasks
                     size={25}
                     isChecked={task.isFinished}
                     fillColor="green"
@@ -22,7 +22,7 @@ const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDo
                     onLongPress={() => toggleDoubleExpand(task.id)}
                 />
             </View>
-            {doubleExpanded === task.id && (
+            {doubleExpanded === task.id && ( // if a task has been clicked on, it expands
                 <View style={styles.task}>
                     <Text>{task.description}</Text>
                     <View style={styles.taskButtons}>
