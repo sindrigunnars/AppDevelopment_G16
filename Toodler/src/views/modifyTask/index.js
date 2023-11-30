@@ -20,7 +20,7 @@ const ModifyTask = ({ route, navigation }) => {
     const [taskName, onChangeTextName] = useState(modify ? task.name : 'Task name...');
     const [taskDescription, onChangeTextDescription] = useState(modify ? task.description : 'Description...');
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectedList, setSelectedList] = useState(null);
+    const [selectedList, setSelectedList] = useState(listId);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -111,11 +111,13 @@ const ModifyTask = ({ route, navigation }) => {
                                 style={[styles.button, styles.buttonClose]}
                                 onPress={() => {
                                     setModalVisible(!modalVisible);
-                                    setData({
-                                        ...data,
-                                        tasks: data.tasks.map((item) => (task.id === item.id ? { ...task, listId: selectedList } : item))
-                                    });
-                                    navigation.navigate('Lists', { boardId: data.lists.find((list) => list.id === selectedList).boardId });
+                                    if (selectedList !== null) {
+                                        setData({
+                                            ...data,
+                                            tasks: data.tasks.map((item) => (task.id === item.id ? { ...task, listId: selectedList } : item))
+                                        });
+                                    }
+                                    navigation.navigate('Lists', { boardId: data.lists.find((list) => list.id === (selectedList === null ? listId : selectedList)).boardId });
                                 }}>
                                 <Text style={styles.textStyle}>Confirm</Text>
                             </Pressable>
