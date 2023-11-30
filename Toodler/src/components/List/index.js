@@ -90,5 +90,7 @@ const styles = StyleSheet.create({
     listList: {
     },
     taskList: {
+        flex: 1,
+        flexDirection: 'column'
     }
 });
