@@ -68,18 +68,20 @@ const List = ({ list }) => {
                 ))}
                 {expanded && (
                     <TouchableOpacity
-                        style={styles.button} // button for ADDING A TASK
+                        style={styles.taskButton} // button for ADDING A TASK
                         onPress={() => navigation.navigate('Edit Task', { modify: false, task: null, listId: id })}
                     >
-                        <Text>Add Task</Text>
+                        <Text style={styles.taskButtonText}>Add Task</Text>
                     </TouchableOpacity>
                 )}
-            <TouchableOpacity onPress={()=> navigation.navigate('Edit List', {modify: true, list, boardId: boardId})}>
-                <Text>Edit List</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={()=> deleteList(id)}>
-                <Text>Delete List</Text>
-            </TouchableOpacity>
+                <View style={styles.buttons}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit List', { modify: true, list, boardId })}>
+                        <Text style={styles.buttonText}>Edit List</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => deleteList(id)}>
+                        <Text style={styles.buttonText}>Delete List</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );
@@ -93,19 +95,55 @@ export default List;
 
 const styles = StyleSheet.create({
     list: {
-        borderBottomWidth: 2,
-        borderTopWidth: 2
+        borderWidth: 1,
+        padding: 10
     },
     header: {
-        fontSize: 30
-    },
-    text: {
-        fontSize: 15
+        fontSize: 25,
+        textAlign: 'center',
+        fontWeight: 'bold'
     },
     listList: {
+        flex: 1,
+        flexDirection: 'column',
+        gap: 10,
+        borderWidth: 1,
+        padding: 5
     },
     taskList: {
         flex: 1,
-        flexDirection: 'column'
+        flexDirection: 'column',
+        gap: 10
+    },
+    buttons: {
+        flexShrink: 1,
+        flexDirection: 'row'
+    },
+    button: {
+        flexShrink: 1,
+        alignItems: 'center',
+        backgroundColor: '#f0785a',
+        padding: 10,
+        width: '100%',
+        borderColor: 'black',
+        borderWidth: 1
+    },
+    buttonText: {
+        color: 'white',
+        textAlign: 'center'
+    },
+    taskButton: {
+        flexShrink: 1,
+        alignItems: 'center',
+        backgroundColor: '#1b2f73',
+        padding: 10,
+        width: '100%',
+        borderColor: 'black',
+        borderWidth: 1
+    },
+    taskButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 });

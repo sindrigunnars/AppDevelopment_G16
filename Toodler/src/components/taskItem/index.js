@@ -22,19 +22,15 @@ const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDo
                     onLongPress={() => toggleDoubleExpand(task.id)}
                 />
             </View>
-            {doubleExpanded === task.id && ( // if a task has been clicked on, it expands
-                <View style={styles.task}>
-                    <Text>{task.description}</Text>
-                    <View style={styles.taskButtons}>
-                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Task', { modify: true, task, listId })}>
-                            <Text>Edit</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.button} onPress={() => deleteTask(task.id)}>
-                            <Text>Delete</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            )}
+            <View style={styles.taskButtons}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Task', { modify: true, task, listId })}>
+                    <Text>Edit</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{ ...styles.button, backgroundColor: 'red' }} onPress={() => deleteTask(task.id)}>
+                    <Text>Delete</Text>
+                </TouchableOpacity>
+            </View>
+            {/* <Text>{task.description}</Text> */}
         </View>
     );
 };
@@ -49,17 +45,14 @@ IndividualTask.propTypes = {
 };
 
 const styles = StyleSheet.create({
-    list: {
-        borderBottomWidth: 2,
-        borderTopWidth: 2
-    },
     checkBox: {
+        width: '50%',
         padding: 5
     },
     task: {
         flex: 1,
-        flexDirection: 'column',
-        gap: 10
+        flexDirection: 'row',
+        justifyContent: 'space-between'
 
     },
     header: {
@@ -73,13 +66,16 @@ const styles = StyleSheet.create({
     taskButtons: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around'
+        justifyContent: 'space-evenly',
+        width: '50%',
+        maxHeight: 40
     },
     button: {
-        width: '47.5%',
+        width: '35%',
         alignItems: 'center',
         borderWidth: 2,
-        backgroundColor: '#DDDDDD',
+        borderRadius: 100,
+        backgroundColor: '#f2f2f2',
         padding: 10
     }
 });

@@ -1,11 +1,11 @@
 import React, { useContext, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
-import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text, Pressable } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
 
 const ModifyList = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
-    const { modify, list, boardId} = route.params;
+    const { modify, list, boardId } = route.params;
     const [name, setName] = useState(modify ? list.name : 'List name...');
     const [color, setColor] = useState(modify ? list.color : '#');
 
@@ -20,7 +20,7 @@ const ModifyList = ({ route, navigation }) => {
             id: modify ? list.id : data.lists[data.lists.length - 1].id + 1,
             name,
             color,
-            boardId,
+            boardId
         };
 
         if (modify) {
@@ -64,13 +64,13 @@ const ModifyList = ({ route, navigation }) => {
                     onChangeText={setColor}
                     value={color}
                 />
-                <TouchableOpacity style={[styles.button, {opacity: !isValidColor(color) ? 0.5 : 1}]}
+                <TouchableOpacity style={[styles.button, { opacity: !isValidColor(color) ? 0.5 : 1 }]}
                     onPress={() => {
                         press();
-                        navigation.navigate('Lists', {boardId: boardId});
+                        navigation.navigate('Lists', { boardId });
                     }}
                     disabled={!isValidColor(color)} // can't press the button unless the hex code is valid
-                    >
+                >
                     <Text style={styles.textStyle}>{modify ? 'Edit List' : 'Add List'}</Text>
                 </TouchableOpacity>
             </ScrollView>
@@ -120,6 +120,5 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     }
 });
-
 
 export default ModifyList;
