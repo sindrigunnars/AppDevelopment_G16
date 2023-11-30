@@ -51,7 +51,7 @@ const List = ({ list }) => {
 
     return (
         <View style={styles.listList}>
-            <TouchableOpacity style={{ ...styles.list, backgroundColor: color }} onPress={toggleExpand}>
+            <TouchableOpacity style={{ ...styles.list, backgroundColor: color === '#' ? '#ffffff' : color }} onPress={toggleExpand}>
                 <Text style={styles.header}>{name}</Text>
             </TouchableOpacity>
             <View style={styles.taskList}>
