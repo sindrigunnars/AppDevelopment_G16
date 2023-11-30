@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import IndividualTask from '../taskItem';
 
 const List = ({ list }) => {
-    const { id, name, color } = list;
+    const { id, name, color, boardId } = list;
     const { data, setData } = useContext(DataContext);
     const [expanded, setExpanded] = useState(false);
     const [doubleExpanded, setDoubleExpanded] = useState(null);
@@ -74,7 +74,7 @@ const List = ({ list }) => {
                         <Text>Add Task</Text>
                     </TouchableOpacity>
                 )}
-            <TouchableOpacity onPress={()=> navigation.navigate('Edit List', {modify: true, list})}>
+            <TouchableOpacity onPress={()=> navigation.navigate('Edit List', {modify: true, list, boardId: boardId})}>
                 <Text>Edit List</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={()=> deleteList(id)}>
