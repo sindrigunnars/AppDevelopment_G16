@@ -29,6 +29,11 @@ const ItemView = ({ item, navigation, lists }) => {
                 style={styles.image}
             >
                 <Text style={styles.headline}>{item.name}</Text>
+                {item.description !== undefined && (
+                    <View style={styles.descriptionBox}>
+                        <Text style={styles.description}>{item.description}</Text>
+                    </View>
+                )}
                 <View style={styles.buttons}>
                     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Board', { modify: true, board: item })}>
                         <Text style={styles.buttonText} >Edit</Text>
@@ -97,6 +102,19 @@ const styles = StyleSheet.create({
     line: {
         width: 1,
         backgroundColor: 'black'
+    },
+    description: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    descriptionBox: {
+        flexShrink: 1,
+        width: '80%',
+        backgroundColor: 'rgba(244, 244, 244, 0.8)',
+        alignSelf: 'center',
+        borderWidth: 1,
+        padding: 5
     }
 });
 

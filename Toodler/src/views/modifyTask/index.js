@@ -58,6 +58,7 @@ const ModifyTask = ({ route, navigation }) => {
                     value={taskName}
                     clearButtonMode='always'
                     keyboardAppearance='dark'
+                    clearTextOnFocus={(taskName === 'Task name...')}
                 />
                 <TextInput
                     style={styles.input}
@@ -70,6 +71,7 @@ const ModifyTask = ({ route, navigation }) => {
                     editable={true}
                     clearButtonMode='always'
                     keyboardAppearance='dark'
+                    clearTextOnFocus={(taskDescription === 'Description...')}
                 />
                 {modify && (
                     <TaskModal
