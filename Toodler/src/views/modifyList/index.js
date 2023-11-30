@@ -51,7 +51,6 @@ const ModifyList = ({ route, navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>IM HERE</Text>
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
                 <TextInput
                     style={styles.input}
@@ -68,7 +67,7 @@ const ModifyList = ({ route, navigation }) => {
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
                         press();
-                        navigation.navigate('Boards');
+                        navigation.navigate('Lists', {boardId: boardId});
                     }}
                     disabled={!isValidColor(color)}
                     >
