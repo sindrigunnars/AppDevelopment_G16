@@ -2,9 +2,10 @@ import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
-
+import styles from './style';
 const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDoubleExpand, doubleExpanded }) => {
     const navigation = useNavigation();
+
     return (
         <TouchableOpacity style={styles.individualTask} onPress={() => toggleDoubleExpand(task.id)}>
             <Text>{task.name}</Text>
@@ -45,25 +46,6 @@ IndividualTask.propTypes = {
     doubleExpanded: PropTypes.number
 };
 
-const styles = StyleSheet.create({
-    list: {
-        borderBottomWidth: 2,
-        borderTopWidth: 2
-    },
-    header: {
-        fontSize: 30
-    },
-    text: {
-        fontSize: 15
-    },
-    individualTask: {
-    },
-    taskButtons: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        columnGap: '1em'
-    }
-});
+
 
 export default IndividualTask;

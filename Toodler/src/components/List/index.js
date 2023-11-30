@@ -65,6 +65,9 @@ const List = ({ list }) => {
                         <Text>Add Task</Text>
                     </TouchableOpacity>
                 )}
+            <TouchableOpacity onPress={()=> navigation.navigate('Edit List', {modify: true, list})}>
+                <Text>Edit List</Text>
+            </TouchableOpacity>
             </View>
         </View>
     );

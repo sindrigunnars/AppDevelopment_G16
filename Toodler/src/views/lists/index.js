@@ -4,7 +4,8 @@ import {
     Text,
     ScrollView,
     SafeAreaView,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 } from 'react-native';
 import List from '../../components/list';
 import { DataContext } from '../../components/data';
@@ -33,6 +34,9 @@ const Lists = ({ route, navigation: { navigate } }) => {
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
                 <Text style={styles.coolstyle}>{data.boards.find((board) => board.id === boardId).name}</Text>
                 {lists.map((list) => <List key={list.id} style={styles.item} list={list} />)}
+                <TouchableOpacity onPress={() => navigate('Edit List', {modify: false, list: null, boardId})}>
+                <Text>Add List</Text>
+            </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );

@@ -3,76 +3,76 @@ import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
 import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
 
-const ModifyTask = ({ route, navigation }) => {
+const ModifyList = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
-    const { modify, task, listId } = route.params;
-    const [taskName, onChangeTextName] = useState(modify ? task.name : 'Task name...');
-    const [taskDescription, onChangeTextDescription] = useState(modify ? task.description : 'Description...');
+    const { modify, list, boardId} = route.params;
+    const [name, setName] = useState(modify ? list.name : 'List name...');
+    const [color, setColor] = useState(modify ? list.color : '#');
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: modify ? 'Edit Task' : 'Add Task'
+            title: modify ? 'Edit List' : 'Add List'
         });
     }, [navigation, modify]);
 
     const press = () => {
-        const newTask = {
-            id: modify ? task.id : data.tasks[data.tasks.length - 1].id + 1,
-            name: taskName,
-            description: taskDescription,
-            isFinished: false,
-            listId
+        const newList = {
+            id: modify ? list.id : data.lists[data.lists.length - 1].id + 1,
+            name,
+            color,
+            boardId,
         };
 
         if (modify) {
-            editTask(newTask);
+            editList(newList);
         } else {
-            addTask(newTask);
+            addList(newList);
         }
     };
 
-    const addTask = (task) => {
+    const addList = (list) => {
         setData({
             ...data,
-            tasks: [...data.tasks, task]
+            lists: [...data.lists, list]
         });
     };
 
-    const editTask = (newTask) => {
+    const editList = (list) => {
         setData({
             ...data,
-            tasks: data.tasks.map((item) => (item.id === newTask.id ? newTask : item))
+            lists: data.lists.map((item) => (item.id === list.id ? list : item))
         });
     };
 
     return (
         <SafeAreaView style={styles.container}>
+            <Text>IM HERE</Text>
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
-                    onChangeText={onChangeTextName}
-                    value={taskName}
+                    onChangeText={setName}
+                    value={name}
                 />
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
-                    onChangeText={onChangeTextDescription}
-                    value={taskDescription}
+                    onChangeText={setColor}
+                    value={color}
                 />
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
                         press();
-                        navigation.navigate('Lists', { boardId: data.lists.find((list) => list.id === listId).boardId });
+                        navigation.navigate('Boards');
                     }}>
-                    <Text>{modify ? 'Edit Task' : 'Add Task'}</Text>
+                    <Text>{modify ? 'Edit List' : 'Add List'}</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );
 };
 
-ModifyTask.propTypes = {
+ModifyList.propTypes = {
     navigation: PropTypes.shape({
         navigate: PropTypes.func.isRequired,
         setOptions: PropTypes.func
@@ -103,4 +103,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ModifyTask;
+export default ModifyList;

@@ -4,8 +4,7 @@ module.exports = {
         node: true
     },
     extends: [
-        'standard',
-        'plugin:react/recommended'
+        'standard'
     ],
     overrides: [
         {
@@ -22,7 +21,7 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module'
     },
-    plugins: ['react'],
+    plugins: ['react', 'plugin:react/recommended'],
     rules: {
         indent: ['error', 4],
         'react/jsx-indent': ['error', 4],
