@@ -20,7 +20,7 @@ const ModifyTask = ({ route, navigation }) => {
 
     const press = () => {
         const newTask = {
-            id: modify ? task.id : data.tasks[data.tasks.length - 1].id + 1,
+            id: modify ? task.id : (data.tasks.length <= 0) ? 1 : data.tasks[data.tasks.length - 1].id + 1,
             name: taskName,
             description: taskDescription,
             isFinished: false,
