@@ -56,11 +56,10 @@ const styles = StyleSheet.create({
         flexShrink: 1,
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        backgroundColor: 'grey',
         borderColor: 'black',
         borderWidth: 1,
         overflow: 'hidden',
-        maxWidth: '95%'
+        maxWidth: '90%'
     },
     image: {
         height: 200,
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     },
     headline: {
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: 'bold',
         textShadowRadius: 5,
         textShadowColor: 'white'
@@ -80,18 +79,20 @@ const styles = StyleSheet.create({
         width: '50%',
         flexShrink: 1,
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#f0785a',
         padding: 5
     },
     buttons: {
         flexShrink: 1,
-        justifyContent: 'space-between',
+        justifyContent: '',
         flexDirection: 'row',
         borderTopWidth: 1,
         borderColor: 'black'
     },
     buttonText: {
-        fontSize: 20
+        color: 'black',
+        textAlign: 'center',
+        fontSize: 18
     },
     line: {
         width: 1,

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
-import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text, Pressable } from 'react-native';
 
 const ModifyList = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
@@ -51,7 +51,7 @@ const ModifyList = ({ route, navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
+            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.scrollContainer}>
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
@@ -64,14 +64,14 @@ const ModifyList = ({ route, navigation }) => {
                     onChangeText={setColor}
                     value={color}
                 />
-                <TouchableOpacity style={styles.button}
+                <TouchableOpacity style={[styles.button, {opacity: !isValidColor(color) ? 0.5 : 1}]}
                     onPress={() => {
                         press();
                         navigation.navigate('Lists', {boardId: boardId});
                     }}
                     disabled={!isValidColor(color)} // can't press the button unless the hex code is valid
                     >
-                    <Text>{modify ? 'Edit List' : 'Add List'}</Text>
+                    <Text style={styles.textStyle}>{modify ? 'Edit List' : 'Add List'}</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
@@ -95,18 +95,31 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: 20
     },
+    scrollContainer: {
+        marginHorizontal: 20,
+        marginTop: 10
+    },
     input: {
-        height: 40,
+        flex: 1,
+        flexDirection: 'row',
+        minHeight: 40,
+        maxHeight: 80,
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 10,
-        paddingHorizontal: 10
+        padding: 10
     },
     button: {
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#1b2f73',
         padding: 10
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 });
+
 
 export default ModifyList;

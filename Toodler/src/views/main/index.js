@@ -5,7 +5,7 @@ import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text, StatusBar
 
 const Main = ({ navigation: { navigate } }) => {
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView>
             <StatusBar
                 animated={true}
                 backgroundColor="#61dafb"
@@ -13,11 +13,11 @@ const Main = ({ navigation: { navigate } }) => {
                 showHideTransition={'fade'}
                 hidden={false}
             />
-            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.container}>
+            <ScrollView bounces={true} contentContainerStyle={styles.container}>
                 <Boards />
                 <TouchableOpacity style={styles.button}
                     onPress={() => navigate('Edit Board', { modify: false })}>
-                    <Text>Add Board</Text>
+                    <Text style={styles.buttonText}>Add Board</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
@@ -35,17 +35,22 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         flexDirection: 'column',
         alignItems: 'center',
-        rowGap: 10,
-        paddingVertical: 20
+        rowGap: 20,
+        paddingVertical: 25
     },
     button: {
         flexShrink: 1,
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#1b2f73',
         padding: 10,
-        width: '95%',
+        width: '90%',
         borderColor: 'black',
         borderWidth: 1
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 });
 

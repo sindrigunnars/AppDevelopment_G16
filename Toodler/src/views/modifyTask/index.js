@@ -87,7 +87,7 @@ const ModifyTask = ({ route, navigation }) => {
                         press();
                         navigation.navigate('Lists', { boardId: data.lists.find((list) => list.id === listId).boardId });
                     }}>
-                    <Text>{modify ? 'Edit Task' : 'Add Task'}</Text>
+                    <Text style={styles.textStyle}>{modify ? 'Edit Task' : 'Add Task'}</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
@@ -127,8 +127,13 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#1b2f73',
         padding: 10
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 });
 
