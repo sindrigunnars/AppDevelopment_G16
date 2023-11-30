@@ -3,9 +3,10 @@ import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { useNavigation } from '@react-navigation/native';
-
+import styles from './style';
 const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDoubleExpand, doubleExpanded }) => {
     const navigation = useNavigation();
+
     return (
         <View style={styles.task}>
             <View style={styles.checkBox}>
