@@ -8,29 +8,33 @@ const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDo
     const navigation = useNavigation();
 
     return (
-        <View style={styles.task}>
-            <View style={styles.checkBox}>
-                <BouncyCheckbox // gorgeous checkbox for checking off tasks
-                    size={25}
-                    isChecked={task.isFinished}
-                    fillColor="green"
-                    unfillColor="#FFFFFF"
-                    text={task.name}
-                    iconStyle={{ borderColor: 'red' }}
-                    innerIconStyle={{ borderWidth: 2 }}
-                    onPress={() => toggleTaskFinished(task.id)}
-                    onLongPress={() => toggleDoubleExpand(task.id)}
-                />
+        <View style={styles.taskWrapper}>
+            <View style={styles.task}>
+                <View style={styles.checkBox}>
+                    <BouncyCheckbox // gorgeous checkbox for checking off tasks
+                        size={25}
+                        isChecked={task.isFinished}
+                        fillColor="green"
+                        unfillColor="#FFFFFF"
+                        text={task.name}
+                        iconStyle={{ borderColor: 'red' }}
+                        innerIconStyle={{ borderWidth: 2 }}
+                        onPress={() => toggleTaskFinished(task.id)}
+                        onLongPress={() => toggleDoubleExpand(task.id)}
+                    />
+                </View>
+                <View style={styles.taskButtons}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Task', { modify: true, task, listId })}>
+                        <Text>Edit</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{ ...styles.button, backgroundColor: 'red' }} onPress={() => deleteTask(task.id)}>
+                        <Text>Delete</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <View style={styles.taskButtons}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Task', { modify: true, task, listId })}>
-                    <Text>Edit</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.button, backgroundColor: 'red' }} onPress={() => deleteTask(task.id)}>
-                    <Text>Delete</Text>
-                </TouchableOpacity>
+            <View style={styles.descriptionWrapper}>
+                <Text style={styles.description}>{task.description}</Text>
             </View>
-            {/* <Text>{task.description}</Text> */}
         </View>
     );
 };
@@ -47,6 +51,18 @@ IndividualTask.propTypes = {
 const styles = StyleSheet.create({
     checkBox: {
         width: '50%',
+        padding: 5
+    },
+    taskWrapper: {
+        flex: 1,
+        flexDirection: 'column',
+        gap: 10
+    },
+    description: {
+        textAlign: 'center'
+    },
+    descriptionWrapper: {
+        borderBottomWidth: 1,
         padding: 5
     },
     task: {

@@ -46,7 +46,7 @@ const ModifyList = ({ route, navigation }) => {
 
     const isValidColor = (color) => {
         const hexColorValidFormat = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/; // so both 6-letter long and 3-letter long hexes will work
-        return color === '#' ? true : hexColorValidFormat.test(color);
+        return ((color === '#') || (color === '')) ? true : hexColorValidFormat.test(color);
     };
 
     return (
@@ -57,12 +57,17 @@ const ModifyList = ({ route, navigation }) => {
                     autoFocus={false}
                     onChangeText={setName}
                     value={name}
+                    clearButtonMode='always'
+                    keyboardAppearance='dark'
+                    clearTextOnFocus={(name === 'List name...')}
                 />
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
                     onChangeText={setColor}
                     value={color}
+                    clearButtonMode='always'
+                    keyboardAppearance='dark'
                 />
                 <TouchableOpacity style={[styles.button, { opacity: !isValidColor(color) ? 0.5 : 1 }]}
                     onPress={() => {

@@ -8,6 +8,7 @@ const ModifyBoard = ({ route, navigation }) => {
     const { modify, board } = route.params;
     const [boardName, onChangeText] = useState(modify ? board.name : 'Board name...');
     const [imgUrl, onChangeImage] = useState(modify ? board.thumbnailPhoto : 'Enter image url here...');
+    const [description, onChangeDescription] = useState(modify ? (board.description !== undefined ? board.description : 'Enter description here...') : 'Enter description here...');
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -19,7 +20,8 @@ const ModifyBoard = ({ route, navigation }) => {
         const newBoard = {
             id: modify ? board.id : (data.boards.length <= 0) ? 1 : data.boards[data.boards.length - 1].id + 1,
             name: boardName,
-            thumbnailPhoto: imgUrl
+            thumbnailPhoto: imgUrl,
+            description: ((description === 'Enter description here...') || description === '') ? undefined : description
         };
 
         if (modify) {
@@ -53,7 +55,7 @@ const ModifyBoard = ({ route, navigation }) => {
                     value={boardName}
                     clearButtonMode='always'
                     keyboardAppearance='dark'
-                    inputMode='url'
+                    clearTextOnFocus={(boardName === 'Board name...')}
                 />
                 <TextInput
                     style={styles.input}
@@ -63,6 +65,21 @@ const ModifyBoard = ({ route, navigation }) => {
                     editable={true}
                     clearButtonMode='always'
                     keyboardAppearance='dark'
+                    inputMode='url'
+                    clearTextOnFocus={(imgUrl === 'Enter image url here...')}
+                />
+                <TextInput
+                    style={styles.input}
+                    autoFocus={false}
+                    onChangeText={onChangeDescription}
+                    value={description}
+                    clearButtonMode='always'
+                    keyboardAppearance='dark'
+                    clearTextOnFocus={(description === 'Enter description here...')}
+                    numberOfLines={4}
+                    maxLength={100}
+                    multiline={true}
+                    editable={true}
                 />
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
