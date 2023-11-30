@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Boards from '../../components/boards';
-import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text, StatusBar } from 'react-native';
 
 const Main = ({ navigation: { navigate } }) => {
     return (
         <SafeAreaView style={styles.container}>
+            <StatusBar
+                animated={true}
+                backgroundColor="#61dafb"
+                barStyle={'dark-content'}
+                showHideTransition={'fade'}
+                hidden={false}
+            />
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.container}>
                 <Boards />
                 <TouchableOpacity style={styles.button}
