@@ -17,7 +17,7 @@ const ModifyList = ({ route, navigation }) => {
 
     const press = () => {
         const newList = {
-            id: modify ? list.id : data.lists[data.lists.length - 1].id + 1,
+            id: modify ? list.id : (data.lists.length <= 0) ? 1 : data.lists[data.lists.length - 1].id + 1,
             name,
             color,
             boardId
