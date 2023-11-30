@@ -44,6 +44,11 @@ const ModifyList = ({ route, navigation }) => {
         });
     };
 
+    const isValidColor = (color) => {
+        const hexColorValidFormat = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/; // so both 6-letter long and 3-letter long hexes will work
+        return hexColorValidFormat.test(color);
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <Text>IM HERE</Text>
@@ -64,7 +69,9 @@ const ModifyList = ({ route, navigation }) => {
                     onPress={() => {
                         press();
                         navigation.navigate('Boards');
-                    }}>
+                    }}
+                    disabled={!isValidColor(color)}
+                    >
                     <Text>{modify ? 'Edit List' : 'Add List'}</Text>
                 </TouchableOpacity>
             </ScrollView>
