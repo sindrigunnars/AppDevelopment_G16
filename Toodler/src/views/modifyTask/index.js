@@ -1,6 +1,7 @@
 import React, { useContext, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
+import TaskModal from '../../components/moveTaskModal';
 import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
 
 const ModifyTask = ({ route, navigation }) => {
@@ -8,6 +9,8 @@ const ModifyTask = ({ route, navigation }) => {
     const { modify, task, listId } = route.params;
     const [taskName, onChangeTextName] = useState(modify ? task.name : 'Task name...');
     const [taskDescription, onChangeTextDescription] = useState(modify ? task.description : 'Description...');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedList, setSelectedList] = useState(listId);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -59,6 +62,15 @@ const ModifyTask = ({ route, navigation }) => {
                     autoFocus={false}
                     onChangeText={onChangeTextDescription}
                     value={taskDescription}
+                />
+                <TaskModal
+                    modalVisible={modalVisible}
+                    setModalVisible={setModalVisible}
+                    selectedList={selectedList}
+                    setSelectedList={setSelectedList}
+                    navigation={navigation}
+                    task={task}
+                    listId={listId}
                 />
                 <TouchableOpacity style={styles.button}
                     onPress={() => {

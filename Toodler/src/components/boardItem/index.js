@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../data';
-import { View, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 
 const ItemView = ({ item, navigation, lists }) => {
     const [imageSource, setImageSource] = useState({ uri: item.thumbnailPhoto });
@@ -22,25 +22,24 @@ const ItemView = ({ item, navigation, lists }) => {
     };
 
     return (
-        <View key={item.id} style={styles.boardContainer}>
-            <Image
+        <TouchableOpacity key={item.id} style={styles.boardContainer} onPress={() => navigation.navigate('Lists', { boardId: item.id, lists })}>
+            <ImageBackground
                 source={imageSource}
                 onError={handleImageError}
                 style={styles.image}
-            />
-            <Text style={styles.headline}>{item.name}</Text>
-            <View style={styles.buttons}>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Lists', { boardId: item.id, lists })}>
-                    <Text>See lists</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Board', { modify: true, board: item })}>
-                    <Text>Edit</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => deleteBoard(item.id)}>
-                    <Text>Delete</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+            >
+                <Text style={styles.headline}>{item.name}</Text>
+                <View style={styles.buttons}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Edit Board', { modify: true, board: item })}>
+                        <Text style={styles.buttonText} >Edit</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.line}></Text>
+                    <TouchableOpacity style={styles.button} onPress={() => deleteBoard(item.id)}>
+                        <Text style={styles.buttonText} >Delete</Text>
+                    </TouchableOpacity>
+                </View>
+            </ImageBackground>
+        </TouchableOpacity>
     );
 };
 
@@ -54,34 +53,49 @@ ItemView.propTypes = {
 
 const styles = StyleSheet.create({
     boardContainer: {
-        flex: 1,
-        rowGap: 5,
-        justifyContent: 'center',
-        textAlign: 'center',
+        flexShrink: 1,
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
         backgroundColor: 'grey',
-        borderRadius: 10,
         borderColor: 'black',
         borderWidth: 1,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        maxWidth: '95%'
     },
     image: {
-        height: 150,
-        resizeMode: 'center'
+        height: 200,
+        resizeMode: 'center',
+        flexShrink: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between'
     },
     headline: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: 'bold',
+        textShadowRadius: 5,
+        textShadowColor: 'white'
     },
     button: {
-        width: '33%',
+        width: '50%',
+        flexShrink: 1,
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
-        padding: 10
+        padding: 5
     },
     buttons: {
-        flex: 1,
+        flexShrink: 1,
         justifyContent: 'space-between',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderTopWidth: 1,
+        borderColor: 'black'
+    },
+    buttonText: {
+        fontSize: 20
+    },
+    line: {
+        width: 1,
+        backgroundColor: 'black'
     }
 });
 
