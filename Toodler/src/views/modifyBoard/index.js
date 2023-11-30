@@ -15,7 +15,7 @@ const ModifyBoard = ({ route, navigation }) => {
         });
     }, [navigation, modify]);
 
-    const press = () => {
+    const press = () => { // the button is pressed and the board is created/updated
         const newBoard = {
             id: modify ? board.id : (data.boards.length <= 0) ? 1 : data.boards[data.boards.length - 1].id + 1,
             name: boardName,

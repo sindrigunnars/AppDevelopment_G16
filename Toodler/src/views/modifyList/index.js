@@ -69,7 +69,7 @@ const ModifyList = ({ route, navigation }) => {
                         press();
                         navigation.navigate('Lists', {boardId: boardId});
                     }}
-                    disabled={!isValidColor(color)}
+                    disabled={!isValidColor(color)} // can't press the button unless the hex code is valid
                     >
                     <Text>{modify ? 'Edit List' : 'Add List'}</Text>
                 </TouchableOpacity>

@@ -13,11 +13,11 @@ const List = ({ list }) => {
     const navigation = useNavigation();
     const tasks = data.tasks.filter((task) => task.listId === list.id);
 
-    const toggleDoubleExpand = useCallback((index) => {
+    const toggleDoubleExpand = useCallback((index) => { // expands selected task
         setDoubleExpanded(doubleExpanded === index ? null : index);
     }, [doubleExpanded, setDoubleExpanded]);
 
-    const toggleExpand = () => {
+    const toggleExpand = () => { // expands selected list
         setExpanded(!expanded);
     };
 
