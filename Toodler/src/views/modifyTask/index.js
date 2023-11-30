@@ -1,13 +1,26 @@
 import React, { useContext, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
-import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text, Modal, Pressable, View, FlatList } from 'react-native';
 
+const Item = ({ item, onPress, backgroundColor, textColor }) => (
+    <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+        <Text style={[styles.title, textColor]}>{item.name}</Text>
+    </TouchableOpacity>
+);
+Item.propTypes = {
+    item: PropTypes.object.isRequired,
+    onPress: PropTypes.func.isRequired,
+    backgroundColor: PropTypes.object.isRequired,
+    textColor: PropTypes.object.isRequired
+};
 const ModifyTask = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
     const { modify, task, listId } = route.params;
     const [taskName, onChangeTextName] = useState(modify ? task.name : 'Task name...');
     const [taskDescription, onChangeTextDescription] = useState(modify ? task.description : 'Description...');
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedList, setSelectedList] = useState(null);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -21,7 +34,7 @@ const ModifyTask = ({ route, navigation }) => {
             name: taskName,
             description: taskDescription,
             isFinished: false,
-            listId: listId
+            listId
         };
 
         if (modify) {
@@ -45,6 +58,24 @@ const ModifyTask = ({ route, navigation }) => {
         });
     };
 
+    const handleItemPress = (id) => {
+        id === selectedList ? setSelectedList(null) : setSelectedList(id);
+    };
+
+    const renderItem = ({ item }) => {
+        const backgroundColor = item.id === selectedList ? '#6e3b6e' : '#f9c2ff';
+        const color = item.id === selectedList ? 'white' : 'black';
+
+        return (
+            <Item
+                item={item}
+                onPress={() => { handleItemPress(item.id); }}
+                backgroundColor={{ backgroundColor }}
+                textColor={{ color }}
+            />
+        );
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
@@ -60,6 +91,42 @@ const ModifyTask = ({ route, navigation }) => {
                     onChangeText={onChangeTextDescription}
                     value={taskDescription}
                 />
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <FlatList
+                                data={data.lists}
+                                renderItem={renderItem}
+                                keyExtractor={(item) => item.id}
+                                extraData={selectedList}
+                                style={styles.flatlist}
+                            />
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => {
+                                    setModalVisible(!modalVisible);
+                                    setData({
+                                        ...data,
+                                        tasks: data.tasks.map((item) => (task.id === item.id ? { ...task, listId: selectedList } : item))
+                                    });
+                                    navigation.navigate('Lists', { boardId: data.lists.find((list) => list.id === selectedList).boardId });
+                                }}>
+                                <Text style={styles.textStyle}>Confirm</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+                <Pressable
+                    style={[styles.button, styles.buttonOpen]}
+                    onPress={() => setModalVisible(true)}>
+                    <Text style={styles.textStyle}>Move Task</Text>
+                </Pressable>
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
                         press();
@@ -83,6 +150,9 @@ ModifyTask.propTypes = {
 };
 
 const styles = StyleSheet.create({
+    flatlist: {
+        flexShrink: 1
+    },
     container: {
         flex: 1,
         flexDirection: 'column',
@@ -100,6 +170,43 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
         padding: 10
+    },
+    centeredView: {
+        flexShrink: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 100,
+        height: '50%'
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    buttonOpen: {
+        backgroundColor: '#F194FF'
+    },
+    buttonClose: {
+        backgroundColor: '#2196F3'
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center'
     }
 });
 
