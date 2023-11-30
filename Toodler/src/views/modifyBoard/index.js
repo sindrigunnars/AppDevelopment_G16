@@ -45,18 +45,24 @@ const ModifyBoard = ({ route, navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
+            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.scrollContainer}>
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
                     onChangeText={onChangeText}
                     value={boardName}
+                    clearButtonMode='always'
+                    keyboardAppearance='dark'
+                    inputMode='url'
                 />
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
                     onChangeText={onChangeImage}
                     value={imgUrl}
+                    editable={true}
+                    clearButtonMode='always'
+                    keyboardAppearance='dark'
                 />
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
@@ -87,12 +93,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: 20
     },
+    scrollContainer: {
+        marginHorizontal: 20,
+        marginTop: 10
+    },
     input: {
-        height: 40,
+        flex: 1,
+        flexDirection: 'row',
+        minHeight: 40,
+        maxHeight: 80,
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 10,
-        paddingHorizontal: 10
+        padding: 10
     },
     button: {
         alignItems: 'center',

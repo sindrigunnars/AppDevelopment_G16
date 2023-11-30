@@ -50,28 +50,38 @@ const ModifyTask = ({ route, navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true}>
+            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.scrollContainer}>
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
                     onChangeText={onChangeTextName}
                     value={taskName}
+                    clearButtonMode='always'
+                    keyboardAppearance='dark'
                 />
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
                     onChangeText={onChangeTextDescription}
                     value={taskDescription}
+                    numberOfLines={4}
+                    maxLength={100}
+                    multiline={true}
+                    editable={true}
+                    clearButtonMode='always'
+                    keyboardAppearance='dark'
                 />
-                <TaskModal
-                    modalVisible={modalVisible}
-                    setModalVisible={setModalVisible}
-                    selectedList={selectedList}
-                    setSelectedList={setSelectedList}
-                    navigation={navigation}
-                    task={task}
-                    listId={listId}
-                />
+                {modify && (
+                    <TaskModal
+                        modalVisible={modalVisible}
+                        setModalVisible={setModalVisible}
+                        selectedList={selectedList}
+                        setSelectedList={setSelectedList}
+                        navigation={navigation}
+                        task={task}
+                        listId={listId}
+                    />
+                )}
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
                         press();
@@ -101,12 +111,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingHorizontal: 20
     },
+    scrollContainer: {
+        marginHorizontal: 20,
+        marginTop: 10
+    },
     input: {
-        height: 40,
+        flex: 1,
+        flexDirection: 'row',
+        minHeight: 40,
+        maxHeight: 80,
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 10,
-        paddingHorizontal: 10
+        padding: 10
     },
     button: {
         alignItems: 'center',
