@@ -28,6 +28,6 @@ export default Boards;
 
 const styles = StyleSheet.create({
     container: {
-        rowGap: 5
+        rowGap: 20
     }
 });

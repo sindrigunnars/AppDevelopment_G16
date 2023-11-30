@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
     Text,
@@ -9,21 +9,29 @@ import {
 } from 'react-native';
 import List from '../../components/list';
 import { DataContext } from '../../components/data';
+import { useNavigation } from '@react-navigation/core';
 
 const Lists = ({ route, navigation: { navigate } }) => {
     const { boardId } = route.params;
     const { data } = useContext(DataContext);
+    const navigation = useNavigation();
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: data.boards.find((board) => board.id === boardId).name
+        });
+    }, [navigation]);
 
     const lists = data.lists.filter((list) => list.boardId === boardId);
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.container}>
-                <Text style={styles.coolstyle}>{data.boards.find((board) => board.id === boardId).name}</Text>
+            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.scrollContainer}>
                 {lists.map((list) => <List key={list.id} style={styles.item} list={list} />)}
-                <TouchableOpacity onPress={() => navigate('Edit List', {modify: false, list: null, boardId})}>
-                <Text>Add List</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button}
+                    onPress={() => navigate('Edit List', {modify: false, list: null, boardId})}>
+                    <Text style={styles.textStyle}>Add List</Text>
+                </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );
@@ -40,12 +48,27 @@ export default Lists;
 
 const styles = StyleSheet.create({
     container: {
-        flexGrow: 1,
+        flex: 1,
         flexDirection: 'column',
-        alignItems: 'stretch',
-        paddingVertical: 20
+        justifyContent: 'center',
+        paddingHorizontal: 20
     },
-    coolstyle: {
-        fontSize: 40
+    scrollContainer: {
+        marginHorizontal: 20,
+        marginTop: 10
+    },
+    button: {
+        flexShrink: 1,
+        alignItems: 'center',
+        backgroundColor: '#1b2f73',
+        padding: 10,
+        width: '100%',
+        borderColor: 'black',
+        borderWidth: 1
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 });

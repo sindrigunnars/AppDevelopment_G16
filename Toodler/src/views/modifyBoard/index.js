@@ -69,7 +69,7 @@ const ModifyBoard = ({ route, navigation }) => {
                         press();
                         navigation.navigate('Boards');
                     }}>
-                    <Text>{modify ? 'Edit Board' : 'Add Board'}</Text>
+                    <Text style={styles.textStyle} >{modify ? 'Edit Board' : 'Add Board'}</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
@@ -109,8 +109,13 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
+        backgroundColor: '#1b2f73',
         padding: 10
+    },
+    textStyle: {
+        color: 'white',
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 });
 
