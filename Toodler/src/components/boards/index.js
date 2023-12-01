@@ -3,6 +3,7 @@ import { useNavigation, useTheme } from '@react-navigation/native';
 import { Text, View } from 'react-native';
 import { DataContext } from '../data';
 import ItemView from '../boardItem';
+import styles from './styles';
 import RadioGroup from 'react-native-radio-buttons-group';
 
 const Boards = () => {
@@ -10,42 +11,41 @@ const Boards = () => {
     const navigation = useNavigation();
     const [selectedId, setSelectedId] = useState();
     const theme = useTheme();
-    navigation.removeListener();
-
     const radioColor = theme.colors.rawText;
+
     const radioButtons = useMemo(() => ([
         {
             id: '1', // acts as primary key, should be unique and non-empty string
-            label: (<Text style={{ color: radioColor }}>Default</Text>),
+            label: 'Default',
             value: 'default',
             selected: true,
-            color: radioColor
+            color: radioColor,
+            labelStyle: { color: radioColor }
 
         },
         {
             id: '2',
-            label: (<Text style={{ color: theme.colors.rawText }}>Alphabetical</Text>),
+            label: 'Alphabetical',
             value: 'alphabetical',
-            color: radioColor
+            color: radioColor,
+            labelStyle: { color: radioColor }
         }
     ]), [theme]);
 
     if (data.boards.length > 0) {
-        let boards = data.boards;
-        if (selectedId === '2') {
-            boards = [...data.boards].sort((a, b) => a.name.localeCompare(b.name));
-        } else {
-            boards = data.boards;
-        }
+        const boards = (selectedId === '2') ? [...data.boards].sort((a, b) => a.name.localeCompare(b.name)) : data.boards;
         return (
-            <View style={{ flex: 1 }}>
-                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                    <Text style={{ color: theme.colors.rawText, textAlign: 'center', fontSize: '1.1rem' }}>Order</Text>
+            <View style={styles.container}>
+                <View style={styles.radio}>
+                    <View style={styles.titleContainer}>
+                        <Text style={{ ...styles.title, color: theme.colors.rawText }}>Order</Text>
+                    </View>
                     <RadioGroup
                         radioButtons={radioButtons}
                         onPress={setSelectedId}
                         selectedId={selectedId || '1'}
                         layout='row'
+                        containerStyle={{ justifyContent: 'center' }}
                     />
                 </View>
                 { boards.map((item, key) => <ItemView key={key} item={item} navigation={navigation} lists={data.lists} imageSourceProp={{ uri: item.thumbnailPhoto }} />)}
@@ -53,8 +53,8 @@ const Boards = () => {
         );
     } else {
         return (
-            <View style={{ rowGap: 10 }}>
-                <Text style={{ color: useTheme().colors.rawText }}>There are no boards</Text>
+            <View style={styles.container}>
+                <Text style={{ color: theme.colors.rawText }}>There are no boards</Text>
             </View>
         );
     }

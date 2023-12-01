@@ -4,14 +4,14 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        justifyContent: 'center',
-        paddingHorizontal: 20
+        justifyContent: 'center'
     },
     scrollContainer: {
         marginHorizontal: 20,
         marginTop: 10,
         gap: 10,
-        paddingVertical: 25
+        paddingTop: 15,
+        paddingBottom: 25
     },
     button: {
         flexShrink: 1,
