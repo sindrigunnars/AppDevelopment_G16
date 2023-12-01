@@ -2,11 +2,11 @@ import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useTheme } from '@react-navigation/native';
 
 const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDoubleExpand, doubleExpanded }) => {
     const navigation = useNavigation();
-
+    const theme = useTheme();
     return (
         <View style={styles.taskWrapper}>
             <View style={styles.task}>
@@ -21,6 +21,7 @@ const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDo
                         innerIconStyle={{ borderWidth: 2 }}
                         onPress={() => toggleTaskFinished(task.id)}
                         onLongPress={() => toggleDoubleExpand(task.id)}
+                        textStyle={{ color: theme.colors.rawText }}
                     />
                 </View>
                 <View style={styles.taskButtons}>
@@ -33,7 +34,7 @@ const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDo
                 </View>
             </View>
             <View style={styles.descriptionWrapper}>
-                <Text style={styles.description}>{task.description}</Text>
+                <Text style={{ ...styles.description, color: theme.colors.rawText }}>{task.description}</Text>
             </View>
         </View>
     );
