@@ -48,8 +48,9 @@ const List = ({ list }) => {
 
     return (
         <View style={styles.listList}>
-            <TouchableOpacity style={{ ...styles.list, backgroundColor: color === '#' ? '#ffffff' : color }} onPress={toggleExpand}>
-                <Text style={styles.header}>{name}</Text>
+            <TouchableOpacity
+                style={{ ...styles.list, backgroundColor: color === '#' ? '#ffffff' : color }} onPress={toggleExpand}>
+                <Text style={{ ...styles.header, color: color > '#808080' ? 'black' : 'white' }}>{name}</Text>
             </TouchableOpacity>
             <View style={styles.taskList}>
                 {expanded && tasks.map((task, index) => (

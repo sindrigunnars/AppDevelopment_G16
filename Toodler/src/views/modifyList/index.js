@@ -107,7 +107,7 @@ const ModifyList = ({ route, navigation }) => {
                     onPress={() => {
                         setColor(colorRandomizer());
                     }}>
-                    <Text style={styles.textStyle}>Get random HEX color</Text>
+                    <Text style={{ ...styles.textStyle, color: color > '#808080' ? 'black' : 'white' }}>Get random HEX color</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{ ...styles.button, opacity: (!isValidColor(color) || !isValidString(name)) ? 0.5 : 1 }}
                     onPress={() => {
