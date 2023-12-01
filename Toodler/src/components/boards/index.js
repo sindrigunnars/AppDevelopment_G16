@@ -1,6 +1,6 @@
 import React, { useContext, useState, useMemo } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { Text, View, StyleSheet } from 'react-native';
+import { useNavigation, useTheme } from '@react-navigation/native';
+import { Text, View } from 'react-native';
 import { DataContext } from '../data';
 import ItemView from '../boardItem';
 import RadioGroup from 'react-native-radio-buttons-group';
@@ -33,8 +33,8 @@ const Boards = () => {
             boards = data.boards;
         }
         return (
-            <View style={styles.container}>
-                <View style={styles.radioGroup}>
+            <View style={{ flex: 1 }}>
+                <View style={{}}>
                     <Text>Sort Boards</Text>
                     <RadioGroup
                         radioButtons={radioButtons}
@@ -48,17 +48,11 @@ const Boards = () => {
         );
     } else {
         return (
-            <View style={styles.container}>
-                <Text>There are no boards</Text>
+            <View style={{ rowGap: 10 }}>
+                <Text style={{ color: useTheme().colors.rawText }}>There are no boards</Text>
             </View>
         );
     }
 };
 
 export default Boards;
-
-const styles = StyleSheet.create({
-    container: {
-        rowGap: 20
-    }
-});

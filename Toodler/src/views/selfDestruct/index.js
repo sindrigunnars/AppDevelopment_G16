@@ -1,17 +1,22 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
-import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import {
+    ScrollView,
+    SafeAreaView,
+    TouchableOpacity,
+    Text
+} from 'react-native';
+import styles from './styles';
 
-const SelfDestruct = ({ route, navigation }) => {
-    const { data, setData } = useContext(DataContext);
+const SelfDestruct = ({ navigation }) => {
+    const { setData } = useContext(DataContext);
 
     const selfDestruct = () => {
         setData({
-            ...data,
-            tasks: [],
+            boards: [],
             lists: [],
-            boards: []
+            tasks: []
         });
     };
 
@@ -40,31 +45,7 @@ SelfDestruct.propTypes = {
     navigation: PropTypes.shape({
         navigate: PropTypes.func.isRequired,
         setOptions: PropTypes.func
-    }).isRequired,
-    route: PropTypes.shape({
-        params: PropTypes.object.isRequired
     }).isRequired
 };
-
-const styles = StyleSheet.create({
-    container: {
-        marginHorizontal: 20,
-        marginTop: 10,
-        rowGap: 10
-    },
-    button: {
-        alignItems: 'center',
-        backgroundColor: '#1b2f73',
-        padding: 10
-    },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center'
-    },
-    redButton: {
-        backgroundColor: 'red'
-    }
-});
 
 export default SelfDestruct;

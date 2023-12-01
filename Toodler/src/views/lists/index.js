@@ -4,12 +4,12 @@ import {
     Text,
     ScrollView,
     SafeAreaView,
-    StyleSheet,
     TouchableOpacity
 } from 'react-native';
 import List from '../../components/list';
 import { DataContext } from '../../components/data';
 import { useNavigation } from '@react-navigation/core';
+import styles from './styles';
 
 const Lists = ({ route, navigation: { navigate } }) => {
     const { boardId } = route.params;
@@ -45,31 +45,3 @@ Lists.propTypes = {
 };
 
 export default Lists;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        paddingHorizontal: 20
-    },
-    scrollContainer: {
-        marginHorizontal: 20,
-        marginTop: 10,
-        gap: 10
-    },
-    button: {
-        flexShrink: 1,
-        alignItems: 'center',
-        backgroundColor: '#1b2f73',
-        padding: 10,
-        width: '100%',
-        borderColor: 'black',
-        borderWidth: 1
-    },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center'
-    }
-});

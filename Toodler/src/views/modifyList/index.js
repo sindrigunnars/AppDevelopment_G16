@@ -1,7 +1,14 @@
 import React, { useContext, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
-import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import {
+    ScrollView,
+    SafeAreaView,
+    TextInput,
+    TouchableOpacity,
+    Text
+} from 'react-native';
+import styles from './styles';
 
 const ModifyList = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
@@ -49,6 +56,32 @@ const ModifyList = ({ route, navigation }) => {
         return ((color === '#') || (color === '')) ? true : hexColorValidFormat.test(color);
     };
 
+    const colorRandomizer = () => {
+        // the code we use in this function is from https://javascript.plainenglish.io/how-to-create-a-random-hex-colour-generator-in-react-b9a46e3f4bb6
+        // by that we mean the functions getRgb, rgbToHex and handleGenerate.
+        const getRgb = () => Math.floor(Math.random() * 256);
+        const rgbToHex = (r, g, b) =>
+            '#' +
+            [r, g, b]
+                .map(x => {
+                    const hex = x.toString(16);
+                    return hex.length === 1 ? '0' + hex : hex;
+                })
+                .join('');
+        const handleGenerate = () => {
+            const color = {
+                r: getRgb(),
+                g: getRgb(),
+                b: getRgb()
+            };
+            return color;
+        };
+
+        const randColorFragmented = handleGenerate();
+        const randColor = rgbToHex(randColorFragmented.r, randColorFragmented.g, randColorFragmented.b);
+        return randColor;
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.scrollContainer}>
@@ -69,6 +102,12 @@ const ModifyList = ({ route, navigation }) => {
                     clearButtonMode='always'
                     keyboardAppearance='dark'
                 />
+                <TouchableOpacity style={{ ...styles.button, backgroundColor: color }}
+                    onPress={() => {
+                        setColor(colorRandomizer());
+                    }}>
+                    <Text style={styles.textStyle}>Get random HEX color</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, { opacity: !isValidColor(color) ? 0.5 : 1 }]}
                     onPress={() => {
                         press();
@@ -92,38 +131,5 @@ ModifyList.propTypes = {
         params: PropTypes.object.isRequired
     }).isRequired
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        paddingHorizontal: 20
-    },
-    scrollContainer: {
-        marginHorizontal: 20,
-        marginTop: 10
-    },
-    input: {
-        flex: 1,
-        flexDirection: 'row',
-        minHeight: 40,
-        maxHeight: 80,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        padding: 10
-    },
-    button: {
-        alignItems: 'center',
-        backgroundColor: '#1b2f73',
-        padding: 10
-    },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center'
-    }
-});
 
 export default ModifyList;

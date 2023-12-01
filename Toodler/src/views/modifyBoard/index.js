@@ -1,7 +1,14 @@
 import React, { useContext, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
-import { ScrollView, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import {
+    ScrollView,
+    SafeAreaView,
+    TextInput,
+    TouchableOpacity,
+    Text
+} from 'react-native';
+import styles from './styles';
 
 const ModifyBoard = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
@@ -102,38 +109,5 @@ ModifyBoard.propTypes = {
         params: PropTypes.object.isRequired
     }).isRequired
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        paddingHorizontal: 20
-    },
-    scrollContainer: {
-        marginHorizontal: 20,
-        marginTop: 10
-    },
-    input: {
-        flex: 1,
-        flexDirection: 'row',
-        minHeight: 40,
-        maxHeight: 80,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        padding: 10
-    },
-    button: {
-        alignItems: 'center',
-        backgroundColor: '#1b2f73',
-        padding: 10
-    },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center'
-    }
-});
 
 export default ModifyBoard;
