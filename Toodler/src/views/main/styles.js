@@ -6,7 +6,8 @@ export default StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         rowGap: 10,
-        paddingVertical: 25
+        paddingTop: 15,
+        paddingBottom: 25
     },
     button: {
         flexShrink: 1,

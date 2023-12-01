@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../data';
 import {
@@ -9,14 +9,18 @@ import {
 } from 'react-native';
 import styles from './styles';
 
-const ItemView = ({ item, navigation, lists }) => {
-    const [imageSource, setImageSource] = useState({ uri: item.thumbnailPhoto });
+const ItemView = ({ item, navigation, lists, imageSourceProp }) => {
+    const [finalImageSource, setFinalImageSource] = useState(imageSourceProp);
     const { data, setData } = useContext(DataContext);
 
     const handleImageError = () => {
     // If the image fails to load, replace it with a default URL
-        setImageSource({ uri: 'https://previews.123rf.com/images/mathier/mathier1905/mathier190500002/134557216-no-thumbnail-image-placeholder-for-forums-blogs-and-websites.jpg' });
+        setFinalImageSource({ uri: 'https://previews.123rf.com/images/mathier/mathier1905/mathier190500002/134557216-no-thumbnail-image-placeholder-for-forums-blogs-and-websites.jpg' });
     };
+
+    useEffect(() => {
+        setFinalImageSource(imageSourceProp);
+    }, [imageSourceProp]);
 
     const deleteBoard = (boardId) => {
         const newLists = data.lists.filter((list) => list.boardId !== boardId);
@@ -30,7 +34,7 @@ const ItemView = ({ item, navigation, lists }) => {
     return (
         <TouchableOpacity key={item.id} style={styles.boardContainer} onPress={() => navigation.navigate('Lists', { boardId: item.id, lists })}>
             <ImageBackground
-                source={imageSource}
+                source={finalImageSource}
                 onError={handleImageError}
                 style={styles.image}
             >
@@ -59,7 +63,8 @@ ItemView.propTypes = {
         navigate: PropTypes.func.isRequired
     }).isRequired,
     item: PropTypes.object.isRequired,
-    lists: PropTypes.array.isRequired
+    lists: PropTypes.array.isRequired,
+    imageSourceProp: PropTypes.object.isRequired
 };
 
 export default ItemView;
