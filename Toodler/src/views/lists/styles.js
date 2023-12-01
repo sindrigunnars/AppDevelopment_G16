@@ -10,7 +10,8 @@ export default StyleSheet.create({
     scrollContainer: {
         marginHorizontal: 20,
         marginTop: 10,
-        gap: 10
+        gap: 10,
+        paddingVertical: 25
     },
     button: {
         flexShrink: 1,
