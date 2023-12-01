@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center'
     },
-        redButton: {
+    redButton: {
         backgroundColor: 'red'
     }
 });
