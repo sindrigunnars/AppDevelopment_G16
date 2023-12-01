@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../data';
 import {
@@ -19,6 +19,11 @@ const ItemView = ({ item, navigation, lists, imageSourceProp }) => {
     // If the image fails to load, replace it with a default URL
         setFinalImageSource(notValidUrlImage);
     };
+
+    useEffect(() => {
+        // Update finalImageSource when imageSourceProp changes
+        setFinalImageSource(validator.isURL(imageSourceProp.uri) ? imageSourceProp : notValidUrlImage);
+    }, [imageSourceProp]);
 
     const deleteBoard = (boardId) => {
         const newLists = data.lists.filter((list) => list.boardId !== boardId);
