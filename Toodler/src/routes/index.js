@@ -6,6 +6,7 @@ import Lists from '../views/lists';
 import ModifyBoard from '../views/modifyBoard';
 import ModifyTask from '../views/modifyTask';
 import ModifyList from '../views/modifyList';
+import SelfDestruct from '../views/selfDestruct';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ const Routes = () => (
             <Stack.Screen name="Lists" component={Lists} />
             <Stack.Screen name="Edit Task" component={ModifyTask} />
             <Stack.Screen name="Edit List" component={ModifyList} />
+            <Stack.Screen name="Self-destruct" component={SelfDestruct} />
         </Stack.Navigator>
     </NavigationContainer>
 );
