@@ -9,11 +9,12 @@ import {
     Text
 } from 'react-native';
 import styles from './styles';
+import isValidString from '../../components/validString';
 
 const ModifyList = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
     const { modify, list, boardId } = route.params;
-    const [name, setName] = useState(modify ? list.name : 'List name...');
+    const [name, setName] = useState(modify ? list.name : null);
     const [color, setColor] = useState(modify ? list.color : '#');
 
     useLayoutEffect(() => {
@@ -53,7 +54,7 @@ const ModifyList = ({ route, navigation }) => {
 
     const isValidColor = (color) => {
         const hexColorValidFormat = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/; // so both 6-letter long and 3-letter long hexes will work
-        return ((color === '#') || (color === '')) ? true : hexColorValidFormat.test(color);
+        return ((color === '#') || (color === '')) ? false : hexColorValidFormat.test(color);
     };
 
     const colorRandomizer = () => {
@@ -92,7 +93,7 @@ const ModifyList = ({ route, navigation }) => {
                     value={name}
                     clearButtonMode='always'
                     keyboardAppearance='dark'
-                    clearTextOnFocus={(name === 'List name...')}
+                    placeholder='List name...'
                 />
                 <TextInput
                     style={styles.input}
@@ -102,18 +103,18 @@ const ModifyList = ({ route, navigation }) => {
                     clearButtonMode='always'
                     keyboardAppearance='dark'
                 />
-                <TouchableOpacity style={{ ...styles.button, backgroundColor: color }}
+                <TouchableOpacity style={{ ...styles.button, backgroundColor: isValidColor(color) ? color : '#240f26' }}
                     onPress={() => {
                         setColor(colorRandomizer());
                     }}>
                     <Text style={styles.textStyle}>Get random HEX color</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, { opacity: !isValidColor(color) ? 0.5 : 1 }]}
+                <TouchableOpacity style={{ ...styles.button, opacity: (!isValidColor(color) || !isValidString(name)) ? 0.5 : 1 }}
                     onPress={() => {
                         press();
                         navigation.navigate('Lists', { boardId });
                     }}
-                    disabled={!isValidColor(color)} // can't press the button unless the hex code is valid
+                    disabled={!isValidColor(color) || !isValidString(name)} // can't press the button unless the hex code is valid
                 >
                     <Text style={styles.textStyle}>{modify ? 'Edit List' : 'Add List'}</Text>
                 </TouchableOpacity>

@@ -10,12 +10,13 @@ import {
     Text
 } from 'react-native';
 import styles from './styles';
+import isValidString from '../../components/validString';
 
 const ModifyTask = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
     const { modify, task, listId } = route.params;
-    const [taskName, onChangeTextName] = useState(modify ? task.name : 'Task name...');
-    const [taskDescription, onChangeTextDescription] = useState(modify ? task.description : 'Description...');
+    const [taskName, onChangeTextName] = useState(modify ? task.name : null);
+    const [taskDescription, onChangeTextDescription] = useState(modify ? task.description : null);
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedList, setSelectedList] = useState(listId);
 
@@ -65,7 +66,7 @@ const ModifyTask = ({ route, navigation }) => {
                     value={taskName}
                     clearButtonMode='always'
                     keyboardAppearance='dark'
-                    clearTextOnFocus={(taskName === 'Task name...')}
+                    placeholder='Task name...'
                 />
                 <TextInput
                     style={styles.input}
@@ -78,7 +79,7 @@ const ModifyTask = ({ route, navigation }) => {
                     editable={true}
                     clearButtonMode='always'
                     keyboardAppearance='dark'
-                    clearTextOnFocus={(taskDescription === 'Description...')}
+                    placeholder='Description...'
                 />
                 {modify && (
                     <TaskModal
@@ -91,7 +92,8 @@ const ModifyTask = ({ route, navigation }) => {
                         listId={listId}
                     />
                 )}
-                <TouchableOpacity style={styles.button}
+                <TouchableOpacity style={{ ...styles.button, opacity: !isValidString(taskName) ? 0.5 : 1 }}
+                    disabled={!isValidString(taskName)}
                     onPress={() => {
                         press();
                         navigation.navigate('Lists', { boardId: data.lists.find((list) => list.id === listId).boardId });

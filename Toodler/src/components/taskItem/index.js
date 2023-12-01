@@ -5,7 +5,7 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import styles from './styles';
 
-const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDoubleExpand, doubleExpanded }) => {
+const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask }) => {
     const navigation = useNavigation();
     const theme = useTheme();
     return (
@@ -44,9 +44,7 @@ IndividualTask.propTypes = {
     task: PropTypes.object.isRequired,
     listId: PropTypes.number.isRequired,
     toggleTaskFinished: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired,
-    toggleDoubleExpand: PropTypes.func.isRequired,
-    doubleExpanded: PropTypes.number
+    deleteTask: PropTypes.func.isRequired
 };
 
 export default IndividualTask;

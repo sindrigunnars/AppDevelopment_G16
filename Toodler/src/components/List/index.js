@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { DataContext } from '../data';
@@ -10,13 +10,9 @@ const List = ({ list }) => {
     const { id, name, color, boardId } = list;
     const { data, setData } = useContext(DataContext);
     const [expanded, setExpanded] = useState(false);
-    const [doubleExpanded, setDoubleExpanded] = useState(null);
+
     const navigation = useNavigation();
     const tasks = data.tasks.filter((task) => task.listId === list.id);
-
-    const toggleDoubleExpand = useCallback((index) => { // expands selected task
-        setDoubleExpanded(doubleExpanded === index ? null : index);
-    }, [doubleExpanded, setDoubleExpanded]);
 
     const toggleExpand = () => { // expands selected list
         setExpanded(!expanded);
@@ -62,8 +58,6 @@ const List = ({ list }) => {
                         key={index}
                         listId={id}
                         toggleTaskFinished={toggleTaskFinished}
-                        toggleDoubleExpand={toggleDoubleExpand}
-                        doubleExpanded={doubleExpanded}
                         deleteTask={deleteTask}
                     />
                 ))}

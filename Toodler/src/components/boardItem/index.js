@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../data';
 import {
@@ -7,20 +7,18 @@ import {
     TouchableOpacity,
     ImageBackground
 } from 'react-native';
+import validator from 'validator';
 import styles from './styles';
 
 const ItemView = ({ item, navigation, lists, imageSourceProp }) => {
-    const [finalImageSource, setFinalImageSource] = useState(imageSourceProp);
+    const notValidUrlImage = { uri: 'https://previews.123rf.com/images/mathier/mathier1905/mathier190500002/134557216-no-thumbnail-image-placeholder-for-forums-blogs-and-websites.jpg' };
+    const [finalImageSource, setFinalImageSource] = useState(validator.isURL(imageSourceProp.uri) ? imageSourceProp : notValidUrlImage);
     const { data, setData } = useContext(DataContext);
 
     const handleImageError = () => {
     // If the image fails to load, replace it with a default URL
-        setFinalImageSource({ uri: 'https://previews.123rf.com/images/mathier/mathier1905/mathier190500002/134557216-no-thumbnail-image-placeholder-for-forums-blogs-and-websites.jpg' });
+        setFinalImageSource(notValidUrlImage);
     };
-
-    useEffect(() => {
-        setFinalImageSource(imageSourceProp);
-    }, [imageSourceProp]);
 
     const deleteBoard = (boardId) => {
         const newLists = data.lists.filter((list) => list.boardId !== boardId);

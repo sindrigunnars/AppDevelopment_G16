@@ -9,13 +9,14 @@ import {
     Text
 } from 'react-native';
 import styles from './styles';
+import isValidString from '../../components/validString';
 
 const ModifyBoard = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
     const { modify, board } = route.params;
-    const [boardName, onChangeText] = useState(modify ? board.name : 'Board name...');
-    const [imgUrl, onChangeImage] = useState(modify ? board.thumbnailPhoto : 'Enter image url here...');
-    const [description, onChangeDescription] = useState(modify ? (board.description !== undefined ? board.description : 'Enter description here...') : 'Enter description here...');
+    const [boardName, onChangeText] = useState(modify ? board.name : null);
+    const [imgUrl, onChangeImage] = useState(modify ? board.thumbnailPhoto : '');
+    const [description, onChangeDescription] = useState(modify ? (board.description !== undefined ? board.description : null) : null);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -28,7 +29,7 @@ const ModifyBoard = ({ route, navigation }) => {
             id: modify ? board.id : (data.boards.length <= 0) ? 1 : data.boards[data.boards.length - 1].id + 1,
             name: boardName,
             thumbnailPhoto: imgUrl,
-            description: ((description === 'Enter description here...') || description === '') ? undefined : description
+            description: isValidString(description) ? description : undefined
         };
 
         if (modify) {
@@ -62,7 +63,7 @@ const ModifyBoard = ({ route, navigation }) => {
                     value={boardName}
                     clearButtonMode='always'
                     keyboardAppearance='dark'
-                    clearTextOnFocus={(boardName === 'Board name...')}
+                    placeholder='Board name...'
                 />
                 <TextInput
                     style={styles.input}
@@ -73,22 +74,23 @@ const ModifyBoard = ({ route, navigation }) => {
                     clearButtonMode='always'
                     keyboardAppearance='dark'
                     inputMode='url'
-                    clearTextOnFocus={(imgUrl === 'Enter image url here...')}
+                    placeholder='Enter image url here...'
                 />
                 <TextInput
                     style={styles.input}
                     autoFocus={false}
                     onChangeText={onChangeDescription}
                     value={description}
-                    clearButtonMode='always'
                     keyboardAppearance='dark'
-                    clearTextOnFocus={(description === 'Enter description here...')}
                     numberOfLines={4}
                     maxLength={100}
                     multiline={true}
                     editable={true}
+                    placeholder='Enter description here...'
                 />
-                <TouchableOpacity style={styles.button}
+                <TouchableOpacity
+                    style={{ ...styles.button, opacity: !isValidString(boardName) ? 0.5 : 1 }}
+                    disabled={!isValidString(boardName)}
                     onPress={() => {
                         press();
                         navigation.navigate('Boards');
