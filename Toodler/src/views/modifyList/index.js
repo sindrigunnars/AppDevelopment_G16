@@ -27,7 +27,7 @@ const ModifyList = ({ route, navigation }) => {
         const newList = {
             id: modify ? list.id : (data.lists.length <= 0) ? 1 : data.lists[data.lists.length - 1].id + 1,
             name,
-            color,
+            color: isValidColor(color) ? color : '#fff', // If color is not valid or missing default is white
             boardId
         };
 
@@ -109,12 +109,12 @@ const ModifyList = ({ route, navigation }) => {
                     }}>
                     <Text style={{ ...styles.textStyle, color: color > '#808080' ? 'black' : 'white' }}>Get random HEX color</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ ...styles.button, opacity: (!isValidColor(color) || !isValidString(name)) ? 0.5 : 1 }}
+                <TouchableOpacity style={{ ...styles.button, opacity: !isValidString(name) ? 0.5 : 1 }}
                     onPress={() => {
                         press();
                         navigation.navigate('Lists', { boardId });
                     }}
-                    disabled={!isValidColor(color) || !isValidString(name)} // can't press the button unless the hex code is valid
+                    disabled={!isValidString(name)} // can't press the button unless the hex code is empty or valid and name is not empty
                 >
                     <Text style={styles.textStyle}>{modify ? 'Edit List' : 'Add List'}</Text>
                 </TouchableOpacity>
