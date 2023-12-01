@@ -1,7 +1,13 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../data';
-import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    ImageBackground
+} from 'react-native';
+import styles from './styles';
 
 const ItemView = ({ item, navigation, lists }) => {
     const [imageSource, setImageSource] = useState({ uri: item.thumbnailPhoto });
@@ -55,67 +61,5 @@ ItemView.propTypes = {
     item: PropTypes.object.isRequired,
     lists: PropTypes.array.isRequired
 };
-
-const styles = StyleSheet.create({
-    boardContainer: {
-        flexShrink: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        borderColor: 'black',
-        borderWidth: 1,
-        overflow: 'hidden',
-        maxWidth: '90%'
-    },
-    image: {
-        height: 200,
-        resizeMode: 'center',
-        flexShrink: 1,
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-    },
-    headline: {
-        textAlign: 'center',
-        fontSize: 24,
-        fontWeight: 'bold',
-        textShadowRadius: 5,
-        textShadowColor: 'white'
-    },
-    button: {
-        width: '50%',
-        flexShrink: 1,
-        alignItems: 'center',
-        backgroundColor: '#f0785a',
-        padding: 5
-    },
-    buttons: {
-        flexShrink: 1,
-        justifyContent: '',
-        flexDirection: 'row',
-        borderTopWidth: 1,
-        borderColor: 'black'
-    },
-    buttonText: {
-        color: 'black',
-        textAlign: 'center',
-        fontSize: 18
-    },
-    line: {
-        width: 1,
-        backgroundColor: 'black'
-    },
-    description: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        textAlign: 'center'
-    },
-    descriptionBox: {
-        flexShrink: 1,
-        width: '80%',
-        backgroundColor: 'rgba(244, 244, 244, 0.8)',
-        alignSelf: 'center',
-        borderWidth: 1,
-        padding: 5
-    }
-});
 
 export default ItemView;
