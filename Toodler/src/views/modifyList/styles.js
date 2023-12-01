@@ -25,7 +25,8 @@ export default StyleSheet.create({
     button: {
         alignItems: 'center',
         backgroundColor: '#1b2f73',
-        padding: 10
+        padding: 10,
+        marginBottom: 10
     },
     textStyle: {
         color: 'white',

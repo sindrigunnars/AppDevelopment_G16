@@ -102,7 +102,7 @@ const ModifyList = ({ route, navigation }) => {
                     clearButtonMode='always'
                     keyboardAppearance='dark'
                 />
-                <TouchableOpacity style={styles.button}
+                <TouchableOpacity style={{ ...styles.button, backgroundColor: color }}
                     onPress={() => {
                         setColor(colorRandomizer());
                     }}>
