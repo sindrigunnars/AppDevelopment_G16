@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
 import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text } from 'react-native';
-// import { Button } from 'react-native-web';
 
 const SelfDestruct = ({ route, navigation }) => {
     const { data, setData } = useContext(DataContext);
@@ -18,19 +17,19 @@ const SelfDestruct = ({ route, navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.scrollContainer}>
+            <ScrollView bounces={true} automaticallyAdjustKeyboardInsets={true} contentContainerStyle={styles.container}>
                 <TouchableOpacity style={styles.button}
                     onPress={() => {
                         navigation.navigate('Boards');
                     }}>
-                    <Text>Cancel</Text>
+                    <Text style={styles.textStyle}>Cancel</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}
+                <TouchableOpacity style={[styles.button, styles.redButton]}
                     onPress={() => {
                         selfDestruct();
                         navigation.navigate('Boards');
                     }}>
-                    <Text>DO IT!!!</Text>
+                    <Text style={styles.textStyle}>DO IT!!!</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
@@ -49,24 +48,9 @@ SelfDestruct.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        paddingHorizontal: 20
-    },
-    scrollContainer: {
         marginHorizontal: 20,
-        marginTop: 10
-    },
-    input: {
-        flex: 1,
-        flexDirection: 'row',
-        minHeight: 40,
-        maxHeight: 80,
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        padding: 10
+        marginTop: 10,
+        rowGap: 10
     },
     button: {
         alignItems: 'center',
@@ -77,6 +61,9 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    redButton: {
+        backgroundColor: 'red'
     }
 });
 
