@@ -55,6 +55,9 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+        redButton: {
+        backgroundColor: 'red'
     }
 });
 
