@@ -1,8 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { useNavigation, useTheme } from '@react-navigation/native';
+import styles from './styles';
 
 const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDoubleExpand, doubleExpanded }) => {
     const navigation = useNavigation();
@@ -20,7 +21,6 @@ const IndividualTask = ({ task, listId, toggleTaskFinished, deleteTask, toggleDo
                         iconStyle={{ borderColor: 'red' }}
                         innerIconStyle={{ borderWidth: 2 }}
                         onPress={() => toggleTaskFinished(task.id)}
-                        onLongPress={() => toggleDoubleExpand(task.id)}
                         textStyle={{ color: theme.colors.rawText }}
                     />
                 </View>
@@ -48,53 +48,5 @@ IndividualTask.propTypes = {
     toggleDoubleExpand: PropTypes.func.isRequired,
     doubleExpanded: PropTypes.number
 };
-
-const styles = StyleSheet.create({
-    checkBox: {
-        width: '50%',
-        padding: 5
-    },
-    taskWrapper: {
-        flex: 1,
-        flexDirection: 'column',
-        gap: 10
-    },
-    description: {
-        textAlign: 'center'
-    },
-    descriptionWrapper: {
-        borderBottomWidth: 1,
-        padding: 5
-    },
-    task: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-
-    },
-    header: {
-        fontSize: 30
-    },
-    text: {
-        fontSize: 15
-    },
-    individualTask: {
-    },
-    taskButtons: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        width: '50%',
-        maxHeight: 40
-    },
-    button: {
-        width: '35%',
-        alignItems: 'center',
-        borderWidth: 2,
-        borderRadius: 100,
-        backgroundColor: '#f2f2f2',
-        padding: 10
-    }
-});
 
 export default IndividualTask;

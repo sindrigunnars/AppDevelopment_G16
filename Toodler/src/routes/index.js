@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Switch } from 'react-native-gesture-handler';
 import Boards from '../views/main';
 import Lists from '../views/lists';
 import ModifyBoard from '../views/modifyBoard';
 import ModifyTask from '../views/modifyTask';
 import ModifyList from '../views/modifyList';
 import SelfDestruct from '../views/selfDestruct';
-import { Switch } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
 
