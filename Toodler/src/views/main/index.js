@@ -19,6 +19,10 @@ const Main = ({ navigation: { navigate } }) => {
                     onPress={() => navigate('Edit Board', { modify: false })}>
                     <Text style={styles.buttonText}>Add Board</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={[styles.button, styles.redButton]}
+                    onPress={() => navigate('Self-destruct')}>
+                    <Text style={styles.buttonText}>SELF-DESTRUCT</Text>
+                </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );
@@ -51,6 +55,9 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+        redButton: {
+        backgroundColor: 'red'
     }
 });
 
