@@ -6,6 +6,7 @@ import Lists from '../views/lists';
 import ModifyBoard from '../views/modifyBoard';
 import ModifyTask from '../views/modifyTask';
 import ModifyList from '../views/modifyList';
+import SelfDestruct from '../views/selfDestruct';
 import { Switch } from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator();
@@ -71,12 +72,18 @@ const Routes = () => {
                 <Stack.Screen
                     name="Edit Task"
                     component={ModifyTask}
-                    options={{ headerRight: () => switchButton({ scheme, setScheme }) }} />
+                    options={{ headerRight: () => switchButton({ scheme, setScheme }) }}
+                />
                 <Stack.Screen
                     name="Edit List"
                     component={ModifyList}
                     options={{ headerRight: () => switchButton({ scheme, setScheme }) }}
                 />
+                 <Stack.Screen
+                    name="Self-destruct"
+                    component={SelfDestruct}
+                    options={{ headerRight: () => switchButton({ scheme, setScheme }) }}
+                 />
             </Stack.Navigator>
         </NavigationContainer>
     );
