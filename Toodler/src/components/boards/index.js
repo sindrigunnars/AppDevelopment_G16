@@ -9,33 +9,38 @@ const Boards = () => {
     const { data } = useContext(DataContext);
     const navigation = useNavigation();
     const [selectedId, setSelectedId] = useState();
+    const theme = useTheme();
     navigation.removeListener();
 
+    const radioColor = theme.colors.rawText;
     const radioButtons = useMemo(() => ([
         {
             id: '1', // acts as primary key, should be unique and non-empty string
-            label: 'Default ',
+            label: (<Text style={{ color: radioColor }}>Default</Text>),
             value: 'default',
-            selected: true
+            selected: true,
+            color: radioColor
+
         },
         {
             id: '2',
-            label: 'Alphabetical',
-            value: 'alphabetical'
+            label: (<Text style={{ color: theme.colors.rawText }}>Alphabetical</Text>),
+            value: 'alphabetical',
+            color: radioColor
         }
-    ]), []);
+    ]), [theme]);
 
     if (data.boards.length > 0) {
         let boards = data.boards;
-        if (selectedId === '1') {
+        if (selectedId === '2') {
             boards = [...data.boards].sort((a, b) => a.name.localeCompare(b.name));
         } else {
             boards = data.boards;
         }
         return (
             <View style={{ flex: 1 }}>
-                <View style={{}}>
-                    <Text>Sort Boards</Text>
+                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ color: theme.colors.rawText, textAlign: 'center', fontSize: '1.1rem' }}>Order</Text>
                     <RadioGroup
                         radioButtons={radioButtons}
                         onPress={setSelectedId}
