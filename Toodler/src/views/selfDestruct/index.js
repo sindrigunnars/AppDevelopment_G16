@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DataContext } from '../../components/data';
 import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-const SelfDestruct = ({ route, navigation }) => {
+const SelfDestruct = ({ navigation }) => {
     const { data, setData } = useContext(DataContext);
 
     const selfDestruct = () => {
@@ -40,9 +40,6 @@ SelfDestruct.propTypes = {
     navigation: PropTypes.shape({
         navigate: PropTypes.func.isRequired,
         setOptions: PropTypes.func
-    }).isRequired,
-    route: PropTypes.shape({
-        params: PropTypes.object.isRequired
     }).isRequired
 };
 

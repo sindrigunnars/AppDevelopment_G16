@@ -79,11 +79,11 @@ const Routes = () => {
                     component={ModifyList}
                     options={{ headerRight: () => switchButton({ scheme, setScheme }) }}
                 />
-                 <Stack.Screen
+                <Stack.Screen
                     name="Self-destruct"
                     component={SelfDestruct}
                     options={{ headerRight: () => switchButton({ scheme, setScheme }) }}
-                 />
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
