@@ -1,40 +1,21 @@
 import * as FileSystem from 'expo-file-system';
 const contactDirectory = `${FileSystem.documentDirectory}contacts`;
 
-const data = [
-    {
-        name: 'Sindri Snær Gunnarsson',
-        phoneNumber: 6622107
-    },
-    {
-        name: 'Elisa Guðnadóttir',
-        phoneNumber: 6997059
-    },
-    {
-        name: 'Arnar Smári Brynjarsson',
-        phoneNumber: 6997052
-    }
-];
-
 export const cleanDirectory = async () => {
     await FileSystem.deleteAsync(contactDirectory);
 };
 
-export const addContact = () => {
-    return data.map((item) => {
-        const fileName = item.phoneNumber.toString();
-        onException(() => FileSystem.writeAsStringAsync(
-            `${contactDirectory}/${fileName}`,
-            JSON.stringify(item),
-            { encoding: FileSystem.EncodingType.UTF8 }));
-        return item;
-    });
+export const addContact = (contact) => {
+    const fileName = contact.phoneNumber.toString();
+    onException(() => FileSystem.writeAsStringAsync(
+        `${contactDirectory}/${fileName}`,
+        JSON.stringify(contact),
+        { encoding: FileSystem.EncodingType.UTF8 }));
+    return contact;
 };
 
-export const readContact = async () => {
-    const fileName = data[0].phoneNumber.toString();
-    const result = onException(() => FileSystem.readAsStringAsync(`${contactDirectory}/${fileName}`));
-    return result;
+export const readContact = async (fileName) => {
+    return onException(() => FileSystem.readAsStringAsync(`${contactDirectory}/${fileName}`));
 };
 
 const onException = (cb, errorHandler) => {
@@ -64,7 +45,7 @@ export const getAllContacts = async () => {
         return {
             name: fileName,
             type: 'json',
-            data: JSON.parse(await FileSystem.readAsStringAsync(`${contactDirectory}/${fileName}`))
+            data: JSON.parse(await readContact(fileName))
         };
     }));
 };
