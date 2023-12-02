@@ -5,7 +5,6 @@ import * as imageService from '../../services/imageService';
 import { Text, SafeAreaView, StyleSheet, ScrollView, View, StatusBar, Button, Modal, Pressable, TextInput, Image } from 'react-native';
 
 const ContactItem = ({ contact }) => {
-    console.log(typeof contact.uri);
     return (
         <View>
             <Text>{contact.name}</Text>
@@ -56,7 +55,7 @@ const Contacts = ({ navigation: { navigate } }) => {
                 const photoRequest = await imageService.selectFromCameraRoll();
                 setPhoto(photoRequest);
             } else if (from === 'camera') {
-                const photoRequest = await imageService.selectFromCameraRoll();
+                const photoRequest = await imageService.takePhoto();
                 setPhoto(photoRequest);
             } else {
                 throw new Error();
@@ -109,16 +108,10 @@ const Contacts = ({ navigation: { navigate } }) => {
                                     placeholder='Phone number...'
                                 />
                                 <Button
-                                    onPress={() => {
-                                        getImage('camera');
-                                        console.log(photo);
-                                    }}
+                                    onPress={() => getImage('camera')}
                                     title='Camera' />
                                 <Button
-                                    onPress={() => {
-                                        getImage('roll');
-                                        console.log(photo);
-                                    }}
+                                    onPress={() => getImage('roll')}
                                     title='Camera Roll' />
                                 <Pressable
                                     style={[styles.button, styles.buttonClose]}
