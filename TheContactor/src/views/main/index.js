@@ -30,7 +30,8 @@ const Contacts = ({ navigation: { navigate } }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.scrollContainer}>
+            <ScrollView
+                style={{ ...styles.scrollContainer, opacity: modalVisible ? 0.2 : 1 }}>
                 <StatusBar
                     animated={true}
                     backgroundColor="#61dafb"

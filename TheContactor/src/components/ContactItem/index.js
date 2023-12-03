@@ -5,13 +5,11 @@ import { Text, Pressable, Image, StyleSheet } from 'react-native';
 const ContactItem = ({ contact }) => {
     return (
         <Pressable style={({ pressed }) => [{ backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white' }, styles.contact]}>
-            { typeof contact.uri === 'string' &&
-                <>
+            { (typeof contact.uri === 'string' && contact.uri !== '')
+                ? <>
                     <Image source={{ uri: contact.uri }} style={styles.contactImage}/>
                 </>
-            }
-            { typeof contact.uri !== 'string' &&
-                <>
+                : <>
                     <Image source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg' }} style={styles.contactImage}/>
                 </>
             }
