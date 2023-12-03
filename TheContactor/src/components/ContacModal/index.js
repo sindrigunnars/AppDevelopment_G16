@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, View, TextInput, Pressable, Text, StyleSheet } from 'react-native';
-import * as imageService from '../services/imageService';
-import * as fileService from '../services/fileService';
+import * as imageService from '../../services/imageService';
+import * as fileService from '../../services/fileService';
 import PropTypes from 'prop-types';
 
 const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) => {
