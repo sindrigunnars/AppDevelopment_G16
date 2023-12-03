@@ -57,6 +57,7 @@ const SearchBar = ({ searchTerm, onSearchTerm, clicked, setClicked }) => {
                     onFocus={() => {
                         setClicked(true);
                     }}
+                    keyboardAppearance='dark'
                 />
                 {/* cross Icon, depending on whether the search bar is clicked or not */}
                 {clicked && (
@@ -125,7 +126,7 @@ const Contacts = ({ navigation: { navigate } }) => {
                 {!clicked
                     ? contacts.map((item, key) => <ContactItem key={key} contact={item.data}/>)
                     : contacts
-                        .filter((item) => item.data.name.includes(searchTerm))
+                        .filter((item) => item.data.name.toLowerCase().includes(searchTerm.toLowerCase()))
                         .map((filteredItem, key) => (
                             <ContactItem key={key} contact={filteredItem.data} />
                         ))
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     scrollContainer: {
-        marginHorizontal: 20
+        paddingHorizontal: 20
     },
     button: {
         alignItems: 'center',
