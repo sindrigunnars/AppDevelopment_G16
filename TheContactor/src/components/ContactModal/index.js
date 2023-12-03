@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, View, TextInput, Pressable, Text, StyleSheet, Dimensions } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import TextButton from '../TextButton';
+import ImageButton from '../ImageButton';
 import * as imageService from '../../services/imageService';
 import * as fileService from '../../services/fileService';
 import PropTypes from 'prop-types';
@@ -69,23 +70,18 @@ const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) 
                             placeholder='Phone number...'
                         />
                         <View style={styles.photoButtons}>
-                            <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.8 : 1 }, styles.photoButton]}
-                                onPress={() => getImage('camera')}
-                            >
-                                {/* <Text style={styles.textStyle}>Camera</Text> */}
-                                <Entypo style={styles.icon} name="camera" />
-                            </Pressable>
+                            <ImageButton
+                                onPressFunc={() => getImage('camera')}
+                                name={'camera'}
+                            />
                             <Text style={styles.divider}></Text>
-                            <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.8 : 1 }, styles.photoButton]}
-                                onPress={() => getImage('roll')}
-                            >
-                                {/* <Text style={styles.textStyle}>Camera Roll</Text> */}
-                                <Entypo style={styles.icon} name="image" />
-                            </Pressable>
+                            <ImageButton
+                                onPressFunc={() => getImage('roll')}
+                                name={'image'}
+                            />
                         </View>
-                        <Pressable
-                            style={[styles.button, styles.buttonClose, { opacity: !areValidInputs() ? 0.7 : 1 }]}
-                            onPress={() => {
+                        <TextButton
+                            onPressFunc={() => {
                                 setModalVisible(false);
                                 const newContact = {
                                     name,
@@ -98,22 +94,20 @@ const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) 
                                 onChangeNumber(null);
                                 setPhoto();
                             }}
+                            text={'Confirm'}
                             disabled={!areValidInputs()}
-                        >
-                            <Text style={styles.textStyle}>Confirm</Text>
-                        </Pressable>
-                        <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.8 : 1 }, styles.button]}
-                            onPress={() => setModalVisible(false)}>
-                            <Text style={styles.textStyle}>Cancel</Text>
-                        </Pressable>
+                        />
+                        <TextButton
+                            onPressFunc={() => setModalVisible(false)}
+                            text={'Cancel'}
+                        />
                     </View>
                 </View>
             </Modal>
-            <Pressable
-                style={({ pressed }) => [{ opacity: pressed ? 0.8 : 1 }, styles.buttonMain, styles.buttonOpen]}
-                onPress={() => setModalVisible(true)}>
-                <Text style={styles.textStyle}>Add Contact</Text>
-            </Pressable>
+            <TextButton
+                onPressFunc={() => setModalVisible(true)}
+                text={'Add Contact'}
+            />
         </>
     );
 };
@@ -147,8 +141,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 100,
         elevation: 100,
-        width: '90%',
-        gap: 10
+        width: '90%'
     },
     buttonOpen: {
         backgroundColor: '#f23006'
@@ -172,7 +165,7 @@ const styles = StyleSheet.create({
         padding: 5
     },
     input: {
-        marginBottom: 10,
+        marginBottom: 16,
         width: '100%',
         padding: 15,
         borderWidth: 1,
@@ -201,24 +194,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center'
     },
-    icon: {
-        aspectRatio: 1,
-        fontSize: 30,
-        marginTop: 10,
-        marginBottom: 10,
-        color: 'white'
-    },
     photoButtons: {
         flexGrow: 1,
         flexDirection: 'row',
-        width: '100%'
-    },
-    photoButton: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#1b2f73',
-        padding: 10
+        width: '100%',
+        marginBottom: 16
     },
     divider: {
         width: 1,

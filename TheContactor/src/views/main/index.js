@@ -4,7 +4,10 @@ import * as fileService from '../../services/fileService';
 import ContactModal from '../../components/ContactModal';
 import SearchBar from '../../components/SearchBar';
 import ContactItem from '../../components/ContactItem';
-import { Text, SafeAreaView, StyleSheet, ScrollView, StatusBar, Pressable } from 'react-native';
+import TextButton from '../../components/TextButton';
+import { SafeAreaView, StyleSheet, ScrollView, StatusBar } from 'react-native';
+import HeaderButton from '../../components/HeaderButton';
+import { useNavigation } from '@react-navigation/native';
 
 const Contacts = ({ navigation: { navigate } }) => {
     const [contacts, setContacts] = useState([]);
@@ -12,6 +15,13 @@ const Contacts = ({ navigation: { navigate } }) => {
     const [refreshContacts, setRefreshContacts] = useState(true);
     const [searchTerm, onSearchTerm] = useState('');
     const [clicked, setClicked] = useState(false);
+    const navigation = useNavigation();
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerRight: () => <HeaderButton onPressFunc={() => setModalVisible(true)} name='add'/>
+        });
+    }, []);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,14 +59,13 @@ const Contacts = ({ navigation: { navigate } }) => {
                         ))
                 }
                 <ContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} setRefreshContacts={setRefreshContacts} />
-                <Pressable
-                    style={styles.button}
-                    onPress={() => {
+                <TextButton
+                    onPressFunc={() => {
                         fileService.cleanDirectory();
                         setRefreshContacts(true);
-                    }}>
-                    <Text style={styles.textStyle}>Clean Directory</Text>
-                </Pressable>
+                    }}
+                    text={'Clean Directory'}
+                />
             </ScrollView>
         </SafeAreaView>
     );
@@ -76,20 +85,6 @@ const styles = StyleSheet.create({
     },
     scrollContainer: {
         paddingHorizontal: 20
-    },
-    button: {
-        alignItems: 'center',
-        backgroundColor: '#1b2f73',
-        justifyContent: 'center',
-        padding: 10,
-        borderRadius: 8,
-        height: 45,
-        marginBottom: 16
-    },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center'
     }
 });
 
