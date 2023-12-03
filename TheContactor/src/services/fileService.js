@@ -24,7 +24,7 @@ const setupDirectory = async () => {
 };
 
 export const removeContact = async (contact) => { // Takes in a contact in the format that getAll supplies
-    const fileName = contact.name;
+    const fileName = contact.phoneNumber.toString();
     return await onException(() => FileSystem.deleteAsync(`${contactDirectory}/${fileName}`));
 };
 
@@ -45,7 +45,7 @@ export const addContact = async (contact) => {
     const fileName = contact.phoneNumber.toString();
     const filePath = `${contactDirectory}/${fileName}`;
     const file = await FileSystem.getInfoAsync(filePath);
-    if (!file.exists && !file.exists) {
+    if (!file.exists && !file.isDirectory) {
         await onException(() => FileSystem.writeAsStringAsync(
             `${contactDirectory}/${fileName}`,
             JSON.stringify(contact),

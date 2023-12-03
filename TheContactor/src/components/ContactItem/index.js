@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Text, Pressable, Image, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const ContactItem = ({ contact }) => {
+const ContactItem = ({ contact, setRefreshContacts }) => {
     const navigation = useNavigation();
     return (
         <Pressable style={({ pressed }) => [{ backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white' }, styles.contact]}
-            onPress={() => navigation.navigate('Contact', { contact })}
+            onPress={() => navigation.navigate('Contact', contact)}
         >
             { (typeof contact.data.uri === 'string' && contact.data.uri !== '')
                 ? <>
@@ -29,7 +29,8 @@ ContactItem.propTypes = {
             phoneNumber: PropTypes.number.isRequired,
             uri: PropTypes.any
         })
-    })
+    }),
+    setRefreshContacts: PropTypes.func.isRequired
 };
 
 export default ContactItem;

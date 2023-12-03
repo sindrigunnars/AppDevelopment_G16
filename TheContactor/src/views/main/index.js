@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import * as fileService from '../../services/fileService';
-import ContactModal from '../../components/ContactModal';
+import AddContactModal from '../../components/AddContactModal';
 import SearchBar from '../../components/SearchBar';
 import ContactItem from '../../components/ContactItem';
 import TextButton from '../../components/TextButton';
@@ -23,20 +23,28 @@ const Contacts = ({ navigation: { navigate } }) => {
         });
     }, []);
 
+    const fetchData = async () => {
+        try {
+            const contactsData = await fileService.getAllContacts();
+            setContacts(contactsData);
+        } catch (error) {
+            console.error('Error fetching contacts', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const contactsData = await fileService.getAllContacts();
-                setContacts(contactsData);
-            } catch (error) {
-                console.error('Error fetching contacts', error);
-            }
-        };
         if (refreshContacts) {
             fetchData();
             setRefreshContacts(false);
         }
     }, [refreshContacts]);
+
+    useEffect(() => {
+        const unsubscribeFocus = navigation.addListener('focus', () => {
+            fetchData();
+        });
+        return unsubscribeFocus;
+    }, [navigation]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -51,14 +59,14 @@ const Contacts = ({ navigation: { navigate } }) => {
                 />
                 <SearchBar searchTerm={searchTerm} onSearchTerm={onSearchTerm} clicked={clicked} setClicked={setClicked}/>
                 {!clicked
-                    ? contacts.map((item, key) => <ContactItem key={key} contact={item}/>)
+                    ? contacts.map((item, key) => <ContactItem key={key} contact={item} setRefreshContacts={setRefreshContacts}/>)
                     : contacts
                         .filter((item) => item.data.name.toLowerCase().includes(searchTerm.toLowerCase()))
                         .map((filteredItem, key) => (
-                            <ContactItem key={key} contact={filteredItem} />
+                            <ContactItem key={key} contact={filteredItem} setRefreshContacts={setRefreshContacts}/>
                         ))
                 }
-                <ContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} setRefreshContacts={setRefreshContacts} />
+                <AddContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} setRefreshContacts={setRefreshContacts} />
                 <TextButton
                     onPressFunc={() => {
                         fileService.cleanDirectory();
