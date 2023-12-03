@@ -51,11 +51,11 @@ const Contacts = ({ navigation: { navigate } }) => {
                 />
                 <SearchBar searchTerm={searchTerm} onSearchTerm={onSearchTerm} clicked={clicked} setClicked={setClicked}/>
                 {!clicked
-                    ? contacts.map((item, key) => <ContactItem key={key} contact={item.data}/>)
+                    ? contacts.map((item, key) => <ContactItem key={key} contact={item}/>)
                     : contacts
                         .filter((item) => item.data.name.toLowerCase().includes(searchTerm.toLowerCase()))
                         .map((filteredItem, key) => (
-                            <ContactItem key={key} contact={filteredItem.data} />
+                            <ContactItem key={key} contact={filteredItem} />
                         ))
                 }
                 <ContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} setRefreshContacts={setRefreshContacts} />

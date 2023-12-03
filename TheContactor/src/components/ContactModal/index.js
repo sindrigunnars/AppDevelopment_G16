@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, TextInput, Pressable, Text, StyleSheet, Dimensions } from 'react-native';
+import { Modal, View, TextInput, Text, StyleSheet, Dimensions } from 'react-native';
 import TextButton from '../TextButton';
 import ImageButton from '../ImageButton';
 import * as imageService from '../../services/imageService';
