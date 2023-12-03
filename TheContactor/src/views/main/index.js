@@ -46,6 +46,18 @@ const Contacts = ({ navigation: { navigate } }) => {
         return unsubscribeFocus;
     }, [navigation]);
 
+    const compareNames = (a, b) => {
+        const nameA = a.data.name.toLowerCase();
+        const nameB = b.data.name.toLowerCase();
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView
@@ -59,9 +71,12 @@ const Contacts = ({ navigation: { navigate } }) => {
                 />
                 <SearchBar searchTerm={searchTerm} onSearchTerm={onSearchTerm} clicked={clicked} setClicked={setClicked}/>
                 {!clicked
-                    ? contacts.map((item, key) => <ContactItem key={key} contact={item} setRefreshContacts={setRefreshContacts}/>)
+                    ? contacts
+                        .sort(compareNames)
+                        .map((item, key) => <ContactItem key={key} contact={item} setRefreshContacts={setRefreshContacts}/>)
                     : contacts
                         .filter((item) => item.data.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                        .sort(compareNames)
                         .map((filteredItem, key) => (
                             <ContactItem key={key} contact={filteredItem} setRefreshContacts={setRefreshContacts}/>
                         ))
