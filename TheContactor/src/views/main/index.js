@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import * as fileService from '../../services/fileService';
-import AddContactModal from '../../components/ContacModal';
+import ContactModal from '../../components/ContactModal';
 import SearchBar from '../../components/SearchBar';
 import ContactItem from '../../components/ContactItem';
 import { Text, SafeAreaView, StyleSheet, ScrollView, StatusBar, Pressable } from 'react-native';
@@ -48,7 +48,7 @@ const Contacts = ({ navigation: { navigate } }) => {
                             <ContactItem key={key} contact={filteredItem.data} />
                         ))
                 }
-                <AddContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} setRefreshContacts={setRefreshContacts} />
+                <ContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} setRefreshContacts={setRefreshContacts} />
                 <Pressable
                     style={styles.button}
                     onPress={() => {
