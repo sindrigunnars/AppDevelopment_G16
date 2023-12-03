@@ -1,4 +1,5 @@
 import * as FileSystem from 'expo-file-system';
+import * as Contacts from 'expo-contacts';
 const contactDirectory = `${FileSystem.documentDirectory}contacts`;
 
 const onException = (cb, errorHandler) => {
@@ -10,6 +11,24 @@ const onException = (cb, errorHandler) => {
         }
         console.error(err);
     }
+};
+
+export const importContacts = async () => {
+    const { data } = await Contacts.getContactsAsync({
+        fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Name, Contacts.Fields.RawImage]
+    });
+
+    return Promise.all(data.map((item) => {
+        return {
+            name: 'fileName',
+            type: 'json',
+            data: {
+                name: item.name,
+                phoneNumber: item.phoneNumbers === undefined ? undefined : item.phoneNumbers[0].number,
+                uri: item.rawImage === undefined ? undefined : item.rawImage.uri
+            }
+        };
+    }));
 };
 
 export const cleanDirectory = async () => {
