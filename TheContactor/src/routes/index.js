@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Contacts from '../views/Main';
+import Contacts from '../views/main';
 import Contact from '../views/Contact';
 import Settings from '../views/Settings';
 import HeaderButton from '../components/HeaderButton';
