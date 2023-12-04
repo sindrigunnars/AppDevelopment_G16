@@ -11,25 +11,29 @@ const EditContactModal = ({ modalVisible, setModalVisible, contact, setContact }
     const [name, onChangeName] = useState(contact.data.name);
     const [number, onChangeNumber] = useState(contact.data.phoneNumber.toString());
     const [photo, setPhoto] = useState(contact.data.uri);
+    const [photoReady, setPhotoReady] = useState();
 
     const areValidInputs = () => {
         if (typeof name !== 'string' || typeof number !== 'string') { return false; }
+        if (photoReady !== undefined && !photoReady) { return false; }
         if (isNaN(parseInt(number))) { return false; }
         if (name.length <= 0) { return false; }
         return true;
     };
 
     const getImage = async (from) => {
+        setPhotoReady(false);
         try {
             if (from === 'roll') {
-                const photoRequest = await imageService.selectFromCameraRoll();
-                setPhoto(photoRequest);
+                await imageService.selectFromCameraRoll().then((image) => {
+                    setPhoto(image);
+                });
             } else if (from === 'camera') {
-                const photoRequest = await imageService.takePhoto();
-                setPhoto(photoRequest);
-            } else {
-                throw new Error();
+                await imageService.takePhoto().then((image) => {
+                    setPhoto(image);
+                });
             }
+            setPhotoReady(true);
         } catch (error) {
             console.error('Error fetching image', error);
         }
@@ -44,6 +48,7 @@ const EditContactModal = ({ modalVisible, setModalVisible, contact, setContact }
         fileService.editContact(contact.name, newContact);
         setModalVisible(false);
         setContact({ ...contact, data: newContact });
+        setPhotoReady();
     };
 
     return (
