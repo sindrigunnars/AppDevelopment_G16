@@ -9,11 +9,14 @@ const Contact = ({ route, navigation: { navigate } }) => {
     const [contactData, setContact] = useState(contact);
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
+
     useEffect(() => {
-        navigation.setOptions({
-            headerRight: () => <HeaderButton onPressFunc={() => setModalVisible(true)} name='pencil'/>
-        });
-    }, []);
+        const headerOptions = {
+            headerRight: () => <HeaderButton onPressFunc={() => setModalVisible(true)} name='pencil' />,
+        };
+        navigation.setOptions(headerOptions);
+    }, [navigation]);
+
     return (
         <EditContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} contact={contactData} setContact={setContact}/>
     );
