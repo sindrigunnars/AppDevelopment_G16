@@ -13,14 +13,12 @@ const SearchBar = ({ searchTerm, onSearchTerm, clicked, setClicked }) => {
                         : styles.searchBar__unclicked
                 }
             >
-                {/* search Icon */}
                 <Feather
                     name="search"
                     size={20}
                     color="black"
                     style={{ marginLeft: 1 }}
                 />
-                {/* Input field */}
                 <TextInput
                     style={styles.searchInput}
                     placeholder="Search"
@@ -31,14 +29,12 @@ const SearchBar = ({ searchTerm, onSearchTerm, clicked, setClicked }) => {
                     }}
                     keyboardAppearance='dark'
                 />
-                {/* cross Icon, depending on whether the search bar is clicked or not */}
                 {clicked && (
                     <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
                         onSearchTerm('');
                     }}/>
                 )}
             </View>
-            {/* cancel button, depending on whether the search bar is clicked or not */}
             {clicked && (
                 <View>
                     <Button

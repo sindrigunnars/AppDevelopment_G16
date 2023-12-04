@@ -63,7 +63,6 @@ export const editContact = async (fileName, contact) => { // Takes in a JSON
 export const addContact = async (contact) => {
     const fileName = `${contact.name.replace(/[^a-zA-Z0-9]/g, '')}-${uuidv4()}`;
     const filePath = `${contactDirectory}/${fileName}`;
-    console.log(fileName);
     const file = await FileSystem.getInfoAsync(filePath);
     if (!file.exists && !file.isDirectory) {
         await onException(() => FileSystem.writeAsStringAsync(
