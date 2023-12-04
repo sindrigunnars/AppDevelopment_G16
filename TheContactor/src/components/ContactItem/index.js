@@ -7,7 +7,7 @@ const ContactItem = ({ contact, setRefreshContacts }) => {
     const navigation = useNavigation();
     return (
         <Pressable style={({ pressed }) => [{ backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white' }, styles.contact]}
-            onPress={() => navigation.navigate('Contact', contact)}
+            onPress={() => navigation.navigate('Contact', { contact })}
         >
             { (typeof contact.data.uri === 'string' && contact.data.uri !== '')
                 ? <>

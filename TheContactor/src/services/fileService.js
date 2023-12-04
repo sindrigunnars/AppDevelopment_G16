@@ -1,5 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 import * as Contacts from 'expo-contacts';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 const contactDirectory = `${FileSystem.documentDirectory}contacts`;
 
 const onException = (cb, errorHandler) => {
@@ -42,13 +44,11 @@ const setupDirectory = async () => {
     }
 };
 
-export const removeContact = async (contact) => { // Takes in a contact in the format that getAll supplies
-    const fileName = contact.phoneNumber.toString();
+export const removeContact = async (fileName) => { // Takes in a contact in the format that getAll supplies
     return await onException(() => FileSystem.deleteAsync(`${contactDirectory}/${fileName}`));
 };
 
-export const editContact = async (contact) => { // Takes in a JSON
-    const fileName = contact.phoneNumber.toString();
+export const editContact = async (fileName, contact) => { // Takes in a JSON
     const filePath = `${contactDirectory}/${fileName}`;
     const file = await FileSystem.getInfoAsync(filePath);
     if (file.exists && !file.isDirectory) {
@@ -61,8 +61,9 @@ export const editContact = async (contact) => { // Takes in a JSON
 };
 
 export const addContact = async (contact) => {
-    const fileName = contact.phoneNumber.toString();
+    const fileName = `${contact.name.replace(/[^a-zA-Z0-9]/g, '')}-${uuidv4()}`;
     const filePath = `${contactDirectory}/${fileName}`;
+    console.log(fileName);
     const file = await FileSystem.getInfoAsync(filePath);
     if (!file.exists && !file.isDirectory) {
         await onException(() => FileSystem.writeAsStringAsync(

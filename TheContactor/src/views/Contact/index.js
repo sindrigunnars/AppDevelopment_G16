@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import EditContactModal from '../../components/EditContactModal';
 
 const Contact = ({ route, navigation: { navigate } }) => {
-    const { data } = route.params;
-    const [contact, setContact] = useState(data);
+    const { contact } = route.params;
+    console.log(route.params);
+    const [contactData, setContact] = useState(contact);
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
     useEffect(() => {
@@ -15,7 +16,7 @@ const Contact = ({ route, navigation: { navigate } }) => {
         });
     }, []);
     return (
-        <EditContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} contact={contact} setContact={setContact}/>
+        <EditContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} contact={contactData} setContact={setContact}/>
     );
 };
 

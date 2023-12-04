@@ -8,9 +8,9 @@ import PropTypes from 'prop-types';
 import ContactModal from '../ContactModel';
 
 const EditContactModal = ({ modalVisible, setModalVisible, contact, setContact }) => {
-    const [name, onChangeName] = useState(contact.name);
-    const [number, onChangeNumber] = useState(contact.phoneNumber.toString());
-    const [photo, setPhoto] = useState(contact.uri);
+    const [name, onChangeName] = useState(contact.data.name);
+    const [number, onChangeNumber] = useState(contact.data.phoneNumber.toString());
+    const [photo, setPhoto] = useState(contact.data.uri);
 
     const areValidInputs = () => {
         if (typeof name !== 'string' || typeof number !== 'string') { return false; }
@@ -41,7 +41,7 @@ const EditContactModal = ({ modalVisible, setModalVisible, contact, setContact }
             phoneNumber: parseInt(number),
             uri: photo
         };
-        if (contact.phoneNumber !== number) {
+        if (contact.data.phoneNumber !== number) {
             await fileService.removeContact(contact);
             fileService.addContact(newContact);
         } else {
@@ -105,9 +105,11 @@ EditContactModal.propTypes = {
     modalVisible: PropTypes.bool.isRequired,
     setModalVisible: PropTypes.func.isRequired,
     contact: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        phoneNumber: PropTypes.number.isRequired,
-        uri: PropTypes.string
+        data: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            phoneNumber: PropTypes.number.isRequired,
+            uri: PropTypes.string
+        })
     }),
     setContact: PropTypes.func.isRequired
 };
