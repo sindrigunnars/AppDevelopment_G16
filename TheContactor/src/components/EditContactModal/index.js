@@ -41,14 +41,9 @@ const EditContactModal = ({ modalVisible, setModalVisible, contact, setContact }
             phoneNumber: parseInt(number),
             uri: photo
         };
-        if (contact.data.phoneNumber !== number) {
-            await fileService.removeContact(contact);
-            fileService.addContact(newContact);
-        } else {
-            fileService.editContact(newContact);
-        }
+        fileService.editContact(contact.name, newContact);
         setModalVisible(false);
-        setContact(newContact);
+        setContact({ ...contact, data: newContact });
     };
 
     return (
@@ -109,7 +104,8 @@ EditContactModal.propTypes = {
             name: PropTypes.string.isRequired,
             phoneNumber: PropTypes.number.isRequired,
             uri: PropTypes.string
-        })
+        }),
+        name: PropTypes.string.isRequired
     }),
     setContact: PropTypes.func.isRequired
 };

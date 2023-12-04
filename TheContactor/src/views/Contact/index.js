@@ -6,7 +6,6 @@ import EditContactModal from '../../components/EditContactModal';
 
 const Contact = ({ route, navigation: { navigate } }) => {
     const { contact } = route.params;
-    console.log(route.params);
     const [contactData, setContact] = useState(contact);
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
