@@ -5,8 +5,8 @@ import TextButton from '../../components/TextButton';
 import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 const Settings = ({ navigation: { navigate } }) => {
     return (
-        <SafeAreaView>
-            <ScrollView>
+        <SafeAreaView style={styles.container}>
+            <ScrollView style={styles.scrollContainer}>
                 <TextButton text='Import Contacts' onPressFunc={() => fileService.importContacts()}/>
             </ScrollView>
         </SafeAreaView>
