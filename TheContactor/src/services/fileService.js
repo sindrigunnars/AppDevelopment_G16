@@ -15,7 +15,7 @@ const onException = (cb, errorHandler) => {
     }
 };
 
-export const importContacts = async () => {
+const importContactsFromSystem = async () => {
     const { data } = await Contacts.getContactsAsync({
         fields: [Contacts.Fields.PhoneNumbers, Contacts.Fields.Name, Contacts.Fields.RawImage]
     });
@@ -27,10 +27,24 @@ export const importContacts = async () => {
             data: {
                 name: item.name,
                 phoneNumber: item.phoneNumbers === undefined ? undefined : item.phoneNumbers[0].number,
-                uri: item.rawImage === undefined ? undefined : item.rawImage.uri
+                uri: item.rawImage === undefined ? undefined : item.rawImage[0].uri
             }
         };
     }));
+};
+
+export const importContacts = async () => {
+    const contacts = await importContactsFromSystem();
+    contacts.map((contact) => {
+        const newContact = {
+            name: contact.data.name,
+            phoneNumber: parseInt(contact.data.phoneNumber.replace(/\D/g, '', '')),
+            uri: contact.data.uri === undefined ? '' : contact.data.uri
+        };
+        addContact(newContact);
+        console.log(newContact);
+        return newContact;
+    });
 };
 
 export const cleanDirectory = async () => {
