@@ -18,7 +18,7 @@ const Contact = ({ route, navigation: { navigate } }) => {
         };
         navigation.setOptions(headerOptions);
     }, [navigation]);
-    console.log(contactData);
+
     return (
         <View style={styles.main}>
             <EditContactModal modalVisible={modalVisible} setModalVisible={setModalVisible} contact={contactData} setContact={setContact}/>
