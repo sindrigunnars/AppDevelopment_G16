@@ -12,7 +12,7 @@ const Contact = ({ route, navigation: { navigate } }) => {
 
     useEffect(() => {
         const headerOptions = {
-            headerRight: () => <HeaderButton onPressFunc={() => setModalVisible(true)} name='pencil' />,
+            headerRight: () => <HeaderButton onPressFunc={() => setModalVisible(true)} name='pencil' />
         };
         navigation.setOptions(headerOptions);
     }, [navigation]);
