@@ -76,7 +76,8 @@ const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) 
                 autoFocus={false}
                 onChangeText={onChangeNumber}
                 value={number}
-                maxLength={10}
+                minLength={3}
+                maxLength={15}
                 inputMode='numeric'
                 clearButtonMode='always'
                 keyboardAppearance='dark'
@@ -93,6 +94,10 @@ const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) 
                     name={'image'}
                 />
             </View>
+            { photoReady
+                ? <View><Text>Image Selected!</Text></View>
+                : <View></View>
+            }
             <TextButton
                 onPressFunc={() => addContact()}
                 text={'Confirm'}
