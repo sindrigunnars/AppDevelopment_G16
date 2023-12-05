@@ -90,7 +90,7 @@ const readContact = async (fileName) => {
     return onException(() => FileSystem.readAsStringAsync(`${contactDirectory}/${fileName}`));
 };
 
-export const getAllContacts = async () => { // Check if directory exists
+export const getAllContacts = async () => { // Gets all existing contacts in file system
     await setupDirectory();
     const result = await onException(() => FileSystem.readDirectoryAsync(contactDirectory));
     return Promise.all(result.map(async fileName => {
