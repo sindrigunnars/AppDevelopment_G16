@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 const ContactDetails = ({ contact }) => {
     return (
         <View style={styles.container}>
-            { (typeof contact.data.uri === 'string' && contact.data.uri !== '')
+            { (typeof contact.data.uri === 'string' && contact.data.uri !== '') // checking if an image was chosen, if not we display a 'default profile picture'
                 ? <>
                     <Image source={{ uri: contact.data.uri }} style={styles.image}/>
                 </>
