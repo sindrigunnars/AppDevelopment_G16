@@ -49,7 +49,7 @@ export const importContacts = async () => {
     });
 };
 
-export const cleanDirectory = async () => {
+export const cleanDirectory = async () => { // delete all function
     await FileSystem.deleteAsync(contactDirectory);
 };
 
@@ -90,8 +90,7 @@ const readContact = async (fileName) => {
     return onException(() => FileSystem.readAsStringAsync(`${contactDirectory}/${fileName}`));
 };
 
-export const getAllContacts = async () => {
-    // Check if directory exists
+export const getAllContacts = async () => { // Check if directory exists
     await setupDirectory();
     const result = await onException(() => FileSystem.readDirectoryAsync(contactDirectory));
     return Promise.all(result.map(async fileName => {
