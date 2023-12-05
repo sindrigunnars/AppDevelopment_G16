@@ -10,7 +10,7 @@ const ContactItem = ({ contact }) => {
         <Pressable style={({ pressed }) => [{ backgroundColor: pressed ? 'rgb(210, 230, 255)' : 'white' }, styles.contact]}
             onPress={() => navigation.navigate('Contact', { contact })}
         >
-            { (typeof contact.data.uri === 'string' && contact.data.uri !== '')
+            { (typeof contact.data.uri === 'string' && contact.data.uri !== '') // checks if an image has been chosen, if not then a 'default profile picture' from the internet is displayed
                 ? <>
                     <Image source={{ uri: contact.data.uri }} style={styles.contactImage}/>
                 </>
