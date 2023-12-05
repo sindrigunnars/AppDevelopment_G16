@@ -60,19 +60,16 @@ const setupDirectory = async () => {
     }
 };
 
-export const removeContact = async (fileName) => { // Takes in a contact in the format that getAll supplies
+const removeContact = async (fileName) => { // Takes in a contact in the format that getAll supplies
     return await onException(() => FileSystem.deleteAsync(`${contactDirectory}/${fileName}`));
 };
 
-export const editContact = async (fileName, contact) => { // Takes in a JSON
+export const editContact = async (fileName, contact) => { // Takes in a JSON and fileName, deletes the file and creates new contact
     const filePath = `${contactDirectory}/${fileName}`;
     const file = await FileSystem.getInfoAsync(filePath);
     if (file.exists && !file.isDirectory) {
-        await onException(() => FileSystem.writeAsStringAsync(
-            filePath,
-            JSON.stringify(contact),
-            { encoding: FileSystem.EncodingType.UTF8 }
-        ));
+        await removeContact(fileName);
+        await addContact(contact);
     }
 };
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import styles from './styles';
 
-const TextButton = ({ text, onPressFunc, disabled }) => {
+const TextButton = ({ text, onPressFunc, disabled, style }) => {
     return (
-        <Pressable style={({ pressed }) => [{ opacity: (pressed || disabled) ? 0.5 : 1 }, styles.button]}
+        <Pressable style={({ pressed }) => [{ opacity: (pressed || disabled) ? 0.5 : 1 }, styles.button, style]}
             onPress={() => onPressFunc()}
             disabled={disabled === undefined ? false : disabled}
         >
@@ -13,26 +14,11 @@ const TextButton = ({ text, onPressFunc, disabled }) => {
     );
 };
 
-export default TextButton;
-
 TextButton.propTypes = {
     text: PropTypes.string.isRequired,
     onPressFunc: PropTypes.func.isRequired,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    style: PropTypes.object
 };
 
-const styles = StyleSheet.create({
-    button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#1b2f73',
-        padding: 15,
-        marginBottom: 16,
-        width: '100%'
-    },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center'
-    }
-});
+export default TextButton;

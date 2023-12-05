@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, TextInput, Button, Keyboard, StyleSheet } from 'react-native';
+import { View, TextInput, Button, Keyboard } from 'react-native';
 import { Feather, Entypo } from '@expo/vector-icons';
+import styles from './styles';
 
 const SearchBar = ({ searchTerm, onSearchTerm, clicked, setClicked }) => {
     return (
@@ -59,36 +60,3 @@ SearchBar.propTypes = {
 };
 
 export default SearchBar;
-
-const styles = StyleSheet.create({
-    searchContainer: {
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        flexDirection: 'row',
-        width: '100%',
-        marginVertical: 16
-
-    },
-    searchBar__unclicked: {
-        padding: 10,
-        flexDirection: 'row',
-        width: '100%',
-        backgroundColor: '#d9dbda',
-        borderRadius: 15,
-        alignItems: 'center'
-    },
-    searchBar__clicked: {
-        padding: 10,
-        flexDirection: 'row',
-        width: '80%',
-        backgroundColor: '#d9dbda',
-        borderRadius: 15,
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
-    },
-    searchInput: {
-        fontSize: 20,
-        marginLeft: 10,
-        width: '90%'
-    }
-});

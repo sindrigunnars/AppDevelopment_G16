@@ -5,20 +5,19 @@ import AddContactModal from '../../components/AddContactModal';
 import SearchBar from '../../components/SearchBar';
 import ContactItem from '../../components/ContactItem';
 import TextButton from '../../components/TextButton';
-import { SafeAreaView, StyleSheet, ScrollView, StatusBar } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import HeaderButton from '../../components/HeaderButton';
-import { useNavigation } from '@react-navigation/native';
+import styles from '../main/styles';
 
-const Contacts = ({ navigation: { navigate } }) => {
+const Contacts = ({ navigation: { setOptions, addListener } }) => {
     const [contacts, setContacts] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     const [refreshContacts, setRefreshContacts] = useState(true);
     const [searchTerm, onSearchTerm] = useState('');
     const [clicked, setClicked] = useState(false);
-    const navigation = useNavigation();
 
     useEffect(() => {
-        navigation.setOptions({
+        setOptions({
             headerRight: () => <HeaderButton onPressFunc={() => setModalVisible(true)} name='add'/>
         });
     }, []);
@@ -40,11 +39,11 @@ const Contacts = ({ navigation: { navigate } }) => {
     }, [refreshContacts]);
 
     useEffect(() => {
-        const unsubscribeFocus = navigation.addListener('focus', () => {
+        const unsubscribeFocus = addListener('focus', () => {
             fetchData();
         });
         return unsubscribeFocus;
-    }, [navigation]);
+    }, []);
 
     const compareNames = (a, b) => {
         const nameA = a.data.name.toLowerCase();
@@ -92,19 +91,9 @@ const Contacts = ({ navigation: { navigate } }) => {
 
 Contacts.propTypes = {
     navigation: PropTypes.shape({
-        navigate: PropTypes.func.isRequired
+        setOptions: PropTypes.func.isRequired,
+        addListener: PropTypes.func.isRequired
     }).isRequired
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center'
-    },
-    scrollContainer: {
-        paddingHorizontal: 20
-    }
-});
 
 export default Contacts;
