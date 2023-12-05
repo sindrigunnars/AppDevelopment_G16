@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as fileService from '../../services/fileService';
 import TextButton from '../../components/TextButton';
-import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
-const Settings = ({ navigation: { navigate } }) => {
+import { SafeAreaView, ScrollView } from 'react-native';
+import styles from './styles';
+
+const Settings = ({ navigation: { goBack } }) => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
-                <TextButton text='Import Contacts' onPressFunc={() => fileService.importContacts()}/>
+                <TextButton style={{ marginTop: 16 }} text='Import Contacts' onPressFunc={async () => {
+                    await fileService.importContacts();
+                    goBack();
+                }}/>
             </ScrollView>
         </SafeAreaView>
     );
@@ -15,19 +20,8 @@ const Settings = ({ navigation: { navigate } }) => {
 
 Settings.propTypes = {
     navigation: PropTypes.shape({
-        navigate: PropTypes.func.isRequired
+        goBack: PropTypes.func.isRequired
     }).isRequired
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center'
-    },
-    scrollContainer: {
-        paddingHorizontal: 20
-    }
-});
 
 export default Settings;
