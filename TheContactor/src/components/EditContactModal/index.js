@@ -88,6 +88,10 @@ const EditContactModal = ({ modalVisible, setModalVisible, contact, setContact }
                     name={'image'}
                 />
             </View>
+            { photoReady && photo !== ''
+                ? <View><Text>Image Selected!</Text></View>
+                : <View></View>
+            }
             <TextButton
                 onPressFunc={() => editContact()}
                 text={'Confirm'}
