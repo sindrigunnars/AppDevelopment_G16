@@ -18,6 +18,7 @@ const EditContactModal = ({ modalVisible, setModalVisible, contact, setContact }
         if (photoReady !== undefined && !photoReady) { return false; }
         if (isNaN(parseInt(number))) { return false; }
         if (name.length <= 0) { return false; }
+        if (number.length < 3) { return false; }
         return true;
     };
 
