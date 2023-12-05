@@ -19,6 +19,7 @@ const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) 
         if (photoReady !== undefined && !photoReady) { return false; }
         if (isNaN(parseInt(number))) { return false; }
         if (name.length <= 0) { return false; }
+        if (number.length < 3) { return false; }
         return true;
     };
 
@@ -77,7 +78,7 @@ const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) 
                 autoFocus={false}
                 onChangeText={onChangeNumber}
                 value={number}
-                maxLength={10}
+                maxLength={15}
                 inputMode='numeric'
                 clearButtonMode='always'
                 keyboardAppearance='dark'
@@ -94,6 +95,10 @@ const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) 
                     name={'image'}
                 />
             </View>
+            { photoReady && photo !== ''
+                ? <View><Text>Image Selected!</Text></View>
+                : <View></View>
+            }
             <TextButton
                 onPressFunc={() => addContact()}
                 text={'Confirm'}
