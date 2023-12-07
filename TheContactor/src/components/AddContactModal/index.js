@@ -42,18 +42,18 @@ const AddContactModal = ({ modalVisible, setModalVisible, setRefreshContacts }) 
     };
 
     const addContact = async () => {
-        setModalVisible(false);
         const newContact = {
             name,
             phoneNumber: parseInt(number),
             uri: photo
         };
-        fileService.addContact(newContact);
+        await fileService.addContact(newContact);
         setRefreshContacts(true);
         onChangeName(null);
         onChangeNumber(null);
         setPhoto();
         setPhotoReady();
+        setModalVisible(false);
     };
 
     return (

@@ -47,9 +47,9 @@ const EditContactModal = ({ modalVisible, setModalVisible, contact, setContact }
             phoneNumber: parseInt(number),
             uri: photo
         };
-        fileService.editContact(contact.name, newContact);
-        setModalVisible(false);
+        await fileService.editContact(contact.name, newContact);
         setContact({ ...contact, data: newContact });
+        setModalVisible(false);
         setPhotoReady();
     };
 
