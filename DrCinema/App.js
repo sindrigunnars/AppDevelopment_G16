@@ -1,11 +1,12 @@
 import React from 'react';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import AppContainer from './src/routes';
+import store from './src/store';
 
 export default function App () {
     return (
-        // <Provider>
-        <AppContainer />
-        // </Provider>
+        <Provider store={store}>
+            <AppContainer />
+        </Provider>
     );
 }
