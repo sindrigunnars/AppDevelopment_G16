@@ -26,14 +26,13 @@ const Main = ({ navigation: { navigate } }) => {
 
     if (isError) return <Text>ERROR</Text>;
 
-    if (isLoading) {
-        return <ActivityIndicator size="large" />;
-    }
-
     return (
         <SafeAreaView>
             <ScrollView>
-                {data.map((movies, key) => <Text key={key}>{movies.title}</Text>)}
+                {isLoading
+                    ? <ActivityIndicator size="large" />
+                    : data.map((movies, key) => <Text key={key}>{movies.title}</Text>)
+                }
             </ScrollView>
         </SafeAreaView>
     );

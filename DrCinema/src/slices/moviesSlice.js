@@ -14,8 +14,6 @@ export const fetchMovies = createAsyncThunk('fetchMovies', async () => {
     return await response.json();
 });
 
-console.log(fetchMovies());
-
 const moviesSlice = createSlice({
     name: 'movies',
     initialState: {
