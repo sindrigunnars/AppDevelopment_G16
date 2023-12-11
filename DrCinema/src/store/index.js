@@ -6,7 +6,11 @@ export const store = configureStore({
     reducer: {
         movies: moviesSlice,
         theaters: theatersSlice
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        immutableCheck: { warnAfter: 250 },
+        serializableCheck: { warnAfter: 250 }
+    })
 });
 
 export default store;
