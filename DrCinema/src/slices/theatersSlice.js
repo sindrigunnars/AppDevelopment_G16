@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // First, create the thunk
-export const fetchTheaters = createAsyncThunk('fetchTheaters', async () => {
+export const fetchTheaters = createAsyncThunk('fetchTheaters', async (token) => {
     const response = await fetch('https://api.kvikmyndir.is/theaters', {
         method: 'GET',
         headers: {
-            'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzYyOGMyYzQwNzkzMzZiYzAyNTIyZiIsImlhdCI6MTcwMjI0NDgzMywiZXhwIjoxNzAyMzMxMjMzfQ.X0hjrhqqlWM7ldOvGMl53lqzDdDtLvH4wnK2doWgfog'
+            'x-access-token': token
         }
     });
     if (!response.ok) {

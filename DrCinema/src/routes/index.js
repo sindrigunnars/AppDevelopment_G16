@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -6,6 +6,8 @@ import Main from '../views/main';
 import Movies from '../views/movies';
 import TheatreDetail from '../views/theatreDetail';
 import MovieDetail from '../views/MovieDetail';
+import { useDispatch } from 'react-redux';
+import { fetchAuth } from '../slices/authSlice';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -47,6 +49,11 @@ const MoviesStack = () => {
 }
 
 const Routes = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchAuth());
+    }, [dispatch]);
+
     return (
         <NavigationContainer>
             <Tab.Navigator>

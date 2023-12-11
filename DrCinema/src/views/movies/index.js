@@ -14,9 +14,10 @@ import MovieItem from '../../components/MovieItem';
 const Movies = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.movies);
+    const { token } = useSelector((state) => state.token);
     const [reload, setReload] = useState(false);
     useEffect(() => {
-        dispatch(fetchMovies());
+        dispatch(fetchMovies(token));
         setReload(false);
     }, [reload]);
 
