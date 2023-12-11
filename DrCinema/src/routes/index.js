@@ -11,13 +11,13 @@ import { fetchAuth } from '../slices/authSlice';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
 const RootStack = () => {
     return (
         <Stack.Navigator initialRouteName="Main">
             <Stack.Screen
                 name="Main"
                 component={Main}
+                options={{ title: 'Theatres' }}
             />
             <Stack.Screen
                 name="Movies"
@@ -32,7 +32,7 @@ const RootStack = () => {
                 component={MovieDetail} />
         </Stack.Navigator>
     );
-}
+};
 
 const MoviesStack = () => {
     return (
@@ -46,7 +46,7 @@ const MoviesStack = () => {
                 component={MovieDetail} />
         </Stack.Navigator>
     );
-}
+};
 
 const Routes = () => {
     const dispatch = useDispatch();
@@ -59,10 +59,13 @@ const Routes = () => {
             <Tab.Navigator>
                 <Tab.Screen
                     name="Home"
-                    component={RootStack} />
+                    component={RootStack}
+                    options={{ headerShown: false }}
+                />
                 <Tab.Screen
                     name="Movies"
                     component={MoviesStack}
+                    options={{ headerShown: false }}
                 />
             </Tab.Navigator>
         </NavigationContainer>

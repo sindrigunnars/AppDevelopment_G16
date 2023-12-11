@@ -16,6 +16,7 @@ const Movies = ({ navigation: { navigate } }) => {
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.movies);
     const { token } = useSelector((state) => state.token);
     const [reload, setReload] = useState(false);
+
     useEffect(() => {
         dispatch(fetchMovies(token));
         setReload(false);

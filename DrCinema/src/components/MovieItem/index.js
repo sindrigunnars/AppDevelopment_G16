@@ -1,13 +1,13 @@
-import { Text, View, TouchableOpacity, Image } from "react-native";
-import { StyleSheet } from "react-native";
+import React from 'react';
+import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 
 const MovieItem = ({ id, title, poster, year, genres, durationMinutes, plot }) => {
-    const genre = genres[0]["NameEN\t"];
+    const genre = genres[0]['NameEN\t'];
     const navigation = useNavigation();
     return (
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Movie', {id, title, poster, year, genres, durationMinutes, plot })}>
+        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Movie', { id, title, poster, year, genres, durationMinutes, plot })}>
             <Image
                 style={styles.image}
                 source={{ uri: poster }} />
@@ -18,7 +18,7 @@ const MovieItem = ({ id, title, poster, year, genres, durationMinutes, plot }) =
             </View>
         </TouchableOpacity>
     );
-}
+};
 
 const styles = StyleSheet.create({
     item: {
@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         alignItems: 'center',
         height: 100,
-        backgroundColor: '#fff',
+        backgroundColor: '#fff'
     },
     title: {
-        fontSize: 20,
+        fontSize: 20
     },
     movieDetails: {
         flex: 1,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: '100%'
     }
-})
+});
 
 MovieItem.propTypes = {
     id: PropTypes.number.isRequired,
