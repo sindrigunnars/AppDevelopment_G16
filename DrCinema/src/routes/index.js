@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Main from '../views/main';
 import Movies from '../views/movies';
 import TheatreDetail from '../views/theatreDetail';
+import { useDispatch } from 'react-redux';
+import { fetchAuth } from '../slices/authSlice';
 const Stack = createStackNavigator();
 
 const Routes = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchAuth());
+    }, [dispatch]);
+
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Main">

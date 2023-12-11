@@ -1,38 +1,39 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 // First, create the thunk
-export const fetchTheaters = createAsyncThunk('fetchTheaters', async (token) => {
-    const response = await fetch('https://api.kvikmyndir.is/theaters', {
-        method: 'GET',
+export const fetchAuth = createAsyncThunk('fetchAuth', async () => {
+    const response = await fetch('https://api.kvikmyndir.is/authenticate', {
+        method: 'POST',
         headers: {
-            'x-access-token': token
+            Authorization: 'Basic c2luZHJpZ3VubmFyczpzaW5kcmkwMA=='
         }
     });
+
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return await response.json();
+    return await (response.json()).token;
 });
 
-const theatersSlice = createSlice({
-    name: 'theaters',
+const authSlice = createSlice({
+    name: 'token',
     initialState: {
         isLoading: false,
-        data: [],
+        data: '',
         isError: false,
         errorMessage: null
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchTheaters.pending, (state, action) => {
+        builder.addCase(fetchAuth.pending, (state, action) => {
             state.isLoading = true;
             state.isError = false;
             state.errorMessage = null;
         });
-        builder.addCase(fetchTheaters.fulfilled, (state, action) => {
+        builder.addCase(fetchAuth.fulfilled, (state, action) => {
             state.isLoading = false;
             state.data = action.payload;
         });
-        builder.addCase(fetchTheaters.rejected, (state, action) => {
+        builder.addCase(fetchAuth.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.errorMessage = action.error.message;
@@ -40,4 +41,4 @@ const theatersSlice = createSlice({
     }
 });
 
-export default theatersSlice.reducer;
+export default authSlice.reducer;
