@@ -12,7 +12,7 @@ import {
 
 const Main = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
-    const { data, isLoading, isError } = useSelector((state) => state.movies);
+    const { data, isLoading, isError, errorMessage } = useSelector((state) => state.movies);
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const Main = ({ navigation: { navigate } }) => {
         // });
     }, [reload]);
 
-    if (isError) return <Text>ERROR</Text>;
+    if (isError) return <Text>ERROR: {errorMessage}</Text>;
 
     return (
         <SafeAreaView>
