@@ -9,11 +9,12 @@ import {
     Text,
     ActivityIndicator
 } from 'react-native';
+import MovieItem from '../../components/MovieItem';
 
 const Movies = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.movies);
-    const { token } = useSelector((state) => state.token);
+    const token = useSelector((state) => state.token.data);
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
@@ -21,14 +22,22 @@ const Movies = ({ navigation: { navigate } }) => {
         setReload(false);
     }, [reload]);
 
+    const compareTitles = (a, b) => {
+        const titleA = a.title;
+        const titleB = b.title;
+        return titleA.localeCompare(titleB, 'is', { sensitivity: 'base' });
+    };
+
     if (isError) return <Text>ERROR: {errorMessage}</Text>;
+
+    const sortedData = data ? [...data].sort(compareTitles) : null;
 
     return (
         <SafeAreaView>
             <ScrollView>
                 {isLoading
                     ? <ActivityIndicator size="large" />
-                    : data.map((movies, key) => <Text key={key}>{movies.title}</Text>)
+                    : sortedData.map((movie, key) => <MovieItem key={key} data={movie}/>)
                 }
             </ScrollView>
         </SafeAreaView>
