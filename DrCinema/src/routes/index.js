@@ -5,13 +5,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Main from '../views/main';
 import Movies from '../views/movies';
 import TheatreDetail from '../views/theatreDetail';
+import MovieDetail from '../views/MovieDetail';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-const HomeStack = () => {
+const RootStack = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Main">
             <Stack.Screen
                 name="Main"
                 component={Main}
@@ -24,6 +25,23 @@ const HomeStack = () => {
                 name="Theatre"
                 component={TheatreDetail}
             />
+            <Stack.Screen
+                name="Movie"
+                component={MovieDetail} />
+        </Stack.Navigator>
+    );
+}
+
+const MoviesStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="Movies">
+            <Stack.Screen
+                name="All Movies"
+                component={Movies}
+            />
+            <Stack.Screen
+                name="Movie"
+                component={MovieDetail} />
         </Stack.Navigator>
     );
 }
@@ -31,17 +49,13 @@ const HomeStack = () => {
 const Routes = () => {
     return (
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="Main">
+            <Tab.Navigator>
                 <Tab.Screen
                     name="Home"
-                    component={HomeStack} />
-                <Stack.Screen
-                    name="Theatres"
-                    component={Main}
-                />
+                    component={RootStack} />
                 <Tab.Screen
                     name="Movies"
-                    component={Movies}
+                    component={MoviesStack}
                 />
             </Tab.Navigator>
         </NavigationContainer>

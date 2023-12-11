@@ -26,7 +26,7 @@ const Movies = ({ navigation: { navigate } }) => {
             <ScrollView>
                 {isLoading
                     ? <ActivityIndicator size="large" />
-                    : data.map((movie, key) => <MovieItem key={key} title={movie.title} poster={movie.poster} genre={movie.genres[0]['NameEN\t']} release_year={movie.year} />)
+                    : data.map((movie, key) => <MovieItem key={key} {...movie}/>)
                 }
             </ScrollView>
         </SafeAreaView>
