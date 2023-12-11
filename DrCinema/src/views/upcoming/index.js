@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUpcoming } from '../../slices/upcomingSlice';
-// import { getToken } from '../../services/apiService';
+import UpcomingComp from '../../components/upcoming';
 import {
     SafeAreaView,
     ScrollView,
@@ -27,7 +27,8 @@ const Upcoming = ({ navigation: { navigate } }) => {
             <ScrollView>
                 {isLoading
                     ? <ActivityIndicator size="large" />
-                    : data.map((upcoming, key) => <Text key={key}>{upcoming.title}</Text>)
+                    // : data.map((upcoming, key) => <Text key={key}>{upcoming.title + upcoming.releaseDate}</Text>)
+                    : data.map((upcoming, key) => <UpcomingComp key={key} data={upcoming}/>)
                 }
             </ScrollView>
         </SafeAreaView>
