@@ -8,7 +8,11 @@ export const store = configureStore({
         movies: moviesSlice,
         theaters: theatersSlice,
         upcoming: upcomingSlice
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        immutableCheck: { warnAfter: 250 },
+        serializableCheck: { warnAfter: 250 }
+    })
 });
 
 export default store;
