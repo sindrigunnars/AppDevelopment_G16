@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Main from '../views/main';
 import Movies from '../views/movies';
+import TheatreDetail from '../views/theatreDetail';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +20,10 @@ const HomeStack = () => {
                 name="Movies"
                 component={Movies}
             />
+            <Stack.Screen
+                name="Theatre"
+                component={TheatreDetail}
+            />
         </Stack.Navigator>
     );
 }
@@ -29,7 +34,10 @@ const Routes = () => {
             <Tab.Navigator initialRouteName="Main">
                 <Tab.Screen
                     name="Home"
-                    component={HomeStack}
+                    component={HomeStack} />
+                <Stack.Screen
+                    name="Theatres"
+                    component={Main}
                 />
                 <Tab.Screen
                     name="Movies"
