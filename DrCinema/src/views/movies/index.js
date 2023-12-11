@@ -10,7 +10,7 @@ import {
     ActivityIndicator
 } from 'react-native';
 
-const Main = ({ navigation: { navigate } }) => {
+const Movies = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.movies);
     const [reload, setReload] = useState(false);
@@ -34,10 +34,10 @@ const Main = ({ navigation: { navigate } }) => {
     );
 };
 
-Main.propTypes = {
+Movies.propTypes = {
     navigation: PropTypes.shape({
         navigate: PropTypes.func.isRequired
     }).isRequired
 };
 
-export default Main;
+export default Movies;
