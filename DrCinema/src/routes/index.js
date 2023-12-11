@@ -18,14 +18,14 @@ const RootStack = () => {
             <Stack.Screen
                 name="Main"
                 component={Main}
-                options={{ title: 'Theatres' }}
+                options={{ title: 'Theaters' }}
             />
             <Stack.Screen
                 name="Movies"
                 component={Movies}
             />
             <Stack.Screen
-                name="Theatre"
+                name="Theater"
                 component={TheatreDetail}
             />
             <Stack.Screen
@@ -63,7 +63,7 @@ const Routes = () => {
                 : <NavigationContainer>
                     <Tab.Navigator>
                         <Tab.Screen
-                            name="Home"
+                            name="Theaters"
                             component={RootStack}
                             options={{ headerShown: false }}
                         />

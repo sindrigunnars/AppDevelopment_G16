@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigation } from '@react-navigation/native';
 import { removeSubstrings } from '../../services/services';
 // import { getToken } from '../../services/apiService';
 import {
@@ -12,21 +11,20 @@ import {
     StyleSheet
 } from 'react-native';
 
-const TheatreDetail = ({ route, navigation: { navigate } }) => {
+const TheatreDetail = ({ route, navigation: { navigate, setOptions } }) => {
     const data = route.params.data;
     const { id, name, description, city, phone, website } = data;
     const address = data['address\t'];
-
-    const navigation = useNavigation();
+    useEffect(() => {
+        setOptions({ title: name });
+    }, []);
 
     const parsedDescription = description ? removeSubstrings(description, ['<b>', '<br>']) : null;
 
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
-                <Pressable
-                    style= {{ rowGap: 10, marginBottom: 10, borderWidth: 1, borderColor: 'black', padding: 10, flexGrow: 1 }}
-                    onPress={() => navigation.navigate('Movies', { id })}>
+                <View>
                     <Text style={{ alignSelf: 'center' }}>{name}</Text>
                     {parsedDescription ? <Text style={{ alignSelf: 'center', textAlign: 'justify' }}>{parsedDescription.trim()}</Text> : null }
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -34,6 +32,12 @@ const TheatreDetail = ({ route, navigation: { navigate } }) => {
                         {phone ? <Text>{phone}</Text> : null }
                         <Text>{website}</Text>
                     </View>
+                </View>
+                <Pressable
+                    style= {{ rowGap: 10, marginBottom: 10, backgroundColor: '#62b0ba', padding: 10, flexGrow: 1, marginTop: 10 }}
+                    onPress={() => navigate('Movies', { id })}
+                >
+                    <Text style={{ alignSelf: 'center' }}> See movies </Text>
                 </Pressable>
             </ScrollView>
         </SafeAreaView>
@@ -42,7 +46,8 @@ const TheatreDetail = ({ route, navigation: { navigate } }) => {
 
 TheatreDetail.propTypes = {
     navigation: PropTypes.shape({
-        navigate: PropTypes.func.isRequired
+        navigate: PropTypes.func.isRequired,
+        setOptions: PropTypes.func.isRequired
     }).isRequired,
     route: PropTypes.object.isRequired
 };

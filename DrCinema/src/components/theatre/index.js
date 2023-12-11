@@ -14,7 +14,7 @@ const Theatre = ({ data }) => {
     return (
         <Pressable
             style= {styles.item}
-            onPress={() => navigation.navigate('Theatre', { data })}>
+            onPress={() => navigation.navigate('Theater', { data })}>
             <Text style={styles.title}>{name}</Text>
             <Text>{website}</Text>
         </Pressable>
