@@ -3,7 +3,8 @@ import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 
-const MovieItem = ({ id, title, poster, year, genres, durationMinutes, plot }) => {
+const MovieItem = ({ data }) => {
+    const { id, title, poster, year, genres, durationMinutes, plot } = data;
     const genre = genres[0]['NameEN\t'];
     const navigation = useNavigation();
     return (
@@ -47,13 +48,14 @@ const styles = StyleSheet.create({
 });
 
 MovieItem.propTypes = {
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    poster: PropTypes.string,
-    year: PropTypes.string.isRequired,
-    genres: PropTypes.array,
-    durationMinutes: PropTypes.number,
-    plot: PropTypes.string
+    data: PropTypes.object.isRequired
+    // id: PropTypes.number.isRequired,
+    // title: PropTypes.string.isRequired,
+    // poster: PropTypes.string,
+    // year: PropTypes.string.isRequired,
+    // genres: PropTypes.array,
+    // durationMinutes: PropTypes.number,
+    // plot: PropTypes.string
 };
 
 export default MovieItem;

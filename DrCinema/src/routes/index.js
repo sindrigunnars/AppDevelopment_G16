@@ -6,8 +6,9 @@ import Main from '../views/main';
 import Movies from '../views/movies';
 import TheatreDetail from '../views/theatreDetail';
 import MovieDetail from '../views/MovieDetail';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuth } from '../slices/authSlice';
+import { ActivityIndicator } from 'react-native';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -50,25 +51,31 @@ const MoviesStack = () => {
 
 const Routes = () => {
     const dispatch = useDispatch();
+    const { isLoading } = useSelector((state) => state.token);
     useEffect(() => {
         dispatch(fetchAuth());
     }, [dispatch]);
 
     return (
-        <NavigationContainer>
-            <Tab.Navigator>
-                <Tab.Screen
-                    name="Home"
-                    component={RootStack}
-                    options={{ headerShown: false }}
-                />
-                <Tab.Screen
-                    name="Movies"
-                    component={MoviesStack}
-                    options={{ headerShown: false }}
-                />
-            </Tab.Navigator>
-        </NavigationContainer>
+        <>
+            { isLoading
+                ? <ActivityIndicator size="large" />
+                : <NavigationContainer>
+                    <Tab.Navigator>
+                        <Tab.Screen
+                            name="Home"
+                            component={RootStack}
+                            options={{ headerShown: false }}
+                        />
+                        <Tab.Screen
+                            name="Movies"
+                            component={MoviesStack}
+                            options={{ headerShown: false }}
+                        />
+                    </Tab.Navigator>
+                </NavigationContainer>
+            }
+        </>
     );
 };
 
