@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Main from '../views/main';
 import Movies from '../views/movies';
+import Upcoming from '../views/upcoming';
 import TheatreDetail from '../views/theatreDetail';
 import MovieDetail from '../views/MovieDetail';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,7 +49,16 @@ const MoviesStack = () => {
         </Stack.Navigator>
     );
 };
-
+const UpcomingStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="Movies">
+            <Stack.Screen
+                name="Upcoming Movies"
+                component={Upcoming}
+            />
+        </Stack.Navigator>
+    );
+};
 const Routes = () => {
     const dispatch = useDispatch();
     const { isLoading } = useSelector((state) => state.token);
@@ -70,6 +80,11 @@ const Routes = () => {
                         <Tab.Screen
                             name="Movies"
                             component={MoviesStack}
+                            options={{ headerShown: false }}
+                        />
+                        <Tab.Screen
+                            name="Upcoming"
+                            component={UpcomingStack}
                             options={{ headerShown: false }}
                         />
                     </Tab.Navigator>
