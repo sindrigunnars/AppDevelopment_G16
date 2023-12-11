@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTheaters } from '../../slices/theatersSlice';
 import Theatre from '../../components/theatre';
-import { useNavigation } from '@react-navigation/native'; // not sure this is meant to be here, but alas
 // import { getToken } from '../../services/apiService';
 import {
     SafeAreaView,
@@ -17,11 +16,11 @@ import {
 const Main = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.theaters);
+    const token = useSelector((state) => state.token.data);
     const [reload, setReload] = useState(false);
-    const navigation = useNavigation(); // not sure this is meant to be here
 
     useEffect(() => {
-        dispatch(fetchTheaters());
+        dispatch(fetchTheaters(token));
         setReload(false);
     }, [reload]);
 
@@ -43,7 +42,7 @@ const Main = ({ navigation: { navigate } }) => {
                     : sortedData.map((theater, key) => <Theatre key={key} data={theater}/>)
                 }
 
-                <Pressable onPress={() => navigation.navigate('Upcoming')} style={styles.upcomingButton}>
+                <Pressable onPress={() => navigate('Upcoming')} style={styles.upcomingButton}>
                     <Text>UPCOMING BUTTON</Text>
                 </Pressable>
             </ScrollView>
