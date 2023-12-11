@@ -24,13 +24,14 @@ const TheatreDetail = ({ route, navigation: { navigate, setOptions } }) => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
-                <View>
-                    <Text style={{ alignSelf: 'center' }}>{name}</Text>
+                <View style={{ marginTop: 10, rowGap: 20 }}>
                     {parsedDescription ? <Text style={{ alignSelf: 'center', textAlign: 'justify' }}>{parsedDescription.trim()}</Text> : null }
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text>{address} {city}</Text>
-                        {phone ? <Text>{phone}</Text> : null }
-                        <Text>{website}</Text>
+                        <Text>{address}, {city}</Text>
+                        <View style={{ flexDirection: 'column' }}>
+                            {phone ? <Text>{phone}</Text> : null }
+                            <Text>{website}</Text>
+                        </View>
                     </View>
                 </View>
                 <Pressable
