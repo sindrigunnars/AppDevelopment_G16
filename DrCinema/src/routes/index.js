@@ -32,10 +32,6 @@ const RootStack = () => {
             <Stack.Screen
                 name="Movie"
                 component={MovieDetail} />
-            <Stack.Screen
-                    name="Upcoming Movies"
-                    component={Upcoming}
-                />
         </Stack.Navigator>
     );
 };
@@ -53,7 +49,16 @@ const MoviesStack = () => {
         </Stack.Navigator>
     );
 };
-
+const UpcomingStack = () => {
+    return (
+        <Stack.Navigator initialRouteName="Movies">
+            <Stack.Screen
+                name="Upcoming Movies"
+                component={Upcoming}
+            />
+        </Stack.Navigator>
+    );
+};
 const Routes = () => {
     const dispatch = useDispatch();
     const { isLoading } = useSelector((state) => state.token);
@@ -79,7 +84,7 @@ const Routes = () => {
                         />
                         <Tab.Screen
                             name="Upcoming"
-                            component={RootStack}
+                            component={UpcomingStack}
                             options={{ headerShown: false }}
                         />
                     </Tab.Navigator>
