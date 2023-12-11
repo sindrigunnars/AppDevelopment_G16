@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
+import { removeSubstrings } from '../../services/services';
 // import { getToken } from '../../services/apiService';
 import {
     Text,
@@ -17,12 +18,6 @@ const TheatreDetail = ({ route, navigation: { navigate } }) => {
     const address = data['address\t'];
 
     const navigation = useNavigation();
-
-    const removeSubstrings = (inputString, substringsToRemove) => {
-        const escapedSubstrings = substringsToRemove.map(substring => substring.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&')).join('|');
-        const regex = new RegExp(escapedSubstrings, 'g');
-        return inputString.replace(regex, '');
-    };
 
     const parsedDescription = description ? removeSubstrings(description, ['<b>', '<br>']) : null;
 
