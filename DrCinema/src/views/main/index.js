@@ -15,7 +15,7 @@ import {
 const Main = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.theaters);
-    const { token } = useSelector((state) => state.token);
+    const token = useSelector((state) => state.token.data);
     const [reload, setReload] = useState(false);
 
     useEffect(() => {

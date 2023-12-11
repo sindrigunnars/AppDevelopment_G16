@@ -12,7 +12,7 @@ export const fetchAuth = createAsyncThunk('fetchAuth', async () => {
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return await (response.json()).token;
+    return await response.json();
 });
 
 const authSlice = createSlice({
@@ -31,7 +31,7 @@ const authSlice = createSlice({
         });
         builder.addCase(fetchAuth.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.data = action.payload;
+            state.data = action.payload.token;
         });
         builder.addCase(fetchAuth.rejected, (state, action) => {
             state.isLoading = false;
