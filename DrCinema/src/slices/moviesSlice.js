@@ -30,7 +30,8 @@ const moviesSlice = createSlice({
         });
         builder.addCase(fetchMovies.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.data = action.payload.sort((a, b) => { return a.title.localeCompare(b.title, 'is', { sensitivity: 'base' }); });
+            const movies = action.payload;
+            state.data = movies.sort((a, b) => { return a.title.localeCompare(b.title, 'is', { sensitivity: 'base' }); });
         });
         builder.addCase(fetchMovies.rejected, (state, action) => {
             state.isLoading = false;
