@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 // import { getToken } from '../../services/apiService';
 import {
     Text,
-    Pressable
+    Pressable,
+    StyleSheet
 } from 'react-native';
 
 const Theatre = ({ data }) => {
@@ -12,9 +13,9 @@ const Theatre = ({ data }) => {
     const navigation = useNavigation();
     return (
         <Pressable
-            style= {{ rowGap: 10, marginBottom: 10, borderWidth: 1, borderColor: 'black', padding: 10 }}
-            onPress={() => navigation.navigate('Theatre', { data })}>
-            <Text style={{ alignSelf: 'center' }}>{name}</Text>
+            style= {styles.item}
+            onPress={() => navigation.navigate('Theater', { data })}>
+            <Text style={styles.title}>{name}</Text>
             <Text>{website}</Text>
         </Pressable>
     );
@@ -25,3 +26,17 @@ Theatre.propTypes = {
 };
 
 export default Theatre;
+
+const styles = StyleSheet.create({
+    item: {
+        flex: 1,
+        flexDirection: 'column',
+        padding: 15,
+        marginVertical: 8,
+        alignItems: 'center',
+        backgroundColor: '#fff'
+    },
+    title: {
+        fontSize: 20
+    }
+});

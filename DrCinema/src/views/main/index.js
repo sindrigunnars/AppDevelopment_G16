@@ -9,8 +9,7 @@ import {
     ScrollView,
     Text,
     ActivityIndicator,
-    StyleSheet,
-    Pressable
+    StyleSheet
 } from 'react-native';
 
 const Main = ({ navigation: { navigate } }) => {
@@ -41,10 +40,10 @@ const Main = ({ navigation: { navigate } }) => {
                     ? <ActivityIndicator size="large" />
                     : sortedData.map((theater, key) => <Theatre key={key} data={theater}/>)
                 }
-
+                {/*
                 <Pressable onPress={() => navigate('Upcoming')} style={styles.upcomingButton}>
                     <Text>UPCOMING BUTTON</Text>
-                </Pressable>
+                </Pressable> */}
             </ScrollView>
         </SafeAreaView>
     );

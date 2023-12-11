@@ -13,14 +13,23 @@ import {
 const Upcoming = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.upcoming);
+    const token = useSelector((state) => state.token.data);
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
-        dispatch(fetchUpcoming());
+        dispatch(fetchUpcoming(token));
         setReload(false);
     }, [reload]);
 
     if (isError) return <Text>ERROR: {errorMessage}</Text>;
+
+    const compareDate = (a, b) => {
+        const dateA = a['release-dateIS'] || 'Release-Date Unknown.';
+        const dateB = b['release-dateIS'] || 'Release-Date Unknown.';
+        return dateA.localeCompare(dateB, 'is', { sensitivity: 'base' });
+    };
+
+    const sortedData = [...data].sort(compareDate);
 
     return (
         <SafeAreaView>
@@ -28,7 +37,7 @@ const Upcoming = ({ navigation: { navigate } }) => {
                 {isLoading
                     ? <ActivityIndicator size="large" />
                     // : data.map((upcoming, key) => <Text key={key}>{upcoming.title + upcoming.releaseDate}</Text>)
-                    : data.map((upcoming, key) => <UpcomingComp key={key} data={upcoming}/>)
+                    : sortedData.map((upcoming, key) => <UpcomingComp key={key} data={upcoming}/>)
                 }
             </ScrollView>
         </SafeAreaView>
