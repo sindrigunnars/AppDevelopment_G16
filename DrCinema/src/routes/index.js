@@ -59,7 +59,9 @@ const UpcomingStack = () => {
             />
             <Stack.Screen
                 name="Upcoming Trailer"
-                component={UpcomingDetail} />
+                component={UpcomingDetail} 
+                options={({ route }) => ({ title: route.params.data.title })} 
+            />
         </Stack.Navigator>
     );
 };
