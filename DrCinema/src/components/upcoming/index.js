@@ -16,7 +16,7 @@ const Upcoming = ({ data }) => {
 
     return (
         <TouchableOpacity
-            onPress={() => navigation.navigate('Upcoming', { data })}
+            onPress={() => navigation.navigate('Upcoming Trailer', { data })}
             style={{ rowGap: 10, marginBottom: 10, borderWidth: 1, borderColor: 'black', padding: 10 }}
         >
             <Text style={{ alignSelf: 'center' }}>{title}</Text>

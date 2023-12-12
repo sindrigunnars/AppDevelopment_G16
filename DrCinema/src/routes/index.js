@@ -33,9 +33,6 @@ const RootStack = () => {
             <Stack.Screen
                 name="Movie"
                 component={MovieDetail} />
-            <Stack.Screen
-                name="Upcoming"
-                component={UpcomingDetail} />
         </Stack.Navigator>
     );
 };
@@ -61,7 +58,7 @@ const UpcomingStack = () => {
                 component={Upcoming}
             />
             <Stack.Screen
-                name="Upcoming"
+                name="Upcoming Trailer"
                 component={UpcomingDetail} />
         </Stack.Navigator>
     );
