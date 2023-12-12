@@ -16,8 +16,9 @@ const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
     const poster = data.poster; // added
     const releaseDate = data['release-dateIS'] || 'Release-Date Unknown.';
     const trailers = data.trailers;
+
     // working out the trailers here
-    const trailerDetails = [trailers[0].results.map(result => ({
+    const trailerDetails = [trailers[0]?.results.map(result => ({
         key: 'https://www.youtube.com/watch?v=' + result.key,
         name: result.name,
         iso_639_1: result.iso_639_1
@@ -41,7 +42,7 @@ const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
                 { /* show the key of each trailer here */ }
                 {trailerDetails.map((trailer, index) => (
                     <View key={index}>
-                        {trailer.map((item, itemIndex) => (
+                        {trailer?.map((item, itemIndex) => (
                             <Pressable key={itemIndex}>
                                 <Text style={styles.trailerTitle}>{item.name} [{item.iso_639_1}]</Text>
                                 <WebView
