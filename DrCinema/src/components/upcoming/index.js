@@ -5,6 +5,7 @@ import {
     Text,
     Image,
     View,
+    StyleSheet,
     TouchableOpacity
 } from 'react-native';
 
@@ -17,13 +18,13 @@ const Upcoming = ({ data }) => {
     return (
         <TouchableOpacity
             onPress={() => navigation.navigate('Upcoming Trailer', { data })}
-            style={{ rowGap: 10, marginBottom: 10, borderWidth: 1, borderColor: 'black', padding: 10 }}
+            style={styles.item}
         >
-            <Text style={{ alignSelf: 'center' }}>{title}</Text>
-            <View>
-                <Image style={{ alignSelf: 'center', width: 100, height: 100 }} source={{ uri: thumbnail }} />
+            <Image style={styles.image} source={{ uri: thumbnail }} />
+            <View style={styles.movieDetails}>
+                <Text style={styles.title}>{title}</Text>
+                <Text>{ releaseDate }</Text>
             </View>
-            <Text style={{ alignSelf: 'center' }}>{ releaseDate }</Text>
         </TouchableOpacity>
     );
 };
@@ -33,3 +34,30 @@ Upcoming.propTypes = {
 };
 
 export default Upcoming;
+
+// copying the style of movies
+const styles = StyleSheet.create({
+    item: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 10,
+        marginVertical: 8,
+        marginHorizontal: 16,
+        alignItems: 'center',
+        height: 100,
+        backgroundColor: '#fff'
+    },
+    title: {
+        fontSize: 20
+    },
+    movieDetails: {
+        flex: 1,
+        flexDirection: 'column',
+        marginLeft: 10,
+        fontSize: 20
+    },
+    image: {
+        width: 70,
+        height: '100%'
+    }
+});
