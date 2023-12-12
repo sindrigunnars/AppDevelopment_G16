@@ -7,6 +7,7 @@ import Movies from '../views/movies';
 import Upcoming from '../views/upcoming';
 import TheatreDetail from '../views/theatreDetail';
 import MovieDetail from '../views/MovieDetail';
+import UpcomingDetail from '../views/upcomingDetail';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuth } from '../slices/authSlice';
 import { ActivityIndicator } from 'react-native';
@@ -32,6 +33,9 @@ const RootStack = () => {
             <Stack.Screen
                 name="Movie"
                 component={MovieDetail} />
+            <Stack.Screen
+                name="Upcoming"
+                component={UpcomingDetail} />
         </Stack.Navigator>
     );
 };
@@ -56,6 +60,9 @@ const UpcomingStack = () => {
                 name="Upcoming Movies"
                 component={Upcoming}
             />
+            <Stack.Screen
+                name="Upcoming"
+                component={UpcomingDetail} />
         </Stack.Navigator>
     );
 };
