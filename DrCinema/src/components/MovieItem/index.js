@@ -30,7 +30,10 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         alignItems: 'center',
         height: 100,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        shadowRadius: 5,
+        shadowColor: 'black',
+        shadowOpacity: 0.1
     },
     title: {
         fontSize: 20

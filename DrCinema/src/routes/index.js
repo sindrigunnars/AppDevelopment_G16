@@ -21,7 +21,7 @@ const CustomDarkTheme = {
         card: '#62b0ba',
         text: 'white',
         primary: 'white',
-        background: '#3c3c44',
+        background: '#f9f9f9',
         rawText: 'white'
     }
 };

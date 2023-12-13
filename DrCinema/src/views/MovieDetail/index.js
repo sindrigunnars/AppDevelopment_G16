@@ -17,7 +17,7 @@ const MovieDetail = ({ route, navigation: { navigate } }) => {
     }
 
     return (
-        <View style={{ flex: 1, height: '100%' }}>
+        <View style={{ flex: 1, height: '100%', backgroundColor: '#f9f9f9' }}>
             <ScrollView>
                 <View style={styles.container}>
                     <Image style={styles.image} source={{ uri: poster }} />

@@ -24,7 +24,7 @@ const TheatreDetail = ({ route, navigation: { navigate, setOptions } }) => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
-                <View style={{ marginTop: 20, rowGap: 20, marginHorizontal: 10, backgroundColor: 'white', padding: 10, marginBottom: 10 }}>
+                <View style={styles.details}>
                     {parsedDescription ? <Text style={{ alignSelf: 'center', textAlign: 'justify' }}>{parsedDescription.trim()}</Text> : null }
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text>{address}, {city}</Text>
@@ -56,6 +56,15 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center'
     },
-    scrollContainer: {
+    details: {
+        marginTop: 20,
+        rowGap: 20,
+        marginHorizontal: 10,
+        backgroundColor: 'white',
+        padding: 10,
+        marginBottom: 10,
+        shadowRadius: 5,
+        shadowColor: 'black',
+        shadowOpacity: 0.1
     }
 });
