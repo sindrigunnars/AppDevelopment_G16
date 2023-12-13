@@ -29,8 +29,8 @@ const MovieList = ({ theatreId }) => {
     return (
         <View>
             {isLoading
-                ? <ActivityIndicator size="large" />
-                : movies.map((movie, key) => <MovieItem key={key} data={movie} />)}
+                ? <ActivityIndicator size="large" /> :
+                movies.map((movie, key) => <MovieItem key={key} data={movie} theatreId={theatreId}/>)}
         </View>
     );
 };

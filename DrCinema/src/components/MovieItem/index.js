@@ -3,12 +3,12 @@ import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
 
-const MovieItem = ({ data }) => {
-    const { id, title, poster, year, genres, durationMinutes, plot } = data;
+const MovieItem = ({ data, theatreId }) => {
+    const { id, title, poster, year, genres, durationMinutes, showtimes, plot } = data;
     const genre = genres[0]['NameEN\t'];
     const navigation = useNavigation();
     return (
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Movie', { id, title, poster, year, genres, durationMinutes, plot })}>
+        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Movie', { id, title, poster, year, genres, durationMinutes, plot, showtimes, theatreId })}>
             <Image
                 style={styles.image}
                 source={{ uri: poster }} />
@@ -48,14 +48,8 @@ const styles = StyleSheet.create({
 });
 
 MovieItem.propTypes = {
-    data: PropTypes.object.isRequired
-    // id: PropTypes.number.isRequired,
-    // title: PropTypes.string.isRequired,
-    // poster: PropTypes.string,
-    // year: PropTypes.string.isRequired,
-    // genres: PropTypes.array,
-    // durationMinutes: PropTypes.number,
-    // plot: PropTypes.string
+    data: PropTypes.object.isRequired,
+    theatreId: PropTypes.number
 };
 
 export default MovieItem;
