@@ -12,7 +12,7 @@ import { WebView } from 'react-native-webview';
 
 const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
     const data = route.params.data;
-    const title = data.title;
+    // const title = data.title;
     const poster = data.poster; // added
     const releaseDate = data['release-dateIS'] || 'Release-Date Unknown.';
     const trailers = data.trailers;
@@ -24,22 +24,18 @@ const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
         iso_639_1: result.iso_639_1
     }))];
 
-    // const trailerDetails = trailers.map(trailer => {
-    //     const results = trailer.results.map(result => ({
-    //         key: 'https://www.youtube.com/watch?v=' + result.key,
-    //         name: result.name,
-    //         iso_639_1: result.iso_639_1
-    //     }));
-    //     return results;
-    // });
-
     return (
         <ScrollView>
-            <Image style={styles.image} source={{ uri: poster }} />
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.info}>Væntanleg {releaseDate}.</Text>
+            <Text style={styles.title}>Væntanleg {releaseDate}.</Text>
+            <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{ uri: poster }} />
+            </View>
+            { trailers[0]
+                ? <View style={styles.line} />
+                : <View></View>
+            }
+            { /* <Text style={styles.title}>{title}</Text> */ }
             <View>
-                { /* show the key of each trailer here */ }
                 {trailerDetails.map((trailer, index) => (
                     <View key={index}>
                         {trailer?.map((item, itemIndex) => (
@@ -49,13 +45,15 @@ const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
                                     source={{ uri: item.key }}
                                     mediaPlaybackRequiresUserAction={true}
                                     style={{ width: '90%', height: 250, marginBottom: 40, alignSelf: 'center', borderRadius: 20 }}
+                                    startInLoadingState={true}
+                                    thirdPartyCookiesEnabled={false}
+                                    hardwareAccelerationDisabledAndroid={true}
                                 />
                             </Pressable>
                         ))}
                     </View>
                 ))}
             </View>
-            <View style={styles.pageBottom}></View>
         </ScrollView>
     );
 };
@@ -70,19 +68,15 @@ UpcomingDetail.propTypes = {
 
 export default UpcomingDetail;
 
-// styles pretty much taken from movie details, slightly edited
 const styles = StyleSheet.create({
     image: {
         width: '100%',
-        height: '100%',
-        maxHeight: '100%', // fixed important issue
-        resizeMode: 'contain'
+        aspectRatio: 1,
+        resizeMode: 'contain',
+        alignSelf: 'center'
     },
-    title: {
-        fontSize: 30,
-        fontWeight: '600',
-        marginVertical: 10,
-        textAlign: 'center'
+    imageContainer: {
+        marginBottom: 15
     },
     trailerTitle: {
         textAlign: 'center',
@@ -91,20 +85,24 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         marginHorizontal: '5%'
     },
-    pageBottom: { // I feel like there's a smarter fix to this problem, but it's past 22:00 so ehhh
-        marginBottom: '175%'
-    },
-    genres: {
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 8
-    },
     info: {
         display: 'flex',
         flexDirection: 'row',
         gap: 8,
-        marginTop: 15,
+        marginTop: 30,
         marginBottom: 20,
+        textAlign: 'center',
+        fontSize: 16
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: '600',
+        marginVertical: 20,
         textAlign: 'center'
+    },
+    line: {
+        borderBottomColor: 'black',
+        borderBottomWidth: 1,
+        marginVertical: 15
     }
 });
