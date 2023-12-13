@@ -23,21 +23,13 @@ const Upcoming = ({ navigation: { navigate } }) => {
 
     if (isError) return <Text>ERROR: {errorMessage}</Text>;
 
-    const compareDate = (a, b) => {
-        const dateA = a['release-dateIS'] || 'Release-Date Unknown.';
-        const dateB = b['release-dateIS'] || 'Release-Date Unknown.';
-        return dateA.localeCompare(dateB, 'is', { sensitivity: 'base' });
-    };
-
-    const sortedData = [...data].sort(compareDate);
-
     return (
         <SafeAreaView>
             <ScrollView>
                 {isLoading
                     ? <ActivityIndicator size="large" />
                     // : data.map((upcoming, key) => <Text key={key}>{upcoming.title + upcoming.releaseDate}</Text>)
-                    : sortedData.map((upcoming, key) => <UpcomingComp key={key} data={upcoming}/>)
+                    : data.map((upcoming, key) => <UpcomingComp key={key} data={upcoming}/>)
                 }
             </ScrollView>
         </SafeAreaView>

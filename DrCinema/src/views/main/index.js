@@ -16,6 +16,7 @@ const Main = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.theaters);
     const token = useSelector((state) => state.token.data);
+
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
@@ -25,25 +26,13 @@ const Main = ({ navigation: { navigate } }) => {
 
     if (isError) return <Text>ERROR: {errorMessage}</Text>;
 
-    const compareNames = (a, b) => {
-        const nameA = a.name;
-        const nameB = b.name;
-        return nameA.localeCompare(nameB, 'is', { sensitivity: 'base' });
-    };
-
-    const sortedData = [...data].sort(compareNames);
-
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
                 {isLoading
                     ? <ActivityIndicator size="large" />
-                    : sortedData.map((theater, key) => <Theatre key={key} data={theater}/>)
+                    : data.map((theater, key) => <Theatre key={key} data={theater}/>)
                 }
-                {/*
-                <Pressable onPress={() => navigate('Upcoming')} style={styles.upcomingButton}>
-                    <Text>UPCOMING BUTTON</Text>
-                </Pressable> */}
             </ScrollView>
         </SafeAreaView>
     );
