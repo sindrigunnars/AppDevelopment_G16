@@ -1,44 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMovies } from '../../slices/moviesSlice';
 // import { getToken } from '../../services/apiService';
 import {
     SafeAreaView,
-    ScrollView,
-    Text,
-    ActivityIndicator
+    ScrollView
 } from 'react-native';
 import MovieItem from '../../components/MovieItem';
+import MovieList from '../../components/MovieList';
 
-const Movies = ({ navigation: { navigate } }) => {
-    const dispatch = useDispatch();
-    const { data, isLoading, isError, errorMessage } = useSelector((state) => state.movies);
-    const token = useSelector((state) => state.token.data);
-    const [reload, setReload] = useState(false);
-
-    useEffect(() => {
-        dispatch(fetchMovies(token));
-        setReload(false);
-    }, [reload]);
-
-    const compareTitles = (a, b) => {
-        const titleA = a.title;
-        const titleB = b.title;
-        return titleA.localeCompare(titleB, 'is', { sensitivity: 'base' });
-    };
-
-    if (isError) return <Text>ERROR: {errorMessage}</Text>;
-
-    const sortedData = data ? [...data].sort(compareTitles) : null;
-
+const Movies = ({ route, navigation: { navigate } }) => {
     return (
         <SafeAreaView>
             <ScrollView>
-                {isLoading
-                    ? <ActivityIndicator size="large" />
-                    : sortedData.map((movie, key) => <MovieItem key={key} data={movie}/>)
-                }
+                <MovieList />
             </ScrollView>
         </SafeAreaView>
     );

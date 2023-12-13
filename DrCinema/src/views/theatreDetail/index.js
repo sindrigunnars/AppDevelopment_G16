@@ -10,6 +10,7 @@ import {
     SafeAreaView,
     StyleSheet
 } from 'react-native';
+import MovieList from '../../components/MovieList';
 
 const TheatreDetail = ({ route, navigation: { navigate, setOptions } }) => {
     const data = route.params.data;
@@ -34,12 +35,14 @@ const TheatreDetail = ({ route, navigation: { navigate, setOptions } }) => {
                         </View>
                     </View>
                 </View>
-                <Pressable
+
+                <MovieList theatreId={id} />
+                {/* <Pressable
                     style= {{ rowGap: 10, marginBottom: 10, backgroundColor: '#62b0ba', padding: 10, flexGrow: 1, marginTop: 10 }}
                     onPress={() => navigate('Movies', { id })}
                 >
                     <Text style={{ alignSelf: 'center' }}> See movies </Text>
-                </Pressable>
+                </Pressable> */}
             </ScrollView>
         </SafeAreaView>
     );
