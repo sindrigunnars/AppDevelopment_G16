@@ -81,17 +81,17 @@ const Routes = () => {
                         <Tab.Screen
                             name="Theaters"
                             component={RootStack}
-                            options={{ headerShown: false }}
+                            options={{ headerShown: false, tabBarActiveTintColor: '#62b0ba', tabBarInactiveTintColor: '#e56441' }}
                         />
                         <Tab.Screen
                             name="Movies"
                             component={MoviesStack}
-                            options={{ headerShown: false }}
+                            options={{ headerShown: false, tabBarActiveTintColor: '#62b0ba', tabBarInactiveTintColor: '#e56441' }}
                         />
                         <Tab.Screen
                             name="Upcoming"
                             component={UpcomingStack}
-                            options={{ headerShown: false }}
+                            options={{ headerShown: false, tabBarActiveTintColor: '#62b0ba', tabBarInactiveTintColor: '#e56441' }}
                         />
                     </Tab.Navigator>
                 </NavigationContainer>

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { getToken } from '../../services/apiService';
 import {
     SafeAreaView,
     ScrollView

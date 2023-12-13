@@ -5,7 +5,6 @@ import { removeSubstrings } from '../../services/services';
 import {
     Text,
     View,
-    Pressable,
     ScrollView,
     SafeAreaView,
     StyleSheet
@@ -25,24 +24,17 @@ const TheatreDetail = ({ route, navigation: { navigate, setOptions } }) => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
-                <View style={{ marginTop: 10, rowGap: 20 }}>
+                <View style={{ marginTop: 20, rowGap: 20, marginHorizontal: 10, backgroundColor: 'white', padding: 10, marginBottom: 10 }}>
                     {parsedDescription ? <Text style={{ alignSelf: 'center', textAlign: 'justify' }}>{parsedDescription.trim()}</Text> : null }
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Text>{address}, {city}</Text>
                         <View style={{ flexDirection: 'column' }}>
-                            {phone ? <Text>{phone}</Text> : null }
+                            {phone ? <Text>Tel: {phone}</Text> : null }
                             <Text>{website}</Text>
                         </View>
                     </View>
                 </View>
-
                 <MovieList theatreId={id} />
-                {/* <Pressable
-                    style= {{ rowGap: 10, marginBottom: 10, backgroundColor: '#62b0ba', padding: 10, flexGrow: 1, marginTop: 10 }}
-                    onPress={() => navigate('Movies', { id })}
-                >
-                    <Text style={{ alignSelf: 'center' }}> See movies </Text>
-                </Pressable> */}
             </ScrollView>
         </SafeAreaView>
     );
@@ -65,6 +57,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     scrollContainer: {
-        paddingHorizontal: 20
     }
 });

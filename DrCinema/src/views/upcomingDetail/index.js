@@ -31,10 +31,9 @@ const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
                 <Image style={styles.image} source={{ uri: poster }} />
             </View>
             { trailers[0]
-                ? <View style={styles.line} />
-                : <View></View>
+                ? <View style={styles.divider} />
+                : null
             }
-            { /* <Text style={styles.title}>{title}</Text> */ }
             <View>
                 {trailerDetails.map((trailer, index) => (
                     <View key={index}>
@@ -75,6 +74,13 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         alignSelf: 'center'
     },
+    divider: {
+        borderBottomColor: 'black',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        marginVertical: 20,
+        width: '90%',
+        alignSelf: 'center'
+    },
     imageContainer: {
         marginBottom: 15
     },
@@ -99,10 +105,5 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginVertical: 20,
         textAlign: 'center'
-    },
-    line: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 1,
-        marginVertical: 15
     }
 });
