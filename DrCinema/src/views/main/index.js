@@ -52,9 +52,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center'
     },
-    scrollContainer: {
-        paddingHorizontal: 20
-    },
     upcomingButton: {
         alignItems: 'center',
         backgroundColor: 'cadetblue'

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Main from '../views/main';
@@ -13,6 +13,18 @@ import { fetchAuth } from '../slices/authSlice';
 import { ActivityIndicator } from 'react-native';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const CustomDarkTheme = {
+    ...DarkTheme,
+    colors: {
+        ...DarkTheme.colors,
+        card: '#62b0ba',
+        text: 'white',
+        primary: 'white',
+        background: '#3c3c44',
+        rawText: 'white'
+    }
+};
 
 const RootStack = () => {
     return (
@@ -76,22 +88,22 @@ const Routes = () => {
         <>
             { isLoading
                 ? <ActivityIndicator size="large" />
-                : <NavigationContainer>
+                : <NavigationContainer theme={CustomDarkTheme}>
                     <Tab.Navigator>
                         <Tab.Screen
                             name="Theaters"
                             component={RootStack}
-                            options={{ headerShown: false, tabBarActiveTintColor: '#62b0ba', tabBarInactiveTintColor: '#e56441' }}
+                            options={{ headerShown: false, tabBarActiveTintColor: '#e56441', tabBarInactiveTintColor: '#3c3c44' }}
                         />
                         <Tab.Screen
                             name="Movies"
                             component={MoviesStack}
-                            options={{ headerShown: false, tabBarActiveTintColor: '#62b0ba', tabBarInactiveTintColor: '#e56441' }}
+                            options={{ headerShown: false, tabBarActiveTintColor: '#e56441', tabBarInactiveTintColor: '#3c3c44' }}
                         />
                         <Tab.Screen
                             name="Upcoming"
                             component={UpcomingStack}
-                            options={{ headerShown: false, tabBarActiveTintColor: '#62b0ba', tabBarInactiveTintColor: '#e56441' }}
+                            options={{ headerShown: false, tabBarActiveTintColor: '#e56441', tabBarInactiveTintColor: '#3c3c44' }}
                         />
                     </Tab.Navigator>
                 </NavigationContainer>
