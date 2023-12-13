@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import Main from '../views/main';
 import Movies from '../views/movies';
 import Upcoming from '../views/upcoming';
 import TheatreDetail from '../views/theatreDetail';
 import MovieDetail from '../views/MovieDetail';
 import UpcomingDetail from '../views/upcomingDetail';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuth } from '../slices/authSlice';
-import { ActivityIndicator } from 'react-native';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 

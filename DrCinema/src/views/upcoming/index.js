@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUpcoming } from '../../slices/upcomingSlice';
@@ -14,12 +14,10 @@ const Upcoming = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.upcoming);
     const token = useSelector((state) => state.token.data);
-    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         dispatch(fetchUpcoming(token));
-        setReload(false);
-    }, [reload]);
+    }, [dispatch]);
 
     if (isError) return <Text>ERROR: {errorMessage}</Text>;
 

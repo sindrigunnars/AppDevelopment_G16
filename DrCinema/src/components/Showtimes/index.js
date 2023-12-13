@@ -1,5 +1,7 @@
-import { View, Text, Linking, Button } from "react-native";
-import styles from "./styles";
+import React from 'react';
+import { View, Text, Linking, Button } from 'react-native';
+import PropTypes from 'prop-types';
+import styles from './styles';
 
 const Showtimes = ({ theatre, times }) => {
     return (
@@ -13,7 +15,12 @@ const Showtimes = ({ theatre, times }) => {
                 </View>
             </View>
         </View>
-    )
+    );
+};
+
+Showtimes.propTypes = {
+    theatre: PropTypes.string.isRequired,
+    times: PropTypes.array.isRequired
 };
 
 export default Showtimes;

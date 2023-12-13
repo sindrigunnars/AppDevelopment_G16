@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import MovieItem from '../MovieItem';
 import { View, ActivityIndicator, Text } from 'react-native';
 import PropTypes from 'prop-types';
@@ -8,13 +8,11 @@ import { fetchMovies } from '../../slices/moviesSlice';
 const MovieList = ({ theatreId }) => {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token.data);
-    const [reload, setReload] = useState(false);
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.movies);
 
     useEffect(() => {
         dispatch(fetchMovies(token));
-        setReload(false);
-    }, [reload]);
+    }, [dispatch]);
 
     const inTheatre = (movie, theatre) => {
         /* Returns true if the given movie is being shown in the given theatre */

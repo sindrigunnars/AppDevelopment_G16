@@ -15,6 +15,7 @@ const TheatreDetail = ({ route, navigation: { navigate, setOptions } }) => {
     const data = route.params.data;
     const { id, name, description, city, phone, website } = data;
     const address = data['address\t'];
+
     useEffect(() => {
         setOptions({ title: name });
     }, []);

@@ -12,7 +12,6 @@ import { WebView } from 'react-native-webview';
 
 const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
     const data = route.params.data;
-    // const title = data.title;
     const poster = data.poster; // added
     const releaseDate = data['release-dateIS'] || 'Release-Date Unknown.';
     const trailers = data.trailers;

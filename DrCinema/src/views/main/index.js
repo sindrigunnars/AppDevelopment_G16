@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTheaters } from '../../slices/theatersSlice';
@@ -17,12 +17,9 @@ const Main = ({ navigation: { navigate } }) => {
     const { data, isLoading, isError, errorMessage } = useSelector((state) => state.theaters);
     const token = useSelector((state) => state.token.data);
 
-    const [reload, setReload] = useState(false);
-
     useEffect(() => {
         dispatch(fetchTheaters(token));
-        setReload(false);
-    }, [reload]);
+    }, [dispatch]);
 
     if (isError) return <Text>ERROR: {errorMessage}</Text>;
 
