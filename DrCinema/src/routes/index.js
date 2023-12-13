@@ -90,21 +90,19 @@ const Routes = () => {
             { isLoading
                 ? <ActivityIndicator size="large" />
                 : <NavigationContainer theme={CustomDarkTheme}>
-                    <Tab.Navigator>
+                    <Tab.Navigator
+                        screenOptions={{ headerShown: false, tabBarActiveTintColor: '#e56441', tabBarInactiveTintColor: '#3c3c44' }}>
                         <Tab.Screen
                             name="Theaters"
                             component={RootStack}
-                            options={{ headerShown: false, tabBarActiveTintColor: '#e56441', tabBarInactiveTintColor: '#3c3c44' }}
                         />
                         <Tab.Screen
                             name="Movies"
                             component={MoviesStack}
-                            options={{ headerShown: false, tabBarActiveTintColor: '#e56441', tabBarInactiveTintColor: '#3c3c44' }}
                         />
                         <Tab.Screen
                             name="Upcoming"
                             component={UpcomingStack}
-                            options={{ headerShown: false, tabBarActiveTintColor: '#e56441', tabBarInactiveTintColor: '#3c3c44' }}
                         />
                     </Tab.Navigator>
                 </NavigationContainer>
