@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1
     },
     title: {
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: '500',
+        margin: 4,
     }
 });

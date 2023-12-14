@@ -6,7 +6,7 @@ import styles from './styles';
 const Showtimes = ({ theatre, times }) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Tickets</Text>
+            <Text style={styles.title}>Buy Tickets</Text>
             <View style={styles.theatreContainer}>
                 <Text style={styles.theatre}>{theatre}</Text>
                 <View style={styles.timesContainer}>

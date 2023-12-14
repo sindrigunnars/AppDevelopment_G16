@@ -26,14 +26,17 @@ const TheatreDetail = ({ route, navigation: { navigate, setOptions } }) => {
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scrollContainer}>
                 <View style={styles.details}>
-                    {parsedDescription ? <Text style={{ alignSelf: 'center', textAlign: 'justify' }}>{parsedDescription.trim()}</Text> : null }
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text>{address}, {city}</Text>
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
+                        <View>
+                            <Text style={{ fontSize: 25, fontWeight: 'bold', marginBottom: 10 }}>{name}</Text>
+                            <Text>{address}, {city}</Text>
+                        </View>
                         <View style={{ flexDirection: 'column' }}>
-                            {phone ? <Text>Tel: {phone}</Text> : null }
+                            {phone ? <Text>Tel: {phone}</Text> : null}
                             <Text>{website}</Text>
                         </View>
                     </View>
+                    {parsedDescription ? <Text style={{ alignSelf: 'center', textAlign: 'justify' }}>{parsedDescription.trim()}</Text> : null}
                 </View>
                 <MovieList theatreId={id} />
             </ScrollView>
@@ -62,10 +65,11 @@ const styles = StyleSheet.create({
         rowGap: 20,
         marginHorizontal: 10,
         backgroundColor: 'white',
-        padding: 10,
+        padding: 20,
         marginBottom: 10,
         shadowRadius: 5,
         shadowColor: 'black',
-        shadowOpacity: 0.1
+        shadowOpacity: 0.1,
+        fontSize: 20,
     }
 });
