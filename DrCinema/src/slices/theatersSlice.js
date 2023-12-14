@@ -11,7 +11,11 @@ export const fetchTheaters = createAsyncThunk('fetchTheaters', async (token) => 
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return await response.json();
+    const res = await response.json();
+    if (res.error) {
+        throw new Error(`${res.message}`);
+    }
+    return res;
 });
 
 const theatersSlice = createSlice({
@@ -30,7 +34,9 @@ const theatersSlice = createSlice({
         });
         builder.addCase(fetchTheaters.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.data = action.payload;
+            const data = action.payload;
+            const sortedData = data ? [...data].sort((theaterA, theaterB) => theaterA.name.localeCompare(theaterB.name, 'is', { sensitivity: 'base' })) : null;
+            state.data = sortedData;
         });
         builder.addCase(fetchTheaters.rejected, (state, action) => {
             state.isLoading = false;

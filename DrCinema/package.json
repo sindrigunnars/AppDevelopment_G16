@@ -15,6 +15,7 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "^6.3.20",
     "@reduxjs/toolkit": "^2.0.1",
+    "base-64": "^1.0.0",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
     "prop-types": "^15.8.1",
@@ -22,7 +23,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.72.6",
     "react-native-web": "~0.19.6",
-    "react-native-webview": "^13.6.3",
+    "react-native-webview": "13.2.2",
     "react-redux": "^8.0.2",
     "redux-thunk": "^3.1.0"
   },
@@ -33,7 +34,26 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-n": "^16.3.1",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.33.2"
+    "eslint-plugin-react": "^7.33.2",
+    "react-native-dotenv": "^3.4.9"
   },
-  "private": true
+  "private": true,
+  "babel": {
+    "plugins": [
+      [
+        "module:react-native-dotenv",
+        {
+          "moduleName": "@env",
+          "path": ".env",
+          "blocklist": null,
+          "allowlist": null,
+          "blacklist": null,
+          "whitelist": null,
+          "safe": false,
+          "allowUndefined": true,
+          "verbose": false
+        }
+      ]
+    ]
+  }
 }

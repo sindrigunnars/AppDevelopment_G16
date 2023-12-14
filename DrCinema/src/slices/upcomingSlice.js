@@ -11,8 +11,18 @@ export const fetchUpcoming = createAsyncThunk('fetchUpcoming', async (token) => 
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return await response.json();
+    const res = await response.json();
+    if (res.error) {
+        throw new Error(`${res.message}`);
+    }
+    return res;
 });
+
+const compareDate = (a, b) => {
+    const dateA = a['release-dateIS'] || 'Release-Date Unknown.';
+    const dateB = b['release-dateIS'] || 'Release-Date Unknown.';
+    return dateA.localeCompare(dateB, 'is', { sensitivity: 'base' });
+};
 
 const upcomingSlice = createSlice({
     name: 'upcoming',
@@ -30,7 +40,9 @@ const upcomingSlice = createSlice({
         });
         builder.addCase(fetchUpcoming.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.data = action.payload;
+            const data = action.payload;
+            const sortedData = [...data].sort(compareDate);
+            state.data = sortedData;
         });
         builder.addCase(fetchUpcoming.rejected, (state, action) => {
             state.isLoading = false;

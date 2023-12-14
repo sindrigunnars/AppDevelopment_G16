@@ -1,6 +1,7 @@
-curl --location --request POST 'https://api.kvikmyndir.is/authenticate' --header 'Authorization: Basic c2luZHJpZ3VubmFyczpzaW5kcmkwMA=='
-// Use this in terminal for token
+To get in to the app you must create a .env file in the same directory as the README and put your credentials in this format:
+API_USER=username
+API_PASSWORD=password
 
-
-curl --location 'https://api.kvikmyndir.is/movies' --header 'x-access-token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY1NzYyOGMyYzQwNzkzMzZiYzAyNTIyZiIsImlhdCI6MTcwMjI0NDgzMywiZXhwIjoxNzAyMzMxMjMzfQ.X0hjrhqqlWM7ldOvGMl53lqzDdDtLvH4wnK2doWgfog'
-// example
+If you wrote the wrong login you have to restart the server with the command:
+    npm start -- --reset-cache
+to reset the cache and update the variables.

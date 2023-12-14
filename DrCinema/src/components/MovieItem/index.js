@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const MovieItem = ({ data, theatreId }) => {
     const { id, title, poster, year, genres, durationMinutes, showtimes, plot } = data;
-    const genre = genres[0]['NameEN\t'];
+    const genre = genres.map((item) => item['NameEN\t']);
     const navigation = useNavigation();
     return (
         <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Movie', { id, title, poster, year, genres, durationMinutes, plot, showtimes, theatreId })}>
@@ -15,7 +15,7 @@ const MovieItem = ({ data, theatreId }) => {
             <View style={styles.movieDetails}>
                 <Text style={styles.title}>{title}</Text>
                 <Text>{year}</Text>
-                <Text>{genre}</Text>
+                <Text>{genre.join(', ')}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -27,10 +27,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         padding: 10,
         marginVertical: 8,
-        marginHorizontal: 16,
+        marginHorizontal: 10,
         alignItems: 'center',
         height: 100,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        shadowRadius: 5,
+        shadowColor: 'black',
+        shadowOpacity: 0.1
     },
     title: {
         fontSize: 20

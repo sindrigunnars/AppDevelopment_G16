@@ -1,18 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { API_USER, API_PASSWORD } from '@env';
+import { encode } from 'base-64';
 
 // First, create the thunk
 export const fetchAuth = createAsyncThunk('fetchAuth', async () => {
+    const encodedAuth = encode(`${API_USER}:${API_PASSWORD}`);
     const response = await fetch('https://api.kvikmyndir.is/authenticate', {
         method: 'POST',
         headers: {
-            Authorization: 'Basic c2luZHJpZ3VubmFyczpzaW5kcmkwMA=='
+            Authorization: `Basic ${encodedAuth}`
         }
     });
 
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return await response.json();
+    const res = await response.json();
+    return res;
 });
 
 const authSlice = createSlice({
