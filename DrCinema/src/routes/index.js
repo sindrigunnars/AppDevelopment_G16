@@ -11,6 +11,8 @@ import TheatreDetail from '../views/theatreDetail';
 import MovieDetail from '../views/MovieDetail';
 import UpcomingDetail from '../views/upcomingDetail';
 import { fetchAuth } from '../slices/authSlice';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -87,7 +89,7 @@ const Routes = () => {
 
     return (
         <>
-            { isLoading
+            {isLoading
                 ? <ActivityIndicator size="large" />
                 : <NavigationContainer theme={CustomDarkTheme}>
                     <Tab.Navigator
@@ -95,14 +97,35 @@ const Routes = () => {
                         <Tab.Screen
                             name="Theaters"
                             component={RootStack}
+                            options={
+                                {
+                                    tabBarIcon: ({ focused, color, size }) => (
+                                        <Ionicons name="ios-home" size={size} color={color} />
+                                    )
+                                }
+                            }
                         />
                         <Tab.Screen
                             name="Movies"
                             component={MoviesStack}
+                            options={
+                                {
+                                    tabBarIcon: ({ focused, color, size }) => (
+                                        <MaterialCommunityIcons name="movie" size={size} color={color} />
+                                    )
+                                }
+                            }
                         />
                         <Tab.Screen
                             name="Upcoming"
                             component={UpcomingStack}
+                            options={
+                                {
+                                    tabBarIcon: ({ focused, color, size }) => (
+                                        <MaterialCommunityIcons name="clock" size={size} color={color} />
+                                    )
+                                }
+                            }
                         />
                     </Tab.Navigator>
                 </NavigationContainer>
