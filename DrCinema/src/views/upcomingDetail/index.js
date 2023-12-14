@@ -29,7 +29,7 @@ const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{ uri: poster }} />
             </View>
-            { trailers[0]
+            { trailers[0] && (trailers[0].results[0] !== undefined)
                 ? <View style={styles.divider} />
                 : null
             }
