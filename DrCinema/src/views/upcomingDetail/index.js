@@ -36,7 +36,7 @@ const UpcomingDetail = ({ route, navigation: { navigate, setOptions } }) => {
             <View>
                 {trailerDetails.map((trailer, index) => (
                     <View key={index}>
-                        {trailer?.map((item, itemIndex) => (
+                        {trailer?.reverse().map((item, itemIndex) => (
                             <Pressable key={itemIndex}>
                                 <Text style={styles.trailerTitle}>{item.name} [{item.iso_639_1}]</Text>
                                 <WebView
