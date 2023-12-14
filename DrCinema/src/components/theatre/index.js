@@ -33,8 +33,12 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         padding: 15,
         marginVertical: 8,
+        marginHorizontal: 10,
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        shadowRadius: 5,
+        shadowColor: 'black',
+        shadowOpacity: 0.1
     },
     title: {
         fontSize: 20

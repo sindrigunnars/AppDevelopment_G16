@@ -1,18 +1,31 @@
 import React, { useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { ActivityIndicator } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import Main from '../views/main';
 import Movies from '../views/movies';
 import Upcoming from '../views/upcoming';
 import TheatreDetail from '../views/theatreDetail';
 import MovieDetail from '../views/MovieDetail';
 import UpcomingDetail from '../views/upcomingDetail';
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuth } from '../slices/authSlice';
-import { ActivityIndicator } from 'react-native';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const CustomDarkTheme = {
+    ...DarkTheme,
+    colors: {
+        ...DarkTheme.colors,
+        card: '#62b0ba',
+        text: 'white',
+        primary: 'white',
+        background: '#f9f9f9',
+        rawText: 'white'
+    }
+};
 
 const RootStack = () => {
     return (
@@ -76,22 +89,20 @@ const Routes = () => {
         <>
             { isLoading
                 ? <ActivityIndicator size="large" />
-                : <NavigationContainer>
-                    <Tab.Navigator>
+                : <NavigationContainer theme={CustomDarkTheme}>
+                    <Tab.Navigator
+                        screenOptions={{ headerShown: false, tabBarActiveTintColor: '#e56441', tabBarInactiveTintColor: '#3c3c44' }}>
                         <Tab.Screen
                             name="Theaters"
                             component={RootStack}
-                            options={{ headerShown: false }}
                         />
                         <Tab.Screen
                             name="Movies"
                             component={MoviesStack}
-                            options={{ headerShown: false }}
                         />
                         <Tab.Screen
                             name="Upcoming"
                             component={UpcomingStack}
-                            options={{ headerShown: false }}
                         />
                     </Tab.Navigator>
                 </NavigationContainer>

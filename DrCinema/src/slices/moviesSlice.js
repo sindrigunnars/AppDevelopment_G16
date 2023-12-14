@@ -11,7 +11,11 @@ export const fetchMovies = createAsyncThunk('fetchMovies', async (token) => {
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return await response.json();
+    const res = await response.json();
+    if (res.error) {
+        throw new Error(`${res.message}`);
+    }
+    return res;
 });
 
 const moviesSlice = createSlice({
@@ -30,7 +34,9 @@ const moviesSlice = createSlice({
         });
         builder.addCase(fetchMovies.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.data = action.payload;
+            const data = action.payload;
+            const sortedData = data ? [...data].sort((movieA, movieB) => movieA.title.localeCompare(movieB.title, 'is', { sensitivity: 'base' })) : null;
+            state.data = sortedData;
         });
         builder.addCase(fetchMovies.rejected, (state, action) => {
             state.isLoading = false;
