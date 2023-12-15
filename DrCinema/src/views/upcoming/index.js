@@ -26,7 +26,6 @@ const Upcoming = ({ navigation: { navigate } }) => {
             <ScrollView>
                 {isLoading
                     ? <ActivityIndicator size="large" />
-                    // : data.map((upcoming, key) => <Text key={key}>{upcoming.title + upcoming.releaseDate}</Text>)
                     : data.map((upcoming, key) => <UpcomingComp key={key} data={upcoming}/>)
                 }
             </ScrollView>
