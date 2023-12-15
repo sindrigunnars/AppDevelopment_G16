@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTheaters } from '../../slices/theatersSlice';
 import Theatre from '../../components/theatre';
-// import { getToken } from '../../services/apiService';
 import {
     SafeAreaView,
     ScrollView,
     Text,
-    ActivityIndicator,
-    StyleSheet
+    ActivityIndicator
 } from 'react-native';
+import styles from './styles';
 
 const Main = ({ navigation: { navigate } }) => {
     const dispatch = useDispatch();
@@ -42,15 +41,3 @@ Main.propTypes = {
 };
 
 export default Main;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center'
-    },
-    upcomingButton: {
-        alignItems: 'center',
-        backgroundColor: 'cadetblue'
-    }
-});

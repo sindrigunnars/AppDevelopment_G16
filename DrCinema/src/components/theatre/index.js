@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
-// import { getToken } from '../../services/apiService';
 import {
     Text,
-    Pressable,
-    StyleSheet
+    Pressable
 } from 'react-native';
+import styles from './styles';
 
 const Theatre = ({ data }) => {
     const { name, website } = data;
@@ -26,23 +25,3 @@ Theatre.propTypes = {
 };
 
 export default Theatre;
-
-const styles = StyleSheet.create({
-    item: {
-        flex: 1,
-        flexDirection: 'column',
-        padding: 15,
-        marginVertical: 8,
-        marginHorizontal: 10,
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        shadowRadius: 5,
-        shadowColor: 'black',
-        shadowOpacity: 0.1
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: '500',
-        margin: 4,
-    }
-});

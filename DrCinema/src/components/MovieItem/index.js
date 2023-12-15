@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
+import styles from './styles';
 
 const MovieItem = ({ data, theatreId }) => {
     const { id, title, poster, year, genres, durationMinutes, showtimes, plot } = data;
@@ -20,35 +21,6 @@ const MovieItem = ({ data, theatreId }) => {
         </TouchableOpacity>
     );
 };
-
-const styles = StyleSheet.create({
-    item: {
-        flex: 1,
-        flexDirection: 'row',
-        padding: 10,
-        marginVertical: 8,
-        marginHorizontal: 10,
-        alignItems: 'center',
-        height: 100,
-        backgroundColor: '#fff',
-        shadowRadius: 5,
-        shadowColor: 'black',
-        shadowOpacity: 0.1
-    },
-    title: {
-        fontSize: 20
-    },
-    movieDetails: {
-        flex: 1,
-        flexDirection: 'column',
-        marginLeft: 10,
-        fontSize: 20
-    },
-    image: {
-        width: 70,
-        height: '100%'
-    }
-});
 
 MovieItem.propTypes = {
     data: PropTypes.object.isRequired,
