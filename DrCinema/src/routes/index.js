@@ -13,7 +13,6 @@ import UpcomingDetail from '../views/upcomingDetail';
 import { fetchAuth } from '../slices/authSlice';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 

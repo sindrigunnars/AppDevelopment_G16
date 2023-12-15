@@ -31,5 +31,8 @@ export default StyleSheet.create({
         backgroundColor: '#ccc',
         margin: 5,
         borderWidth: 1
+    },
+    theatreText: {
+        alignSelf: 'center'
     }
 });
